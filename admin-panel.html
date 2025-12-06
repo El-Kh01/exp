@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления - Особенная часть АП</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-cogs"></i> Панель управления</h1>
+        
+        <div class="admin-cards">
+            <div class="card" onclick="location.href='index.html'">
+                <i class="fas fa-home fa-2x"></i>
+                <h3>На главную</h3>
+            </div>
+            
+            <div class="card" onclick="openAdminPanel()">
+                <i class="fas fa-plus-circle fa-2x"></i>
+                <h3>Добавить орган</h3>
+            </div>
+            
+            <div class="card" onclick="exportData()">
+                <i class="fas fa-download fa-2x"></i>
+                <h3>Экспорт данных</h3>
+            </div>
+            
+            <div class="card" onclick="document.getElementById('importFile').click()">
+                <i class="fas fa-upload fa-2x"></i>
+                <h3>Импорт данных</h3>
+                <input type="file" id="importFile" style="display:none" 
+                       accept=".json" onchange="handleFileImport(this.files[0])">
+            </div>
+        </div>
+        
+        <div class="stats">
+            <h3>Статистика</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>ФОИВ</h4>
+                    <p id="foiCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Службы</h4>
+                    <p id="servicesCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Агентства</h4>
+                    <p id="agenciesCount">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="backup">
+            <h3>Резервное копирование</h3>
+            <button class="btn btn-primary" onclick="createBackup()">
+                <i class="fas fa-save"></i> Создать резервную копию
+            </button>
+            <button class="btn btn-secondary" onclick="restoreBackup()">
+                <i class="fas fa-history"></i> Восстановить из резервной копии
+            </button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // Обновление статистики
+        function updateStats() {
+            const data = JSON.parse(localStorage.getItem('ap_data')) || {foi: [], services: [], agencies: []};
+            document.getElementById('foiCount').textContent = data.foi.length;
+            document.getElementById('servicesCount').textContent = data.services.length;
+            document.getElementById('agenciesCount').textContent = data.agencies.length;
+        }
+        
+        // Обработка импорта файла
+        function handleFileImport(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    localStorage.setItem('ap_data', JSON.stringify(importedData));
+                    updateStats();
+                    alert('Данные успешно импортированы!');
+                } catch (error) {
+                    alert('Ошибка при импорте файла!');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        // Создание резервной копии
+        function createBackup() {
+            exportData();
+        }
+        
+        // Восстановление из резервной копии
+        function restoreBackup() {
+            document.getElementById('importFile').click();
+        }
+        
+        updateStats();
+    </script>
+</body>
+</html>
