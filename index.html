@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особенная часть АП - ФОИВ и органы власти</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-balance-scale"></i>
+                <span>Особенная часть АП</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Главная</a></li>
+                <li><a href="#foi">ФОИВ</a></li>
+                <li><a href="#services">Службы</a></li>
+                <li><a href="#agencies">Агентства</a></li>
+                <li><a href="#about">О проекте</a></li>
+            </ul>
+            <div class="nav-tools">
+                <button class="btn btn-outline" onclick="openAdminPanel()">
+                    <i class="fas fa-plus"></i> Добавить орган
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Герой-секция -->
+    <header class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title">Федеральные органы исполнительной власти</h1>
+            <p class="hero-subtitle">База знаний по особенной части административного права</p>
+            <div class="search-box">
+                <input type="text" id="globalSearch" placeholder="Поиск органа власти, службы или агентства...">
+                <button class="btn btn-primary"><i class="fas fa-search"></i> Найти</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Быстрый доступ -->
+        <section class="quick-access">
+            <h2><i class="fas fa-bolt"></i> Быстрый доступ</h2>
+            <div class="cards-grid">
+                <div class="card" onclick="navigateTo('foi')">
+                    <div class="card-icon" style="background: #3b82f6;">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>ФОИВ</h3>
+                    <p>Федеральные органы исполнительной власти</p>
+                    <span class="count">45 органов</span>
+                </div>
+                
+                <div class="card" onclick="navigateTo('services')">
+                    <div class="card-icon" style="background: #10b981;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Службы</h3>
+                    <p>Федеральные службы России</p>
+                    <span class="count">28 служб</span>
+                </div>
+                
+                <div class="card" onclick="navigateTo('agencies')">
+                    <div class="card-icon" style="background: #8b5cf6;">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Агентства</h3>
+                    <p>Федеральные агентства</p>
+                    <span class="count">32 агентства</span>
+                </div>
+                
+                <div class="card" onclick="showHierarchy()">
+                    <div class="card-icon" style="background: #f59e0b;">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>Иерархия</h3>
+                    <p>Структура подчинения</p>
+                    <span class="count">2 типа</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Разделы -->
+        <section id="foi" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-landmark"></i> ФОИВ</h2>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="president">Подчинены Президенту</button>
+                    <button class="filter-btn" data-filter="government">Подчинены Правительству</button>
+                    <button class="filter-btn" data-filter="sphere">По сферам</button>
+                </div>
+            </div>
+            <div class="org-grid" id="foiGrid">
+                <!-- Динамически загружается из JSON -->
+            </div>
+            <div class="text-center">
+                <button class="btn btn-secondary" onclick="loadMore('foi')">
+                    <i class="fas fa-plus"></i> Показать все ФОИВ
+                </button>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-shield-alt"></i> Федеральные службы</h2>
+            </div>
+            <div class="org-grid" id="servicesGrid">
+                <!-- Динамически загружается из JSON -->
+            </div>
+        </section>
+
+        <section id="agencies" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-briefcase"></i> Федеральные агентства</h2>
+            </div>
+            <div class="org-grid" id="agenciesGrid">
+                <!-- Динамически загружается из JSON -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Особенная часть АП</h4>
+                    <p>База знаний по федеральным органам исполнительной власти Российской Федерации</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Категории</h4>
+                    <ul>
+                        <li><a href="#foi">ФОИВ</a></li>
+                        <li><a href="#services">Федеральные службы</a></li>
+                        <li><a href="#agencies">Федеральные агентства</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Инструменты</h4>
+                    <ul>
+                        <li><a href="#" onclick="openAdminPanel()">Добавить орган</a></li>
+                        <li><a href="#" onclick="exportData()">Экспорт данных</a></li>
+                        <li><a href="#" onclick="printPage()">Версия для печати</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Особенная часть АП. Для учебных целей.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно добавления -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminPanel()">&times;</span>
+            <h3><i class="fas fa-plus-circle"></i> Добавить новый орган</h3>
+            <div class="form-tabs">
+                <button class="form-tab active" data-tab="foi">ФОИВ</button>
+                <button class="form-tab" data-tab="service">Служба</button>
+                <button class="form-tab" data-tab="agency">Агентство</button>
+            </div>
+            
+            <form id="addForm" class="admin-form">
+                <div class="form-group">
+                    <label>Название органа *</label>
+                    <input type="text" id="orgName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Сокращенное название</label>
+                    <input type="text" id="orgShortName">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Подчиненность *</label>
+                        <select id="orgSubordination" required>
+                            <option value="">Выберите...</option>
+                            <option value="president">Президенту РФ</option>
+                            <option value="government">Правительству РФ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Сфера управления *</label>
+                        <select id="orgSphere" required>
+                            <option value="">Выберите...</option>
+                            <option value="foreign">Международные отношения</option>
+                            <option value="internal">Внутренние дела</option>
+                            <option value="economic">Экономика</option>
+                            <option value="social">Социальная сфера</option>
+                            <option value="defense">Оборона</option>
+                            <option value="justice">Правосудие</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Основные функции</label>
+                    <textarea id="orgFunctions" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Правовая база</label>
+                    <textarea id="orgLegalBase" rows="2"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Ссылка на официальный сайт</label>
+                    <input type="url" id="orgWebsite">
+                </div>
+                
+                <div class="form-group">
+                    <label>Дополнительная информация (в формате Markdown)</label>
+                    <textarea id="orgContent" rows="6" 
+                        placeholder="## История создания\n## Структура\n## Полномочия"></textarea>
+                    <small>Поддерживается Markdown-разметка</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminPanel()">Отмена</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Сохранить орган
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
