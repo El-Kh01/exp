@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Федеральные органы исполнительной власти - Субъекты государственного управления РФ</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/levels.css">
+    <link rel="stylesheet" href="../../../css/categories.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Стили для главной страницы модуля ФОИВ */
+        :root {
+            --political: #e80909;
+            --economic: #1013e3;
+            --social: #f5d442;
+            --mixed-politics-economic: #7a1b9a;
+            --mixed-politics-social: #ff6b00;
+            --mixed-economic-social: #20b2aa;
+        }
+        
+        .foiv-module-hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 100px 0 80px;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .foiv-module-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .foiv-module-hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+        }
+        
+        .hero-module-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .hero-module-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+        
+        .hero-module-text p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .hero-stat-item {
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 140px;
+        }
+        
+        .hero-stat-item .number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .hero-stat-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .hero-module-visual {
+            text-align: center;
+        }
+        
+        .foiv-module-logo {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.3);
+        }
+        
+        /* Блоки классификации */
+        .classification-blocks {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+        
+        .classification-block {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .classification-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .classification-block:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .classification-block:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .block-header {
+            padding: 40px 40px 25px;
+            position: relative;
+        }
+        
+        .block-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .block-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .classification-block.system .block-icon-wrapper { 
+            background: linear-gradient(135deg, #1e3c72, #2a5298); 
+        }
+        .classification-block.structure .block-icon-wrapper { 
+            background: linear-gradient(135deg, #28a745, #20c997); 
+        }
+        .classification-block.spheres .block-icon-wrapper { 
+            background: linear-gradient(135deg, #dc3545, #e35d6a); 
+        }
+        
+        .block-header h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e3c72;
+            line-height: 1.3;
+        }
+        
+        .block-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .block-body {
+            padding: 0 40px 40px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .block-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .block-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .block-features i {
+            color: #28a745;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .block-footer {
+            margin-top: auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .block-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            color: #1e3c72;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 16px 32px;
+            background: rgba(30, 60, 114, 0.08);
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            width: 100%;
+            justify-content: center;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .block-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .block-link:hover {
+            background: #1e3c72;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(30, 60, 114, 0.3);
+        }
+        
+        .block-link:hover::before {
+            left: 100%;
+        }
+        
+        /* Обозначения */
+        .legend-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .legend-category h4 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .legend-color.political { background: var(--political); }
+        .legend-color.economic { background: var(--economic); }
+        .legend-color.social { background: var(--social); }
+        .legend-color.mixed-pe { background: var(--mixed-politics-economic); }
+        .legend-color.mixed-ps { background: var(--mixed-politics-social); }
+        .legend-color.mixed-es { background: var(--mixed-economic-social); }
+        
+        .legend-badge {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        
+        .legend-badge span {
+            transform: rotate(-45deg);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        .legend-structure {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .legend-structure.president { background: #dc3545; }
+        .legend-structure.government { background: #17a2b8; }
+        
+        .legend-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .hero-module-content {
+                grid-template-columns: 1fr 350px;
+                gap: 60px;
+            }
+            
+            .hero-module-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .foiv-module-logo {
+                width: 280px;
+                height: 280px;
+                font-size: 5rem;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-module-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .hero-module-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .foiv-module-logo {
+                width: 250px;
+                height: 250px;
+                font-size: 4.5rem;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .foiv-module-hero {
+                padding: 80px 0 60px;
+            }
+            
+            .hero-module-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-module-text p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .block-header {
+                padding: 32px 32px 20px;
+            }
+            
+            .block-body {
+                padding: 0 32px 32px;
+            }
+            
+            .foiv-module-logo {
+                width: 220px;
+                height: 220px;
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-module-text h1 {
+                font-size: 1.9rem;
+            }
+            
+            .block-header h3 {
+                font-size: 1.4rem;
+            }
+            
+            .block-icon-wrapper {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .block-link {
+                padding: 14px 24px;
+            }
+            
+            .foiv-module-logo {
+                width: 200px;
+                height: 200px;
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с навигацией -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="../../../index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ФОИВ РФ</h1>
+                        <p class="logo-subtitle">Федеральные органы исполнительной власти</p>
+                    </div>
+                </a>
+                
+                <nav class="breadcrumbs">
+                    <a href="../../../index.html"><i class="fas fa-home"></i> Главная</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Федеральный уровень</a>
+                    <span class="separator">/</span>
+                    <span class="current">ФОИВ</span>
+                </nav>
+                
+                <button class="menu-toggle" aria-label="Меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Герой-секция модуля -->
+        <section class="foiv-module-hero">
+            <div class="container">
+                <div class="hero-module-content">
+                    <div class="hero-module-text">
+                        <h1>Федеральные органы исполнительной власти</h1>
+                        <p>Полная система министерств, служб и агентств Российской Федерации. Изучите классификацию по системе, структуре подчинения и сферам деятельности</p>
+                        
+                        <div class="hero-stats">
+                            <div class="hero-stat-item">
+                                <span class="number">69</span>
+                                <span class="label">ФОИВов</span>
+                            </div>
+                            <div class="hero-stat-item">
+                                <span class="number">21</span>
+                                <span class="label">Министерство</span>
+                            </div>
+                            <div class="hero-stat-item">
+                                <span class="number">30</span>
+                                <span class="label">Службы</span>
+                            </div>
+                            <div class="hero-stat-item">
+                                <span class="number">18</span>
+                                <span class="label">Агентства</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-module-visual">
+                        <div class="foiv-module-logo">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Обозначения -->
+        <section class="legend-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-info-circle"></i> Условные обозначения</h2>
+                    <p class="section-subtitle">Система обозначений для классификации ФОИВов</p>
+                </div>
+                
+                <div class="legend-grid">
+                    <div class="legend-category">
+                        <h4>Сферы деятельности (цвет)</h4>
+                        <div class="legend-item">
+                            <div class="legend-color political"></div>
+                            <div class="legend-text">Административно-политическая сфера</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color economic"></div>
+                            <div class="legend-text">Экономическая сфера</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color social"></div>
+                            <div class="legend-text">Социально-культурная сфера</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color mixed-pe"></div>
+                            <div class="legend-text">Смешанная: политическая + экономическая</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color mixed-ps"></div>
+                            <div class="legend-text">Смешанная: политическая + социальная</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color mixed-es"></div>
+                            <div class="legend-text">Смешанная: экономическая + социальная</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h4>Полномочия (ромбы)</h4>
+                        <div class="legend-item">
+                            <div class="legend-badge"><span>НПА</span></div>
+                            <div class="legend-text">Принятие нормативных правовых актов</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge"><span>АН</span></div>
+                            <div class="legend-text">Административный надзор</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge"><span>ГИ</span></div>
+                            <div class="legend-text">Управление государственным имуществом</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge"><span>ГУ</span></div>
+                            <div class="legend-text">Оказание государственных услуг</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h4>Структура подчинения</h4>
+                        <div class="legend-item">
+                            <div class="legend-structure president">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="legend-text">Под руководством Президента РФ</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-structure government">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <div class="legend-text">Под руководством Правительства РФ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блоки классификации -->
+        <section class="classification-blocks">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-cubes"></i> Классификация ФОИВ</h2>
+                    <p class="section-subtitle">Выберите систему классификации для изучения федеральных органов исполнительной власти</p>
+                </div>
+                
+                <div class="blocks-grid">
+                    <!-- Система -->
+                    <div class="classification-block system">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h3>Система ФОИВ</h3>
+                            <p class="block-description">Классификация по типу органов: федеральные министерства, службы и агентства с указанием их основных функций и полномочий</p>
+                        </div>
+                        <div class="block-body">
+                            <ul class="block-features">
+                                <li><i class="fas fa-check-circle"></i> 21 федеральное министерство</li>
+                                <li><i class="fas fa-check-circle"></i> 30 федеральных служб</li>
+                                <li><i class="fas fa-check-circle"></i> 18 федеральных агентств</li>
+                                <li><i class="fas fa-check-circle"></i> Разделение по функциям и полномочиям</li>
+                            </ul>
+                            <div class="block-footer">
+                                <a href="system/index.html" class="block-link">
+                                    <i class="fas fa-arrow-right"></i> Перейти к системе ФОИВ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Структура -->
+                    <div class="classification-block structure">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Структура подчинения</h3>
+                            <p class="block-description">Классификация по подведомственности: органы, подчиненные Президенту РФ и Правительству РФ, включая иерархию подчинения</p>
+                        </div>
+                        <div class="block-body">
+                            <ul class="block-features">
+                                <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Президента РФ</li>
+                                <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Правительства РФ</li>
+                                <li><i class="fas fa-check-circle"></i> Министерства с подведомственными службами и агентствами</li>
+                                <li><i class="fas fa-check-circle"></i> Иерархия и взаимодействие органов</li>
+                            </ul>
+                            <div class="block-footer">
+                                <a href="structure/index.html" class="block-link">
+                                    <i class="fas fa-arrow-right"></i> Перейти к структуре подчинения
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Сферы -->
+                    <div class="classification-block spheres">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3>Сферы деятельности</h3>
+                            <p class="block-description">Классификация по сферам общественной жизни: экономическая, социально-культурная и административно-политическая сферы</p>
+                        </div>
+                        <div class="block-body">
+                            <ul class="block-features">
+                                <li><i class="fas fa-check-circle"></i> Экономическая сфера (12 направлений)</li>
+                                <li><i class="fas fa-check-circle"></i> Социально-культурная сфера (5 направлений)</li>
+                                <li><i class="fas fa-check-circle"></i> Административно-политическая сфера (5 направлений)</li>
+                                <li><i class="fas fa-check-circle"></i> Смешанные и комплексные сферы</li>
+                            </ul>
+                            <div class="block-footer">
+                                <a href="spheres/index.html" class="block-link">
+                                    <i class="fas fa-arrow-right"></i> Перейти к сферам деятельности
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Федеральные органы исполнительной власти</h4>
+                    <p>Информационный справочник по системе ФОИВ Российской Федерации</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../../index.html">На главную</a></li>
+                        <li><a href="../../index.html">Федеральный уровень</a></li>
+                        <li><a href="#system">Система ФОИВ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <ul class="footer-links">
+                        <li><a href="http://government.ru" target="_blank">Правительство РФ</a></li>
+                        <li><a href="http://pravo.gov.ru" target="_blank">Официальный портал правовой информации</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Субъекты государственного управления РФ. Модуль ФОИВ.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../js/navigation.js"></script>
+    <script>
+        // Инициализация для страницы модуля
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.breadcrumbs').classList.toggle('active');
+        });
+        
+        // Анимация появления карточек
+        document.addEventListener('DOMContentLoaded', function() {
+            const blocks = document.querySelectorAll('.classification-block');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            blocks.forEach((block, index) => {
+                block.style.opacity = '0';
+                block.style.transform = 'translateY(40px) scale(0.95)';
+                block.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                observer.observe(block);
+            });
+        });
+    </script>
+</body>
+</html>
