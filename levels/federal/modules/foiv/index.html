@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Федеральные органы исполнительной власти - Субъекты государственного управления РФ</title>
-    <link rel="stylesheet" href="../../../css/style.css">
-    <link rel="stylesheet" href="../../../css/levels.css">
-    <link rel="stylesheet" href="../../../css/categories.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/levels.css">
+    <link rel="stylesheet" href="/css/categories.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
@@ -28,31 +28,30 @@
             --glass-border: rgba(255, 255, 255, 0.2);
             --shadow-glow: 0 0 40px rgba(42, 82, 152, 0.3);
             --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.15);
-            
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 8rem;
         }
         
-        /* Глобальные улучшения */
+        /* Базовые стили для гарантии отображения */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            background: #f8fafc;
+            color: #1a202c;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
         
         .container {
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
         
-        /* Герой-секция - Ультрасовременная */
+        /* Герой-секция */
         .foiv-module-hero {
             background: var(--gradient-primary);
             color: white;
-            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            padding: 8rem 0 6rem;
             margin-bottom: 0;
             position: relative;
             overflow: hidden;
@@ -61,44 +60,10 @@
             align-items: center;
         }
         
-        .foiv-module-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: pulse 20s ease-in-out infinite alternate;
-        }
-        
-        .foiv-module-hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 60s linear infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
         .hero-module-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
+            gap: 4rem;
             align-items: center;
             position: relative;
             z-index: 2;
@@ -106,79 +71,52 @@
         
         .hero-module-text h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 1.5rem;
             line-height: 1.1;
-            letter-spacing: -0.02em;
             background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.9) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease-out;
         }
         
         .hero-module-text p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             opacity: 0.95;
-            margin-bottom: var(--spacing-lg);
-            line-height: 1.8;
+            margin-bottom: 3rem;
+            line-height: 1.7;
             font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
             max-width: 600px;
         }
         
-        /* Анимированные статистические карточки */
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-sm);
-            animation: fadeInUp 0.8s ease-out 0.4s both;
+            gap: 1.5rem;
+            max-width: 500px;
         }
         
         .hero-stat-item {
-            padding: var(--spacing-md);
-            background: var(--glass-bg);
-            border-radius: 24px;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.7s ease;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
         
         .hero-stat-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-glow);
+            transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .hero-stat-item:hover::before {
-            left: 100%;
         }
         
         .hero-stat-item .number {
             display: block;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 0.5rem;
             line-height: 1;
-            background: linear-gradient(135deg, #fff 0%, #a8c6ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .hero-stat-item .label {
@@ -189,369 +127,171 @@
             letter-spacing: 0.05em;
         }
         
-        /* 3D логотип */
         .foiv-module-logo {
-            width: 400px;
-            height: 400px;
+            width: 350px;
+            height: 350px;
             margin: 0 auto;
             background: var(--gradient-secondary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
+            font-size: 7rem;
             color: white;
             position: relative;
-            animation: float 6s ease-in-out infinite;
-            transform-style: preserve-3d;
-            perspective: 1000px;
             box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.4),
-                inset 0 0 0 2px rgba(255,255,255,0.3),
-                0 0 60px rgba(102, 126, 234, 0.5);
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 2px rgba(255,255,255,0.3);
         }
         
-        .foiv-module-logo::before {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: conic-gradient(from 0deg, #667eea, #764ba2, #667eea);
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.5;
-            animation: rotate 20s linear infinite;
-            z-index: -1;
-        }
-        
-        .foiv-module-logo i {
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-            transform: translateZ(50px);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-30px) rotateY(10deg); }
-        }
-        
-        /* Блоки классификации - Неоморфизм + Глассморфизм */
+        /* Блоки классификации */
         .classification-blocks {
-            padding: var(--spacing-xl) 0;
+            padding: 6rem 0;
             background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
-            position: relative;
-        }
-        
-        .classification-blocks::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
         }
         
         .blocks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
         
         .classification-block {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 32px;
+            background: white;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow-card);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            position: relative;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateY(60px) scale(0.95);
-        }
-        
-        .classification-block.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        
-        .classification-block::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 100%);
-            border-radius: 32px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .classification-block:hover {
-            transform: translateY(-20px) scale(1.02);
-            box-shadow: 
-                0 40px 80px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255,255,255,0.9);
-        }
-        
-        .classification-block:hover::before {
-            opacity: 1;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .block-header {
-            padding: var(--spacing-lg);
-            position: relative;
-            z-index: 1;
+            padding: 2.5rem 2.5rem 1.5rem;
         }
         
         .block-icon-wrapper {
-            width: 100px;
-            height: 100px;
-            border-radius: 24px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: white;
-            margin-bottom: var(--spacing-md);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .classification-block:hover .block-icon-wrapper {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .block-icon-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
-            opacity: 0.5;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         
         .classification-block.system .block-icon-wrapper { 
             background: var(--gradient-primary);
         }
         .classification-block.structure .block-icon-wrapper { 
-            background: linear-gradient(135deg, #00b09b, #96c93d);
+            background: linear-gradient(135deg, #28a745, #20c997);
         }
         .classification-block.spheres .block-icon-wrapper { 
             background: var(--gradient-accent);
         }
         
         .block-header h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: var(--spacing-sm);
-            color: #1a237e;
-            line-height: 1.2;
-            position: relative;
-        }
-        
-        .block-header h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-            transition: width 0.4s ease;
-        }
-        
-        .classification-block:hover .block-header h3::after {
-            width: 100px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e3c72;
         }
         
         .block-description {
-            color: #5a6c7d;
-            line-height: 1.7;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.1rem;
-            font-weight: 500;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
         }
         
         .block-body {
-            padding: 0 var(--spacing-lg) var(--spacing-lg);
+            padding: 0 2.5rem 2.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            position: relative;
-            z-index: 1;
         }
         
         .block-features {
             list-style: none;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 2rem;
         }
         
         .block-features li {
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 0.8rem;
             display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: 0.8rem;
-            background: rgba(30, 60, 114, 0.03);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .block-features li:hover {
-            background: rgba(30, 60, 114, 0.08);
-            transform: translateX(10px);
+            align-items: flex-start;
+            gap: 0.8rem;
         }
         
         .block-features i {
             color: #28a745;
-            font-size: 1.2rem;
+            margin-top: 3px;
             flex-shrink: 0;
-            width: 24px;
-            text-align: center;
         }
         
         .block-link {
             display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--spacing-sm);
+            gap: 1rem;
             color: white;
             font-weight: 700;
             text-decoration: none;
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
             background: var(--gradient-primary);
-            border-radius: 16px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            min-width: 100%;
-        }
-        
-        .block-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s ease;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            justify-content: center;
+            font-size: 1.05rem;
         }
         
         .block-link:hover {
-            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(30, 60, 114, 0.4);
+            box-shadow: 0 12px 25px rgba(30, 60, 114, 0.3);
         }
         
-        .block-link:hover::before {
-            left: 100%;
-        }
-        
-        .block-link i {
-            transition: transform 0.4s ease;
-        }
-        
-        .block-link:hover i {
-            transform: translateX(10px);
-        }
-        
-        /* Обозначения - Современный стиль */
+        /* Обозначения */
         .legend-section {
-            padding: var(--spacing-xl) 0;
+            padding: 6rem 0;
             background: white;
-            position: relative;
-        }
-        
-        .legend-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
         }
         
         .legend-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
-        }
-        
-        .legend-category {
-            padding: var(--spacing-md);
-            background: linear-gradient(145deg, #ffffff, #f8fafc);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f1f5f9;
-            transition: transform 0.3s ease;
-        }
-        
-        .legend-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
         }
         
         .legend-category h4 {
             color: #1e3c72;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.4rem;
-            font-weight: 800;
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 2px solid #e2e8f0;
-            position: relative;
-        }
-        
-        .legend-category h4::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--gradient-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-            padding: 0.8rem;
-            background: #f8fafc;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .legend-item:hover {
-            background: #f1f5f9;
-            transform: translateX(5px);
+            gap: 1rem;
+            margin-bottom: 1.2rem;
         }
         
         .legend-color {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 2px solid white;
-            transition: transform 0.3s ease;
-        }
-        
-        .legend-item:hover .legend-color {
-            transform: scale(1.1);
         }
         
         .legend-color.political { background: var(--political); }
@@ -562,121 +302,77 @@
         .legend-color.mixed-es { background: var(--mixed-economic-social); }
         
         .legend-badge {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2d3748, #4a5568);
+            background: #333;
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             transform: rotate(45deg);
             flex-shrink: 0;
-            box-shadow: 0 6px 16px rgba(45, 55, 72, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .legend-item:hover .legend-badge {
-            transform: rotate(45deg) scale(1.1);
         }
         
         .legend-badge span {
             transform: rotate(-45deg);
-            font-size: 0.9rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
         
         .legend-structure {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: white;
             flex-shrink: 0;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
         }
         
-        .legend-item:hover .legend-structure {
-            transform: scale(1.1);
-        }
-        
-        .legend-structure.president { 
-            background: linear-gradient(135deg, #dc3545, #e35d6a);
-        }
-        .legend-structure.government { 
-            background: linear-gradient(135deg, #17a2b8, #2dc5e0);
-        }
+        .legend-structure.president { background: #dc3545; }
+        .legend-structure.government { background: #17a2b8; }
         
         .legend-text {
-            font-size: 1rem;
-            color: #4a5568;
-            line-height: 1.5;
-            font-weight: 500;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.4;
         }
         
-        /* Анимации */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Секции заголовки */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
         
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
         
-        /* Адаптивность - Улучшенная */
-        @media (max-width: 1400px) {
-            .hero-module-text h1 {
-                font-size: 4rem;
-            }
-            
-            .foiv-module-logo {
-                width: 350px;
-                height: 350px;
-                font-size: 7rem;
-            }
-            
-            .blocks-grid {
-                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
+        /* Адаптивность */
         @media (max-width: 1200px) {
             .hero-module-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: var(--spacing-lg);
+                grid-template-columns: 1fr 350px;
+                gap: 4rem;
             }
             
             .hero-module-text h1 {
-                font-size: 3.5rem;
-            }
-            
-            .hero-module-text p {
-                margin: 0 auto var(--spacing-lg);
-            }
-            
-            .hero-stats {
-                max-width: 500px;
-                margin: 0 auto;
+                font-size: 3rem;
             }
             
             .foiv-module-logo {
@@ -684,48 +380,66 @@
                 height: 300px;
                 font-size: 6rem;
             }
-            
-            .legend-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
         
         @media (max-width: 992px) {
-            .foiv-module-hero {
-                min-height: 80vh;
-                padding: var(--spacing-lg) 0;
+            .hero-module-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
             }
             
             .hero-module-text h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
             
             .hero-module-text p {
-                font-size: 1.2rem;
+                margin: 0 auto 3rem;
             }
             
-            .blocks-grid {
-                grid-template-columns: 1fr;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .legend-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-                margin-left: auto;
-                margin-right: auto;
+            .hero-stats {
+                max-width: 400px;
+                margin: 0 auto;
             }
         }
         
         @media (max-width: 768px) {
-            .hero-module-text h1 {
-                font-size: 2.5rem;
+            .foiv-module-hero {
+                padding: 6rem 0 4rem;
+                min-height: auto;
             }
             
-            .hero-stat-item .number {
-                font-size: 2.8rem;
+            .hero-module-text h1 {
+                font-size: 2.3rem;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 3rem auto 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero-module-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .block-header,
+            .block-body {
+                padding: 2rem;
             }
             
             .foiv-module-logo {
@@ -733,59 +447,15 @@
                 height: 250px;
                 font-size: 5rem;
             }
-            
-            .block-header h3 {
-                font-size: 1.8rem;
-            }
-            
-            .block-icon-wrapper {
-                width: 80px;
-                height: 80px;
-                font-size: 2.2rem;
-            }
         }
-        
-        @media (max-width: 576px) {
-            .container {
-                padding: 0 1rem;
-            }
-            
-            .hero-module-text h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-sm);
-            }
-            
-            .hero-stat-item {
-                padding: var(--spacing-sm);
-            }
-            
-            .foiv-module-logo {
-                width: 200px;
-                height: 200px;
-                font-size: 4rem;
-            }
-            
-            .block-header,
-            .block-body {
-                padding: var(--spacing-md);
-            }
-            
-            .classification-block {
-                border-radius: 24px;
-            }
-        }
-    </script>
+    </style>
 </head>
 <body>
     <!-- Шапка с навигацией -->
     <header class="site-header">
         <div class="container">
             <div class="header-wrapper">
-                <a href="../../../index.html" class="logo">
+                <a href="/index.html" class="logo">
                     <div class="logo-icon">
                         <i class="fas fa-building"></i>
                     </div>
@@ -796,9 +466,9 @@
                 </a>
                 
                 <nav class="breadcrumbs">
-                    <a href="../../../index.html"><i class="fas fa-home"></i> Главная</a>
+                    <a href="/index.html"><i class="fas fa-home"></i> Главная</a>
                     <span class="separator">/</span>
-                    <a href="../../index.html">Федеральный уровень</a>
+                    <a href="/levels/federal/index.html">Федеральный уровень</a>
                     <span class="separator">/</span>
                     <span class="current">ФОИВ</span>
                 </nav>
@@ -951,8 +621,7 @@
                             </ul>
                             <div class="block-footer">
                                 <a href="system/index.html" class="block-link">
-                                    <span>Перейти к системе ФОИВ</span>
-                                    <i class="fas fa-arrow-right"></i>
+                                    <i class="fas fa-arrow-right"></i> Перейти к системе ФОИВ
                                 </a>
                             </div>
                         </div>
@@ -976,8 +645,7 @@
                             </ul>
                             <div class="block-footer">
                                 <a href="structure/index.html" class="block-link">
-                                    <span>Перейти к структуре подчинения</span>
-                                    <i class="fas fa-arrow-right"></i>
+                                    <i class="fas fa-arrow-right"></i> Перейти к структуре подчинения
                                 </a>
                             </div>
                         </div>
@@ -1001,8 +669,7 @@
                             </ul>
                             <div class="block-footer">
                                 <a href="spheres/index.html" class="block-link">
-                                    <span>Перейти к сферам деятельности</span>
-                                    <i class="fas fa-arrow-right"></i>
+                                    <i class="fas fa-arrow-right"></i> Перейти к сферам деятельности
                                 </a>
                             </div>
                         </div>
@@ -1024,8 +691,8 @@
                 <div class="footer-section">
                     <h4>Навигация</h4>
                     <ul class="footer-links">
-                        <li><a href="../../../index.html">На главную</a></li>
-                        <li><a href="../../index.html">Федеральный уровень</a></li>
+                        <li><a href="/index.html">На главную</a></li>
+                        <li><a href="/levels/federal/index.html">Федеральный уровень</a></li>
                         <li><a href="#system">Система ФОИВ</a></li>
                     </ul>
                 </div>
@@ -1045,76 +712,28 @@
         </div>
     </footer>
 
-    <script src="../../../js/navigation.js"></script>
     <script>
-        // Анимация появления элементов при скролле
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Наблюдаем за блоками классификации
-        document.querySelectorAll('.classification-block').forEach(block => {
-            observer.observe(block);
-        });
-
-        // Наблюдаем за элементами легенды
-        document.querySelectorAll('.legend-category').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(30px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(item);
-            
-            observer.observe(item);
-            item.addEventListener('animationend', () => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Инициализация для страницы модуля
+        // Базовый скрипт для меню
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.breadcrumbs').classList.toggle('active');
         });
-
-        // Параллакс эффект для героя
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.foiv-module-hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.1}px)`;
-            }
-        });
-
-        // Анимация чисел в статистике
-        const statNumbers = document.querySelectorAll('.hero-stat-item .number');
-        statNumbers.forEach((numberElement, index) => {
-            const targetNumber = parseInt(numberElement.textContent);
-            const duration = 2000;
-            const increment = targetNumber / (duration / 16);
-            let currentNumber = 0;
-            
-            const updateNumber = () => {
-                currentNumber += increment;
-                if (currentNumber < targetNumber) {
-                    numberElement.textContent = Math.floor(currentNumber);
-                    requestAnimationFrame(updateNumber);
-                } else {
-                    numberElement.textContent = targetNumber;
-                }
-            };
-            
-            setTimeout(() => {
-                updateNumber();
-            }, 500 + index * 300);
+        
+        // Анимация чисел
+        document.addEventListener('DOMContentLoaded', function() {
+            const numbers = document.querySelectorAll('.hero-stat-item .number');
+            numbers.forEach(number => {
+                const target = parseInt(number.textContent);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    number.textContent = Math.round(current);
+                }, 30);
+            });
         });
     </script>
 </body>
