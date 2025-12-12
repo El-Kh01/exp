@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Федеральные органы исполнительной власти - Субъекты государственного управления РФ</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/levels.css">
+    <link rel="stylesheet" href="../../../css/categories.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Стили для страницы ФОИВ */
+        :root {
+            --political: #e80909;
+            --economic: #1013e3;
+            --social: #f5d442;
+            --mixed-politics-economic: #7a1b9a;
+            --mixed-politics-social: #ff6b00;
+            --mixed-economic-social: #20b2aa;
+            --foiv-card-bg: rgba(255, 255, 255, 0.95);
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .foiv-hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 100px 0 60px;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+        
+        /* Навигация по модулям */
+        .foiv-navigation {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            margin-bottom: 40px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-tab {
+            padding: 20px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-tab:hover {
+            color: #1e3c72;
+        }
+        
+        .nav-tab.active {
+            color: #1e3c72;
+            border-bottom-color: #1e3c72;
+        }
+        
+        /* Основной контент */
+        .foiv-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Секции внутри вкладок */
+        .foiv-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            margin-bottom: 30px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-header p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+        
+        /* Карточки ФОИВов */
+        .foiv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .foiv-card {
+            background: var(--foiv-card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+        
+        .foiv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* Цветная полоска по сфере */
+        .foiv-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+        }
+        
+        .foiv-card.political::before { background: var(--political); }
+        .foiv-card.economic::before { background: var(--economic); }
+        .foiv-card.social::before { background: var(--social); }
+        .foiv-card.mixed-pe::before { background: var(--mixed-politics-economic); }
+        .foiv-card.mixed-ps::before { background: var(--mixed-politics-social); }
+        .foiv-card.mixed-es::before { background: var(--mixed-economic-social); }
+        
+        .foiv-card-header {
+            padding: 25px 25px 20px;
+        }
+        
+        .foiv-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .foiv-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .ministry .foiv-icon { background: #1e3c72; }
+        .service .foiv-icon { background: #28a745; }
+        .agency .foiv-icon { background: #17a2b8; }
+        
+        .foiv-name {
+            flex-grow: 1;
+        }
+        
+        .foiv-name h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .foiv-type {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Ромбики полномочий */
+        .foiv-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 6px;
+            transform: rotate(45deg);
+            position: relative;
+        }
+        
+        .badge span {
+            transform: rotate(-45deg);
+        }
+        
+        .badge.npa { background: #4a6fa5; color: white; }
+        .badge.an { background: #dc3545; color: white; }
+        .badge.gi { background: #fd7e14; color: white; }
+        .badge.gu { background: #20c997; color: white; }
+        
+        /* Информация о подведомственности */
+        .foiv-info {
+            padding: 0 25px 25px;
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .info-row i {
+            color: #1e3c72;
+            width: 16px;
+        }
+        
+        /* Кнопка подробнее */
+        .foiv-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #eee;
+        }
+        
+        .foiv-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 60, 114, 0.08);
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .foiv-link:hover {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        /* Легенда */
+        .legend {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .legend h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-sample {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        
+        .color-sample.political { background: var(--political); }
+        .color-sample.economic { background: var(--economic); }
+        .color-sample.social { background: var(--social); }
+        .color-sample.mixed-pe { background: var(--mixed-politics-economic); }
+        .color-sample.mixed-ps { background: var(--mixed-politics-social); }
+        .color-sample.mixed-es { background: var(--mixed-economic-social); }
+        
+        .legend-badge {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            border-radius: 6px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        
+        .legend-badge span {
+            transform: rotate(-45deg);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .legend-badge.npa { background: #4a6fa5; color: white; }
+        .legend-badge.an { background: #dc3545; color: white; }
+        .legend-badge.gi { background: #fd7e14; color: white; }
+        .legend-badge.gu { background: #20c997; color: white; }
+        
+        .legend-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .foiv-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .nav-tab {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .foiv-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-tab {
+                min-width: 100px;
+                font-size: 0.9rem;
+                padding: 12px 10px;
+            }
+            
+            .foiv-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .foiv-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="../../../index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ФОИВ РФ</h1>
+                        <p class="logo-subtitle">Федеральные органы исполнительной власти</p>
+                    </div>
+                </a>
+                
+                <nav class="breadcrumbs">
+                    <a href="../../../index.html"><i class="fas fa-home"></i> Главная</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Федеральный уровень</a>
+                    <span class="separator">/</span>
+                    <span class="current">ФОИВ</span>
+                </nav>
+                
+                <button class="menu-toggle" aria-label="Меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="foiv-hero">
+        <div class="hero-content">
+            <h1>Федеральные органы исполнительной власти</h1>
+            <p>Министерства, службы и агентства, осуществляющие функции по выработке государственной политики, контролю, надзору, оказанию государственных услуг и управлению государственным имуществом</p>
+        </div>
+    </section>
+
+    <!-- Навигация -->
+    <nav class="foiv-navigation">
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="system">
+                <i class="fas fa-sitemap"></i>
+                Система
+            </div>
+            <div class="nav-tab" data-tab="structure">
+                <i class="fas fa-network-wired"></i>
+                Структура
+            </div>
+            <div class="nav-tab" data-tab="spheres">
+                <i class="fas fa-globe-americas"></i>
+                Сферы
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="foiv-content">
+        
+        <!-- Вкладка "Система" -->
+        <div id="system" class="tab-content active">
+            <!-- Легенда -->
+            <div class="legend">
+                <h3><i class="fas fa-info-circle"></i> Условные обозначения</h3>
+                <div class="legend-grid">
+                    <div>
+                        <h4>Типы ФОИВ:</h4>
+                        <div class="legend-item">
+                            <div class="color-sample" style="background: #1e3c72;"></div>
+                            <div class="legend-text">Министерства</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-sample" style="background: #28a745;"></div>
+                            <div class="legend-text">Службы</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-sample" style="background: #17a2b8;"></div>
+                            <div class="legend-text">Агентства</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Полномочия:</h4>
+                        <div class="legend-item">
+                            <div class="legend-badge npa"><span>НПА</span></div>
+                            <div class="legend-text">Принятие нормативных правовых актов</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge an"><span>АН</span></div>
+                            <div class="legend-text">Административный надзор</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge gi"><span>ГИ</span></div>
+                            <div class="legend-text">Управление госимуществом</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-badge gu"><span>ГУ</span></div>
+                            <div class="legend-text">Оказание госуслуг</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Министерства -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-landmark"></i> Федеральные министерства</h2>
+                    <p>ФОИВ, осуществляющий функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности. Осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример министерства - МВД -->
+                    <div class="foiv-card ministry political" data-sphere="political">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство внутренних дел Российской Федерации (МВД России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Под руководством Президента РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Административно-политическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/mvd.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о МВД России
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Шаблон для других министерств -->
+                    <div class="foiv-card ministry economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство экономического развития Российской Федерации (Минэкономразвития России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Экономическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/mineconom.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Минэкономразвития
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Еще министерства -->
+                    <div class="foiv-card ministry social" data-sphere="social">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство здравоохранения Российской Федерации (Минздрав России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Социально-культурная</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/minzdrav.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Минздраве
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Службы -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-eye"></i> Федеральные службы</h2>
+                    <p>ФОИВ, осуществляющий функции по контролю и надзору в установленной сфере деятельности, а также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности.</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример службы - ФСБ -->
+                    <div class="foiv-card service political" data-sphere="political">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-user-secret"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная служба безопасности Российской Федерации (ФСБ России)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Под руководством Президента РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Административно-политическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/fsb.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о ФСБ России
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример службы - ФНС -->
+                    <div class="foiv-card service economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-money-check-alt"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная налоговая служба (ФНС России)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Экономическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/fns.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о ФНС России
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример смешанной службы - Роспотребнадзор -->
+                    <div class="foiv-card service mixed-es" data-sphere="mixed-es">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-clinic-medical"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная служба по надзору в сфере защиты прав потребителей и благополучия человека (Роспотребнадзор)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Социально-культурная / Экономическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/rospotrebnadzor.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Роспотребнадзоре
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Агентства -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-hands-helping"></i> Федеральные агентства</h2>
+                    <p>ФОИВ, осуществляющий в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример агентства - Росреестр -->
+                    <div class="foiv-card agency economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная служба государственной регистрации, кадастра и картографии (Росреестр)</h3>
+                                    <div class="foiv-type">Федеральное агентство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge gu"><span>ГУ</span></div>
+                                <div class="badge gi"><span>ГИ</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Экономическая</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/rosreestr.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Росреестре
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример агентства - Росмолодежь -->
+                    <div class="foiv-card agency social" data-sphere="social">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральное агентство по делам молодежи (Росмолодежь)</h3>
+                                    <div class="foiv-type">Федеральное агентство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge gu"><span>ГУ</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Социально-культурная</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/rosmolodezh.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Росмолодежи
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример агентства - Росархив -->
+                    <div class="foiv-card agency mixed-ps" data-sphere="mixed-ps">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-archive"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральное архивное агентство (Росархив)</h3>
+                                    <div class="foiv-type">Федеральное агентство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge gi"><span>ГИ</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Под руководством Президента РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Политическая / Социально-культурная</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/rosarhiv.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Росархиве
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Вкладка "Структура" -->
+        <div id="structure" class="tab-content">
+            <div class="legend">
+                <h3><i class="fas fa-project-diagram"></i> Структура подчинения ФОИВ</h3>
+                <p>Федеральные органы исполнительной власти находятся в подчинении Президента РФ или Правительства РФ. Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ.</p>
+            </div>
+
+            <!-- Президентские ФОИВы -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-tie"></i> ФОИВы под руководством Президента РФ</h2>
+                    <p>Органы исполнительной власти, непосредственное руководство которыми осуществляет Президент Российской Федерации</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример президентского ФОИВа -->
+                    <div class="foiv-card ministry political" data-sphere="political">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство внутренних дел Российской Федерации (МВД России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Непосредственное подчинение Президенту РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Курирует: МЧС России, ФМС России</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/mvd.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о МВД России
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Еще президентские ФОИВы -->
+                    <div class="foiv-card service political" data-sphere="political">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-user-secret"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная служба безопасности Российской Федерации (ФСБ России)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Непосредственное подчинение Президенту РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Специальные функции в области безопасности</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/fsb.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о ФСБ России
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Правительственные ФОИВы -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-landmark"></i> ФОИВы под руководством Правительства РФ</h2>
+                    <p>Органы исполнительной власти, руководство которыми осуществляет Правительство Российской Федерации</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример правительственного ФОИВа -->
+                    <div class="foiv-card ministry economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство экономического развития Российской Федерации (Минэкономразвития России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Непосредственное подчинение Правительству РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Курирует: Росстат, Росаккредитация, Роспатент</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/mineconom.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Минэкономразвития
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Еще правительственные ФОИВы -->
+                    <div class="foiv-card service mixed-es" data-sphere="mixed-es">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-clinic-medical"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная служба по надзору в сфере защиты прав потребителей и благополучия человека (Роспотребнадзор)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Непосредственное подчинение Правительству РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Самостоятельный ФОИВ в структуре Правительства РФ</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/rospotrebnadzor.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Роспотребнадзоре
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Вкладка "Сферы" -->
+        <div id="spheres" class="tab-content">
+            <div class="legend">
+                <h3><i class="fas fa-filter"></i> ФОИВы по сферам общественной жизни</h3>
+                <div class="legend-grid">
+                    <div class="legend-item">
+                        <div class="color-sample political"></div>
+                        <div class="legend-text"><strong>Административно-политическая:</strong> оборона, безопасность, внутренние дела, иностранные дела, юстиция</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-sample economic"></div>
+                        <div class="legend-text"><strong>Экономическая:</strong> экономическое развитие, финансы, промышленность, торговля, сельское хозяйство</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-sample social"></div>
+                        <div class="legend-text"><strong>Социально-культурная:</strong> образование, наука, культура, здравоохранение, социальная защита, спорт</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Экономическая сфера -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line"></i> Экономическая сфера</h2>
+                    <p>Управление экономическим развитием, финансы, промышленность и торговля, антимонопольное регулирование, агропромышленный комплекс, энергетика, транспорт, строительство и ЖКХ, цифровое развитие, связь, таможенное дело, экология</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример экономического ФОИВа -->
+                    <div class="foiv-card ministry economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство финансов Российской Федерации (Минфин России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Финансы и бюджетная политика</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/minfin.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Минфине
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Еще экономические ФОИВы -->
+                    <div class="foiv-card service economic" data-sphere="economic">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Федеральная антимонопольная служба (ФАС России)</h3>
+                                    <div class="foiv-type">Федеральная служба</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge an"><span>АН</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Антимонопольное регулирование</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/fas.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о ФАС России
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Социально-культурная сфера -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-heart"></i> Социально-культурная сфера</h2>
+                    <p>Образование и наука, культура, здравоохранение, труд и социальная защита, физическая культура и спорт</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример социального ФОИВа -->
+                    <div class="foiv-card ministry social" data-sphere="social">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство науки и высшего образования Российской Федерации (Минобрнауки России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-landmark"></i>
+                                <span>Под руководством Правительства РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Высшее образование и наука</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/minobrnauki.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о Минобрнауки
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Административно-политическая сфера -->
+            <section class="foiv-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-shield-alt"></i> Административно-политическая сфера</h2>
+                    <p>Оборона, государственная безопасность, внутренние дела, иностранные дела, юстиция</p>
+                </div>
+                <div class="foiv-grid">
+                    <!-- Пример политического ФОИВа -->
+                    <div class="foiv-card ministry political" data-sphere="political">
+                        <div class="foiv-card-header">
+                            <div class="foiv-title">
+                                <div class="foiv-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="foiv-name">
+                                    <h3>Министерство иностранных дел Российской Федерации (МИД России)</h3>
+                                    <div class="foiv-type">Федеральное министерство</div>
+                                </div>
+                            </div>
+                            <div class="foiv-badges">
+                                <div class="badge npa"><span>НПА</span></div>
+                            </div>
+                        </div>
+                        <div class="foiv-info">
+                            <div class="info-row">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Под руководством Президента РФ</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Сфера: Внешняя политика и международные отношения</span>
+                            </div>
+                        </div>
+                        <div class="foiv-footer">
+                            <a href="foivs/mid.html" class="foiv-link">
+                                <i class="fas fa-external-link-alt"></i> Подробнее о МИД России
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Федеральные органы исполнительной власти</h4>
+                    <p>Информационный справочник по системе ФОИВ Российской Федерации</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../../index.html">На главную</a></li>
+                        <li><a href="../../index.html">Федеральный уровень</a></li>
+                        <li><a href="#system">Система ФОИВ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <ul class="footer-links">
+                        <li><a href="http://government.ru" target="_blank">Правительство РФ</a></li>
+                        <li><a href="http://pravo.gov.ru" target="_blank">Официальный портал правовой информации</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Субъекты государственного управления РФ. Модуль ФОИВ.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../js/navigation.js"></script>
+    <script>
+        // Переключение вкладок
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-tab');
+                    
+                    // Убираем активный класс у всех вкладок и контента
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей вкладке и контенту
+                    this.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // Инициализация меню
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.querySelector('.breadcrumbs').classList.toggle('active');
+            });
+            
+            // Анимация появления карточек
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.foiv-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
