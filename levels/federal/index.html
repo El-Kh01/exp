@@ -11,11 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Специальные стили для страницы федерального уровня */
+        :root {
+            --federal-blue: #1e3c72;
+            --federal-light: #2a5298;
+            --federal-accent: #4a6fa5;
+            --card-shadow: 0 8px 30px rgba(30, 60, 114, 0.12);
+            --card-hover: 0 20px 40px rgba(30, 60, 114, 0.2);
+        }
+        
         .federal-hero {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 80px 0 60px;
-            margin-bottom: 40px;
+            padding: 100px 0 80px;
+            margin-bottom: 0;
             position: relative;
             overflow: hidden;
         }
@@ -27,60 +35,74 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 L120,0 L120,120 Z" fill="white" opacity="0.03"/><path d="M0,0 L0,120 L120,120 Z" fill="white" opacity="0.03"/></svg>');
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
         }
         
         .federal-hero .container {
             position: relative;
             z-index: 1;
+            max-width: 1400px;
         }
         
         .hero-content-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 400px;
+            gap: 80px;
             align-items: center;
         }
         
         .hero-text-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
         }
         
         .hero-text-content p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 400;
         }
         
         .hero-stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(3, 140px);
+            gap: 24px;
+            margin-top: 50px;
         }
         
         .hero-stat {
             text-align: center;
-            padding: 20px;
+            padding: 24px 16px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 16px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .hero-stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .hero-stat .number {
             display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1;
         }
         
         .hero-stat .label {
             font-size: 0.95rem;
-            opacity: 0.8;
+            opacity: 0.9;
+            font-weight: 500;
         }
         
         .hero-visual {
@@ -88,81 +110,138 @@
         }
         
         .federation-logo {
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 6rem;
             color: white;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .federation-logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        .federation-logo i {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         /* Карточки модулей */
         .modules-section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-top: 50px;
         }
         
         .module-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             height: 100%;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(30, 60, 114, 0.1);
+            position: relative;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--federal-blue), var(--federal-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
         
         .module-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-12px);
+            box-shadow: var(--card-hover);
+        }
+        
+        .module-card:hover::before {
+            transform: scaleX(1);
         }
         
         .module-header {
-            padding: 30px 30px 20px;
+            padding: 36px 36px 24px;
             position: relative;
         }
         
         .module-icon-wrapper {
-            width: 70px;
-            height: 70px;
-            border-radius: 16px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: white;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
         }
         
         .module-header h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #1e3c72;
+            margin-bottom: 12px;
+            color: var(--federal-blue);
+            line-height: 1.3;
         }
         
         .module-description {
-            color: #666;
+            color: #555;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
         
         .module-body {
-            padding: 0 30px 30px;
+            padding: 0 36px 36px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -170,20 +249,21 @@
         
         .module-features {
             list-style: none;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         .module-features li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
         }
         
         .module-features i {
             color: #28a745;
             margin-top: 3px;
             flex-shrink: 0;
+            font-size: 1.1rem;
         }
         
         .module-footer {
@@ -195,101 +275,216 @@
         .module-link {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            color: #1e3c72;
+            gap: 12px;
+            color: var(--federal-blue);
             font-weight: 600;
             text-decoration: none;
-            padding: 12px 24px;
-            background: rgba(30, 60, 114, 0.1);
-            border-radius: 8px;
+            padding: 14px 28px;
+            background: rgba(30, 60, 114, 0.08);
+            border-radius: 12px;
             transition: all 0.3s ease;
             width: 100%;
             justify-content: center;
+            font-size: 1rem;
         }
         
         .module-link:hover {
-            background: #1e3c72;
+            background: var(--federal-blue);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
         }
         
         /* Цвета для разных типов модулей */
-        .module-card.president .module-icon-wrapper { background: #1e3c72; }
-        .module-card.government .module-icon-wrapper { background: #2a5298; }
-        .module-card.foiv .module-icon-wrapper { background: #4a6fa5; }
-        .module-card.assembly .module-icon-wrapper { background: #6f42c1; }
-        .module-card.judicial .module-icon-wrapper { background: #dc3545; }
-        .module-card.prosecutor .module-icon-wrapper { background: #6610f2; }
-        .module-card.other .module-icon-wrapper { background: #fd7e14; }
-        .module-card.state-org .module-icon-wrapper { background: #20c997; }
+        .module-card.president .module-icon-wrapper { 
+            background: linear-gradient(135deg, #1e3c72, #2a5298); 
+        }
+        .module-card.government .module-icon-wrapper { 
+            background: linear-gradient(135deg, #2a5298, #4a6fa5); 
+        }
+        .module-card.foiv .module-icon-wrapper { 
+            background: linear-gradient(135deg, #4a6fa5, #6a8bc5); 
+        }
+        .module-card.assembly .module-icon-wrapper { 
+            background: linear-gradient(135deg, #6f42c1, #8e6ed6); 
+        }
+        .module-card.judicial .module-icon-wrapper { 
+            background: linear-gradient(135deg, #dc3545, #e35d6a); 
+        }
+        .module-card.prosecutor .module-icon-wrapper { 
+            background: linear-gradient(135deg, #6610f2, #8540f5); 
+        }
+        .module-card.other .module-icon-wrapper { 
+            background: linear-gradient(135deg, #fd7e14, #ff9a4d); 
+        }
+        .module-card.state-org .module-icon-wrapper { 
+            background: linear-gradient(135deg, #20c997, #4cd9ad); 
+        }
         
         /* Информационные карточки */
         .info-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            margin-top: 50px;
         }
         
         .info-card {
             background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 36px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(30, 60, 114, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--federal-blue);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover);
         }
         
         .info-card h3 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            gap: 12px;
+            color: var(--federal-blue);
+            margin-bottom: 24px;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
         
         .info-card h3 i {
-            color: #2a5298;
+            color: var(--federal-light);
+            font-size: 1.4rem;
         }
         
         .info-card p {
-            line-height: 1.6;
+            line-height: 1.7;
             color: #555;
+            font-size: 1.05rem;
+        }
+        
+        /* Разделитель */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30, 60, 114, 0.2), transparent);
+            margin: 60px 0;
         }
         
         /* Адаптивность */
+        @media (max-width: 1200px) {
+            .hero-content-wrapper {
+                grid-template-columns: 1fr 350px;
+                gap: 60px;
+            }
+            
+            .hero-text-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .federation-logo {
+                width: 280px;
+                height: 280px;
+                font-size: 5rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .hero-content-wrapper {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 50px;
+            }
+            
+            .hero-text-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .federation-logo {
+                width: 250px;
+                height: 250px;
+                font-size: 4.5rem;
+            }
+            
+            .hero-stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 500px;
+            }
+            
+            .modules-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .federal-hero {
+                padding: 80px 0 60px;
             }
             
             .hero-text-content h1 {
                 font-size: 2.2rem;
             }
             
-            .hero-stats-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .hero-text-content p {
+                font-size: 1.2rem;
             }
-        }
-        
-        @media (max-width: 768px) {
+            
+            .hero-stats-grid {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+            }
+            
             .modules-grid {
                 grid-template-columns: 1fr;
             }
             
-            .hero-stats-grid {
+            .info-cards-grid {
                 grid-template-columns: 1fr;
             }
             
-            .hero-text-content h1 {
-                font-size: 1.8rem;
+            .module-header {
+                padding: 28px 28px 20px;
+            }
+            
+            .module-body {
+                padding: 0 28px 28px;
+            }
+            
+            .info-card {
+                padding: 28px;
             }
             
             .federation-logo {
-                width: 150px;
-                height: 150px;
-                font-size: 3rem;
+                width: 200px;
+                height: 200px;
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text-content h1 {
+                font-size: 1.9rem;
+            }
+            
+            .module-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .module-icon-wrapper {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -329,12 +524,12 @@
                 <div class="hero-content-wrapper">
                     <div class="hero-text-content">
                         <h1>Федеральный уровень государственного управления</h1>
-                        <p>Органы государственной власти Российской Федерации, осуществляющие управление на всей территории страны</p>
+                        <p>Государственные органы и организации Российской Федерации, осуществляющие управление на всей территории страны в соответствии с Конституцией РФ и федеральным законодательством</p>
                         
                         <div class="hero-stats-grid">
                             <div class="hero-stat">
                                 <span class="number">8</span>
-                                <span class="label">Основных категорий органов</span>
+                                <span class="label">Категорий органов</span>
                             </div>
                             <div class="hero-stat">
                                 <span class="number">70+</span>
@@ -351,7 +546,6 @@
                         <div class="federation-logo">
                             <i class="fas fa-landmark"></i>
                         </div>
-                        <h3 style="margin-top: 20px; opacity: 0.9;">Российская Федерация</h3>
                     </div>
                 </div>
             </div>
@@ -384,8 +578,13 @@
             </div>
         </section>
 
+        <!-- Разделитель -->
+        <div class="container">
+            <div class="section-divider"></div>
+        </div>
+
         <!-- Модули федерального уровня -->
-        <section class="modules-section" style="background: #f8f9fa; padding: 80px 0;">
+        <section class="modules-section">
             <div class="container">
                 <div class="section-header">
                     <h2><i class="fas fa-cubes"></i> Система федеральных органов власти</h2>
@@ -622,10 +821,10 @@
             document.querySelector('.breadcrumbs').classList.toggle('active');
         });
         
-        // Анимация карточек при скролле
+        // Плавное появление элементов при скролле
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
@@ -637,12 +836,20 @@
             });
         }, observerOptions);
         
-        // Наблюдаем за карточками модулей
-        document.querySelectorAll('.module-card').forEach(card => {
+        // Анимация появления карточек
+        document.querySelectorAll('.module-card, .info-card').forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
+            card.style.transform = 'translateY(30px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
+        });
+        
+        // Анимация появления статистики
+        document.querySelectorAll('.hero-stat').forEach(stat => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'translateY(20px)';
+            stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(stat);
         });
     </script>
 </body>
