@@ -560,7 +560,7 @@
         .block-description {
             color: #666;
             line-height: 1.6;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-size: 1.05rem;
         }
         
@@ -569,6 +569,75 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+        }
+        
+        .system-details {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .system-details h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .system-details p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+        
+        .system-details ul {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+        
+        .system-details li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .system-details li i {
+            color: var(--primary-blue);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .power-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            border-bottom: 1px dotted var(--primary-blue);
+        }
+        
+        .power-link:hover {
+            color: var(--primary-light);
+            border-bottom: 1px solid var(--primary-light);
+        }
+        
+        .reference {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            font-style: italic;
         }
         
         .block-features {
@@ -602,6 +671,7 @@
             border-radius: var(--radius-lg);
             transition: var(--transition);
             font-size: 1.05rem;
+            margin-top: auto;
         }
         
         .block-link:hover {
@@ -1019,12 +1089,36 @@
                             <p class="block-description">Классификация по типу органов: федеральные министерства, службы и агентства с указанием их основных функций и полномочий</p>
                         </div>
                         <div class="block-body">
-                            <ul class="block-features">
-                                <li><i class="fas fa-check-circle"></i> 21 федеральное министерство</li>
-                                <li><i class="fas fa-check-circle"></i> 30 федеральных служб</li>
-                                <li><i class="fas fa-check-circle"></i> 18 федеральных агентств</li>
-                                <li><i class="fas fa-check-circle"></i> Разделение по функциям и полномочиям</li>
-                            </ul>
+                            <div class="system-details">
+                                <h4><i class="fas fa-gavel"></i> Федеральное министерство</h4>
+                                <p>Федеральное министерство является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
+                                <p>Под функциями по принятию нормативных правовых актов понимается издание правил поведения, распространяющихся на неопределенный круг лиц.</p>
+                                <p><strong>Перечень 21 министерств</strong></p>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4><i class="fas fa-shield-alt"></i> Федеральная служба</h4>
+                                <p>Федеральная служба (служба) является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности.</p>
+                                <p><strong>Перечень 20 служб</strong></p>
+                                <p>А также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности.</p>
+                                <p><strong>Перечень 10 служб</strong></p>
+                                <p>Под функциями по контролю и надзору понимаются:</p>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> осуществление действий по контролю и надзору за исполнением общеобязательных правил поведения;</li>
+                                    <li><i class="fas fa-check-circle"></i> выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
+                                    <li><i class="fas fa-check-circle"></i> регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов.</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4><i class="fas fa-building"></i> Федеральное агентство</h4>
+                                <p>Федеральное агентство является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
+                                <p><strong>Перечень 18 агентств</strong></p>
+                                <p>Под функциями по управлению государственным имуществом понимается осуществление полномочий собственника в отношении федерального имущества, а также управление находящимися в федеральной собственности акциями открытых акционерных обществ. <a href="powers/property/index.html" class="power-link">Ссылка «Управление государственным имуществом»</a></p>
+                                <p>Под функциями по оказанию государственных услуг понимается предоставление федеральными органами исполнительной власти непосредственно или через подведомственные им федеральные государственные учреждения либо иные организации безвозмездно или по регулируемым органами государственной власти ценам услуг гражданам и организациям в области образования, здравоохранения, социальной защиты населения и в других областях, установленных федеральными законами.</p>
+                                <p class="reference"><i class="fas fa-book"></i> См. УП РФ от 9 марта 2004 г. № 314</p>
+                            </div>
+                            
                             <div class="block-footer">
                                 <a href="system/index.html" class="block-link">
                                     <i class="fas fa-arrow-right"></i> Перейти к системе ФОИВ
@@ -1040,15 +1134,30 @@
                                 <i class="fas fa-network-wired"></i>
                             </div>
                             <h3>Структура подчинения</h3>
-                            <p class="block-description">Классификация по подведомственности: органы, подчиненные Президенту РФ и Правительству РФ, включая иерархию подчинения</p>
+                            <p class="block-description">Перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
                         </div>
                         <div class="block-body">
-                            <ul class="block-features">
+                            <div class="system-details">
+                                <h4><i class="fas fa-user-tie"></i> Структура включает ФОИВы, непосредственно подчиненные:</h4>
+                                <ul>
+                                    <li><i class="fas fa-caret-right"></i> <strong>1. Президенту РФ</strong></li>
+                                    <li><i class="fas fa-caret-right"></i> <strong>2. Правительству РФ.</strong></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4><i class="fas fa-sitemap"></i> Иерархия подчинения</h4>
+                                <p>Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ.</p>
+                                <p>Все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней.</p>
+                            </div>
+                            
+                            <div class="block-features">
                                 <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Президента РФ</li>
                                 <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Правительства РФ</li>
                                 <li><i class="fas fa-check-circle"></i> Министерства с подведомственными службами и агентствами</li>
                                 <li><i class="fas fa-check-circle"></i> Иерархия и взаимодействие органов</li>
                             </ul>
+                            
                             <div class="block-footer">
                                 <a href="structure/index.html" class="block-link">
                                     <i class="fas fa-arrow-right"></i> Перейти к структуре подчинения
@@ -1067,12 +1176,45 @@
                             <p class="block-description">Классификация по сферам общественной жизни: экономическая, социально-культурная и административно-политическая сферы</p>
                         </div>
                         <div class="block-body">
-                            <ul class="block-features">
-                                <li><i class="fas fa-check-circle"></i> Экономическая сфера (12 направлений)</li>
-                                <li><i class="fas fa-check-circle"></i> Социально-культурная сфера (5 направлений)</li>
-                                <li><i class="fas fa-check-circle"></i> Административно-политическая сфера (5 направлений)</li>
-                                <li><i class="fas fa-check-circle"></i> Смешанные и комплексные сферы</li>
-                            </ul>
+                            <div class="system-details">
+                                <h4><i class="fas fa-chart-line" style="color: var(--economic);"></i> 1. Экономическая сфера</h4>
+                                <ul>
+                                    <li><i class="fas fa-caret-right"></i> управление экономическим развитием</li>
+                                    <li><i class="fas fa-caret-right"></i> финансы</li>
+                                    <li><i class="fas fa-caret-right"></i> промышленность и торговля</li>
+                                    <li><i class="fas fa-caret-right"></i> антимонопольное регулирование</li>
+                                    <li><i class="fas fa-caret-right"></i> агропромышленный комплекс</li>
+                                    <li><i class="fas fa-caret-right"></i> энергетика</li>
+                                    <li><i class="fas fa-caret-right"></i> транспорт</li>
+                                    <li><i class="fas fa-caret-right"></i> строительство и жилищно-коммунальное хозяйство</li>
+                                    <li><i class="fas fa-caret-right"></i> цифровое развитие, связь, массовые коммуникации</li>
+                                    <li><i class="fas fa-caret-right"></i> таможенное дело</li>
+                                    <li><i class="fas fa-caret-right"></i> экология, окружающая среда</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4><i class="fas fa-users" style="color: var(--social);"></i> 2. Социально-культурная сфера</h4>
+                                <ul>
+                                    <li><i class="fas fa-caret-right"></i> образование и наука</li>
+                                    <li><i class="fas fa-caret-right"></i> культура</li>
+                                    <li><i class="fas fa-caret-right"></i> здравоохранение</li>
+                                    <li><i class="fas fa-caret-right"></i> труд и социальная защита</li>
+                                    <li><i class="fas fa-caret-right"></i> физическая культура и спорт</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4><i class="fas fa-shield-alt" style="color: var(--political);"></i> 3. Административно-политическая сфера</h4>
+                                <ul>
+                                    <li><i class="fas fa-caret-right"></i> оборона</li>
+                                    <li><i class="fas fa-caret-right"></i> государственная безопасность</li>
+                                    <li><i class="fas fa-caret-right"></i> внутренние дела</li>
+                                    <li><i class="fas fa-caret-right"></i> иностранные дела</li>
+                                    <li><i class="fas fa-caret-right"></i> юстиция</li>
+                                </ul>
+                            </div>
+                            
                             <div class="block-footer">
                                 <a href="spheres/index.html" class="block-link">
                                     <i class="fas fa-arrow-right"></i> Перейти к сферам деятельности
