@@ -391,6 +391,44 @@
             border-bottom: 2px solid #e2e8f0;
         }
         
+        /* Стили для кликабельных полномочий */
+        .legend-power-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .legend-power-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 60, 114, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .legend-power-item:hover::after {
+            left: 100%;
+        }
+        
+        .legend-power-item:hover {
+            background: rgba(30, 60, 114, 0.08);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Стили для обычных (не кликабельных) элементов легенды */
         .legend-item {
             display: flex;
             align-items: center;
@@ -887,7 +925,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2><i class="fas fa-info-circle"></i> Условные обозначения</h2>
-                    <p class="section-subtitle">Система обозначений для классификации ФОИВов</p>
+                    <p class="section-subtitle">Система обозначений для классификации ФОИВов <br><small style="font-size: 0.9em; color: #666;">(полномочия кликабельны)</small></p>
                 </div>
                 
                 <div class="legend-grid">
@@ -920,23 +958,27 @@
                     </div>
                     
                     <div class="legend-category">
-                        <h4>Полномочия (ромбы)</h4>
-                        <div class="legend-item">
+                        <h4>Полномочия (ромбы) <small style="font-size: 0.85em; font-weight: normal; color: #666;">(кликабельно)</small></h4>
+                        
+                        <a href="javascript:void(0);" class="legend-power-item" data-power="normative" title="Нормативные правовые акты">
                             <div class="legend-badge"><span>НПА</span></div>
                             <div class="legend-text">Принятие нормативных правовых актов</div>
-                        </div>
-                        <div class="legend-item">
+                        </a>
+                        
+                        <a href="javascript:void(0);" class="legend-power-item" data-power="supervision" title="Административный надзор">
                             <div class="legend-badge"><span>АН</span></div>
                             <div class="legend-text">Административный надзор</div>
-                        </div>
-                        <div class="legend-item">
+                        </a>
+                        
+                        <a href="javascript:void(0);" class="legend-power-item" data-power="property" title="Государственное имущество">
                             <div class="legend-badge"><span>ГИ</span></div>
                             <div class="legend-text">Управление государственным имуществом</div>
-                        </div>
-                        <div class="legend-item">
+                        </a>
+                        
+                        <a href="javascript:void(0);" class="legend-power-item" data-power="services" title="Государственные услуги">
                             <div class="legend-badge"><span>ГУ</span></div>
                             <div class="legend-text">Оказание государственных услуг</div>
-                        </div>
+                        </a>
                     </div>
                     
                     <div class="legend-category">
@@ -1104,6 +1146,32 @@
             document.querySelectorAll('.breadcrumbs a').forEach(link => {
                 link.addEventListener('click', () => {
                     document.querySelector('.breadcrumbs').classList.remove('active');
+                });
+            });
+            
+            // Обработка кликов по полномочиям
+            document.querySelectorAll('.legend-power-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const powerType = this.getAttribute('data-power');
+                    const powerNames = {
+                        'normative': 'Принятие нормативных правовых актов',
+                        'supervision': 'Административный надзор',
+                        'property': 'Управление государственным имуществом',
+                        'services': 'Оказание государственных услуг'
+                    };
+                    
+                    // Временное сообщение - позже можно заменить на реальную фильтрацию
+                    alert(`Вы выбрали полномочие: "${powerNames[powerType]}"\n\nВ будущем здесь будет отображаться список ФОИВов с этим полномочием.`);
+                    
+                    // Пример, как можно подсветить выбранное полномочие
+                    document.querySelectorAll('.legend-power-item').forEach(i => {
+                        i.style.background = '';
+                        i.style.borderLeft = '';
+                    });
+                    
+                    this.style.background = 'rgba(30, 60, 114, 0.12)';
+                    this.style.borderLeft = '4px solid var(--primary-blue)';
                 });
             });
         });
