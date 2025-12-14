@@ -19,6 +19,9 @@
             --political: #e80909;
             --economic: #1013e3;
             --social: #f5d442;
+            --mixed-politics-economic: #7C0E76;
+            --mixed-politics-social: #EF6F26;
+            --mixed-economic-social: #90EE90;
             
             --primary-blue: #1e3c72;
             --primary-light: #2a5298;
@@ -341,7 +344,7 @@
         .section-header h2 {
             font-size: 2.8rem;
             color: var(--primary-blue);
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.5rem;
             font-family: 'Montserrat', sans-serif;
         }
         
@@ -352,6 +355,106 @@
             margin: 0 auto;
             font-weight: 500;
             line-height: 1.6;
+        }
+        
+        /* ===== ОБОЗНАЧЕНИЯ (ПЕРЕНЕСЕНЫ ВНИЗ) ===== */
+        .legend-section {
+            padding: 6rem 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .legend-category {
+            padding: 2.5rem;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #f1f5f9;
+            transition: var(--transition);
+        }
+        
+        .legend-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .legend-category h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+        
+        .legend-item:hover {
+            background: #f8fafc;
+        }
+        
+        .legend-color {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid white;
+        }
+        
+        .legend-badge {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2d3748;
+            color: white;
+            border-radius: 8px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        
+        .legend-badge span {
+            transform: rotate(-45deg);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        
+        .legend-structure {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .legend-structure.president { background: #dc3545; }
+        .legend-structure.government { background: #17a2b8; }
+        
+        .legend-text {
+            font-size: 1rem;
+            color: #4a5568;
+            line-height: 1.5;
         }
         
         /* ===== БЛОКИ КЛАССИФИКАЦИИ ===== */
@@ -409,54 +512,6 @@
         }
         .classification-block.spheres .block-icon-wrapper { 
             background: var(--gradient-accent);
-        }
-        
-        /* Специальный символ для структуры с тремя уровнями */
-        .structure-diagram {
-            position: relative;
-            width: 60px;
-            height: 60px;
-        }
-        
-        .structure-diagram .level {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .structure-diagram .level-1 {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .level-2 {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            gap: 30px;
-        }
-        
-        .structure-diagram .level-3 {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            gap: 15px;
-        }
-        
-        .structure-diagram .node {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .structure-diagram .level-1 .node {
-            width: 16px;
-            height: 16px;
         }
         
         .block-header h3 {
@@ -545,75 +600,6 @@
         .block-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(30, 60, 114, 0.4);
-        }
-        
-        /* ===== ОБОЗНАЧЕНИЯ (ПЕРЕНЕСЕНЫ ВНИЗ) ===== */
-        .legend-section {
-            padding: 6rem 0;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-        }
-        
-        .legend-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-            margin-top: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .legend-category {
-            padding: 2.5rem;
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            border: 1px solid #f1f5f9;
-            transition: var(--transition);
-        }
-        
-        .legend-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .legend-category h4 {
-            color: var(--primary-blue);
-            margin-bottom: 1.8rem;
-            font-size: 1.4rem;
-            font-weight: 800;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.2rem;
-            padding: 0.8rem;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
-        }
-        
-        .legend-item:hover {
-            background: #f8fafc;
-        }
-        
-        .legend-color {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius-sm);
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 2px solid white;
-        }
-        
-        .legend-text {
-            font-size: 1rem;
-            color: #4a5568;
-            line-height: 1.5;
         }
         
         /* ===== СОВРЕМЕННЫЙ ПОДВАЛ ===== */
@@ -739,6 +725,10 @@
                 justify-content: center;
             }
             
+            .legend-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .blocks-grid {
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             }
@@ -795,6 +785,10 @@
             .hero-stat-row {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
             }
             
             .blocks-grid {
@@ -927,7 +921,8 @@
         <section class="classification-blocks">
             <div class="container">
                 <div class="section-header">
-                    <h2>Классификация ФОИВ</h2>
+                    <h2>Модуль</h2>
+                    <p class="section-subtitle">Федеральные органы исполнительной власти</p>
                 </div>
                 
                 <div class="blocks-grid">
@@ -980,19 +975,7 @@
                     <div class="classification-block structure">
                         <div class="block-header">
                             <div class="block-icon-wrapper">
-                                <div class="structure-diagram">
-                                    <div class="level level-1">
-                                        <div class="node"></div>
-                                    </div>
-                                    <div class="level level-2">
-                                        <div class="node"></div>
-                                        <div class="node"></div>
-                                    </div>
-                                    <div class="level level-3">
-                                        <div class="node"></div>
-                                        <div class="node"></div>
-                                    </div>
-                                </div>
+                                <i class="fas fa-network-wired"></i>
                             </div>
                             <h3>СТРУКТУРА</h3>
                             <p class="block-description">перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
@@ -1068,6 +1051,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Условные обозначения</h2>
+                    <p class="section-subtitle">Система обозначений для классификации ФОИВов <br><small style="font-size: 0.9em; color: #666;"></small></p>
                 </div>
                 
                 <div class="legend-grid">
@@ -1084,6 +1068,58 @@
                         <div class="legend-item">
                             <div class="legend-color" style="background: var(--social);"></div>
                             <div class="legend-text">Социально-культурная сфера</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--mixed-politics-economic);"></div>
+                            <div class="legend-text">Смешанная: политическая + экономическая</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--mixed-politics-social);"></div>
+                            <div class="legend-text">Смешанная: политическая + социальная</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--mixed-economic-social);"></div>
+                            <div class="legend-text">Смешанная: экономическая + социальная</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h4>Полномочия</h4>
+                        
+                        <div class="legend-item" data-power="normative" title="Нормативные правовые акты">
+                            <div class="legend-badge"><span>НПА</span></div>
+                            <div class="legend-text">Принятие нормативных правовых актов</div>
+                        </div>
+                        
+                        <div class="legend-item" data-power="supervision" title="Административный надзор">
+                            <div class="legend-badge"><span>АН</span></div>
+                            <div class="legend-text">Административный надзор</div>
+                        </div>
+                        
+                        <div class="legend-item" data-power="property" title="Государственное имущество">
+                            <div class="legend-badge"><span>ГИ</span></div>
+                            <div class="legend-text">Управление государственным имуществом</div>
+                        </div>
+                        
+                        <div class="legend-item" data-power="services" title="Государственные услуги">
+                            <div class="legend-badge"><span>ГУ</span></div>
+                            <div class="legend-text">Оказание государственных услуг</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h4>Структура подчинения</h4>
+                        <div class="legend-item">
+                            <div class="legend-structure president">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="legend-text">Под руководством Президента РФ</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-structure government">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <div class="legend-text">Под руководством Правительства РФ</div>
                         </div>
                     </div>
                 </div>
