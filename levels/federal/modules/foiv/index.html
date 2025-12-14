@@ -19,9 +19,6 @@
             --political: #e80909;
             --economic: #1013e3;
             --social: #f5d442;
-            --mixed-politics-economic: #7C0E76;
-            --mixed-politics-social: #EF6F26;
-            --mixed-economic-social: #90EE90;
             
             --primary-blue: #1e3c72;
             --primary-light: #2a5298;
@@ -208,7 +205,7 @@
         .foiv-module-hero {
             background: var(--gradient-dark);
             color: white;
-            padding: 140px 0 100px;
+            padding: 120px 0 80px;
             position: relative;
             overflow: hidden;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
@@ -258,10 +255,23 @@
             max-width: 600px;
         }
         
+        /* Обновленная статистика - две строки */
         .hero-stats {
             display: flex;
+            flex-direction: column;
             gap: 1.5rem;
             margin-top: 3rem;
+        }
+        
+        .hero-stat-single {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-stat-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
         
@@ -332,18 +342,7 @@
             font-size: 2.8rem;
             color: var(--primary-blue);
             margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.2rem;
             font-family: 'Montserrat', sans-serif;
-        }
-        
-        .section-header h2 i {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .section-subtitle {
@@ -353,143 +352,6 @@
             margin: 0 auto;
             font-weight: 500;
             line-height: 1.6;
-        }
-        
-        /* ===== ОБОЗНАЧЕНИЯ ===== */
-        .legend-section {
-            padding: 6rem 0;
-            background: white;
-        }
-        
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-        
-        .legend-category {
-            padding: 2.5rem;
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            border: 1px solid #f1f5f9;
-            transition: var(--transition);
-        }
-        
-        .legend-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .legend-category h4 {
-            color: var(--primary-blue);
-            margin-bottom: 1.8rem;
-            font-size: 1.4rem;
-            font-weight: 800;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        
-        /* Стили для кликабельных полномочий */
-        .legend-power-item {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.2rem;
-            padding: 0.8rem;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .legend-power-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 60, 114, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        
-        .legend-power-item:hover::after {
-            left: 100%;
-        }
-        
-        .legend-power-item:hover {
-            background: rgba(30, 60, 114, 0.08);
-            transform: translateX(5px);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        /* Стили для обычных (не кликабельных) элементов легенды */
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.2rem;
-            padding: 0.8rem;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
-        }
-        
-        .legend-item:hover {
-            background: #f8fafc;
-        }
-        
-        .legend-color {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius-sm);
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 2px solid white;
-        }
-        
-        .legend-badge {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #2d3748;
-            color: white;
-            border-radius: 8px;
-            transform: rotate(45deg);
-            flex-shrink: 0;
-        }
-        
-        .legend-badge span {
-            transform: rotate(-45deg);
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        
-        .legend-structure {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .legend-structure.president { background: #dc3545; }
-        .legend-structure.government { background: #17a2b8; }
-        
-        .legend-text {
-            font-size: 1rem;
-            color: #4a5568;
-            line-height: 1.5;
         }
         
         /* ===== БЛОКИ КЛАССИФИКАЦИИ ===== */
@@ -549,6 +411,54 @@
             background: var(--gradient-accent);
         }
         
+        /* Специальный символ для структуры с тремя уровнями */
+        .structure-diagram {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .structure-diagram .level {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .structure-diagram .level-1 {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .structure-diagram .level-2 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 30px;
+        }
+        
+        .structure-diagram .level-3 {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 15px;
+        }
+        
+        .structure-diagram .node {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .structure-diagram .level-1 .node {
+            width: 16px;
+            height: 16px;
+        }
+        
         .block-header h3 {
             font-size: 1.8rem;
             font-weight: 800;
@@ -583,9 +493,6 @@
             color: var(--primary-blue);
             margin-bottom: 1rem;
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
         
         .system-details p {
@@ -602,35 +509,22 @@
         
         .system-details li {
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
             color: #4a5568;
             font-size: 0.95rem;
+            padding-left: 1.2rem;
+            position: relative;
         }
         
-        .system-details li i {
+        .system-details li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
             color: var(--primary-blue);
-            margin-top: 3px;
-            flex-shrink: 0;
         }
         
-        .block-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-        
-        .block-features li {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-        }
-        
-        .block-features i {
-            color: #28a745;
-            margin-top: 3px;
-            flex-shrink: 0;
+        .block-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
         }
         
         .block-link {
@@ -646,7 +540,6 @@
             border-radius: var(--radius-lg);
             transition: var(--transition);
             font-size: 1.05rem;
-            margin-top: auto;
         }
         
         .block-link:hover {
@@ -654,12 +547,80 @@
             box-shadow: 0 15px 35px rgba(30, 60, 114, 0.4);
         }
         
+        /* ===== ОБОЗНАЧЕНИЯ (ПЕРЕНЕСЕНЫ ВНИЗ) ===== */
+        .legend-section {
+            padding: 6rem 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .legend-category {
+            padding: 2.5rem;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #f1f5f9;
+            transition: var(--transition);
+        }
+        
+        .legend-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .legend-category h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+        
+        .legend-item:hover {
+            background: #f8fafc;
+        }
+        
+        .legend-color {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid white;
+        }
+        
+        .legend-text {
+            font-size: 1rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
         /* ===== СОВРЕМЕННЫЙ ПОДВАЛ ===== */
         .site-footer {
             background: var(--gradient-dark);
             color: white;
             padding: 5rem 0 2.5rem;
-            margin-top: 6rem;
             position: relative;
         }
         
@@ -773,12 +734,9 @@
                 margin: 0 auto 3rem;
             }
             
-            .hero-stats {
+            .hero-stat-single,
+            .hero-stat-row {
                 justify-content: center;
-            }
-            
-            .legend-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
             
             .blocks-grid {
@@ -829,18 +787,14 @@
                 font-size: 1.2rem;
             }
             
-            .hero-stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            
             .hero-stat-item {
                 width: 100%;
                 max-width: 250px;
             }
             
-            .legend-grid {
-                grid-template-columns: 1fr;
+            .hero-stat-row {
+                flex-direction: column;
+                align-items: center;
             }
             
             .blocks-grid {
@@ -933,25 +887,29 @@
             <div class="container">
                 <div class="hero-module-content">
                     <div class="hero-module-text">
-                        <h1>Федеральные органы исполнительной власти</h1>
-                        <p>Полная система министерств, служб и агентств Российской Федерации. Изучите классификацию по системе, структуре подчинения и сферам деятельности</p>
+                        <h1>Модуль</h1>
+                        <p>Федеральные органы исполнительной власти</p>
                         
                         <div class="hero-stats">
-                            <div class="hero-stat-item">
-                                <span class="number">69</span>
-                                <span class="label">ФОИВов</span>
+                            <div class="hero-stat-single">
+                                <div class="hero-stat-item">
+                                    <span class="number">69</span>
+                                    <span class="label">ФОИВов</span>
+                                </div>
                             </div>
-                            <div class="hero-stat-item">
-                                <span class="number">21</span>
-                                <span class="label">Министерств</span>
-                            </div>
-                            <div class="hero-stat-item">
-                                <span class="number">30</span>
-                                <span class="label">Служб</span>
-                            </div>
-                            <div class="hero-stat-item">
-                                <span class="number">18</span>
-                                <span class="label">Агентств</span>
+                            <div class="hero-stat-row">
+                                <div class="hero-stat-item">
+                                    <span class="number">21</span>
+                                    <span class="label">Министерств</span>
+                                </div>
+                                <div class="hero-stat-item">
+                                    <span class="number">30</span>
+                                    <span class="label">Служб</span>
+                                </div>
+                                <div class="hero-stat-item">
+                                    <span class="number">18</span>
+                                    <span class="label">Агентств</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -965,12 +923,151 @@
             </div>
         </section>
 
-        <!-- Обозначения -->
+        <!-- Блоки классификации -->
+        <section class="classification-blocks">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Классификация ФОИВ</h2>
+                </div>
+                
+                <div class="blocks-grid">
+                    <!-- Система -->
+                    <div class="classification-block system">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h3>СИСТЕМА</h3>
+                        </div>
+                        <div class="block-body">
+                            <div class="system-details">
+                                <h4>1. федеральное министерство</h4>
+                                <p>является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
+                                <p>под функциями по принятию нормативных правовых актов понимается издание правил поведения, распространяющихся на неопределенный круг лиц;</p>
+                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Принятие нормативных правовых актов ФОИВ</a></p>
+                                <p>Перечень 21 министерств</p>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4>2. федеральная служба</h4>
+                                <p>является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности, Перечень 20 служб</p>
+                                <p>а также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности. Перечень 10 служб</p>
+                                <p>под функциями по контролю и надзору понимаются:</p>
+                                <ul>
+                                    <li>осуществление действий по контролю и надзору за исполнением общеобязательных правил поведения;</li>
+                                    <li>выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
+                                    <li>регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов;</li>
+                                </ul>
+                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Административный надзор</a></p>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4>3. федеральное агентство</h4>
+                                <p>является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции. Перечень 18 агентств</p>
+                                <p>под функциями по управлению государственным имуществом понимается осуществление полномочий собственника в отношении федерального имущества, а также управление находящимися в федеральной собственности акциями открытых акционерных обществ;</p>
+                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Управление государственным имуществом</a></p>
+                                <p>под функциями по оказанию государственных услуг понимается предоставление федеральными органами исполнительной власти непосредственно или через подведомственные им федеральные государственные учреждения либо иные организации безвозмездно или по регулируемым органами государственной власти ценам услуг гражданам и организациям в области образования, здравоохранения, социальной защиты населения и в других областях, установленных федеральными законами.</p>
+                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Оказание государственных услуг</a></p>
+                            </div>
+                            
+                            <div class="system-details">
+                                <p>См. УП РФ от 9 марта 2004 г. № 314</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Структура -->
+                    <div class="classification-block structure">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <div class="structure-diagram">
+                                    <div class="level level-1">
+                                        <div class="node"></div>
+                                    </div>
+                                    <div class="level level-2">
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                    </div>
+                                    <div class="level level-3">
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>СТРУКТУРА</h3>
+                            <p class="block-description">перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
+                        </div>
+                        <div class="block-body">
+                            <div class="system-details">
+                                <h4>Структура включает ФОИВы, непосредственно подчиненные:</h4>
+                                <ul>
+                                    <li>1. Президенту РФ,</li>
+                                    <li>2. Правительству РФ.</li>
+                                </ul>
+                                <p>Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ (все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней).</p>
+                                <p>См. УП РФ от 31 мая 2024г. № 326</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Сферы -->
+                    <div class="classification-block spheres">
+                        <div class="block-header">
+                            <div class="block-icon-wrapper">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3>СФЕРЫ ОБЩЕСТВЕННОЙ ЖИЗНИ</h3>
+                        </div>
+                        <div class="block-body">
+                            <div class="system-details">
+                                <h4>1. Экономическая</h4>
+                                <ul>
+                                    <li>управление экономическим развитием</li>
+                                    <li>финансы</li>
+                                    <li>промышленность и торговля</li>
+                                    <li>антимонопольное регулирование</li>
+                                    <li>агропромышленный комплекс</li>
+                                    <li>энергетика</li>
+                                    <li>транспорт</li>
+                                    <li>строительство и жилищно-коммунальное хозяйство</li>
+                                    <li>цифровое развитие, связь, массовые коммуникации</li>
+                                    <li>таможенное дело</li>
+                                    <li>экология, окружающая среда</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4>2. Социально-культурная</h4>
+                                <ul>
+                                    <li>образование и наука</li>
+                                    <li>культура</li>
+                                    <li>здравоохранение</li>
+                                    <li>труд и социальная защита</li>
+                                    <li>физическая культура и спорт</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="system-details">
+                                <h4>3. Административно-политическая</h4>
+                                <ul>
+                                    <li>оборона</li>
+                                    <li>государственная безопасность</li>
+                                    <li>внутренние дела</li>
+                                    <li>иностранные дела</li>
+                                    <li>юстиция</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Обозначения (перенесены вниз) -->
         <section class="legend-section">
             <div class="container">
                 <div class="section-header">
-                    <h2><i class="fas fa-info-circle"></i> Условные обозначения</h2>
-                    <p class="section-subtitle">Система обозначений для классификации ФОИВов <br><small style="font-size: 0.9em; color: #666;">(полномочия кликабельны)</small></p>
+                    <h2>Условные обозначения</h2>
                 </div>
                 
                 <div class="legend-grid">
@@ -987,216 +1084,6 @@
                         <div class="legend-item">
                             <div class="legend-color" style="background: var(--social);"></div>
                             <div class="legend-text">Социально-культурная сфера</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-politics-economic);"></div>
-                            <div class="legend-text">Смешанная: политическая + экономическая</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-politics-social);"></div>
-                            <div class="legend-text">Смешанная: политическая + социальная</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-economic-social);"></div>
-                            <div class="legend-text">Смешанная: экономическая + социальная</div>
-                        </div>
-                    </div>
-                    
-                    <div class="legend-category">
-                        <h4>Полномочия <small style="font-size: 0.85em; font-weight: normal; color: #666;">(кликабельно)</small></h4>
-                        
-                        <a href="powers/normative/index.html" class="legend-power-item" data-power="normative" title="Нормативные правовые акты">
-                            <div class="legend-badge"><span>НПА</span></div>
-                            <div class="legend-text">Принятие нормативных правовых актов</div>
-                        </a>
-                        
-                        <a href="powers/supervision/index.html" class="legend-power-item" data-power="supervision" title="Административный надзор">
-                            <div class="legend-badge"><span>АН</span></div>
-                            <div class="legend-text">Административный надзор</div>
-                        </a>
-                        
-                        <a href="powers/property/index.html" class="legend-power-item" data-power="property" title="Государственное имущество">
-                            <div class="legend-badge"><span>ГИ</span></div>
-                            <div class="legend-text">Управление государственным имуществом</div>
-                        </a>
-                        
-                        <a href="powers/services/index.html" class="legend-power-item" data-power="services" title="Государственные услуги">
-                            <div class="legend-badge"><span>ГУ</span></div>
-                            <div class="legend-text">Оказание государственных услуг</div>
-                        </a>
-                    </div>
-                    
-                    <div class="legend-category">
-                        <h4>Структура подчинения</h4>
-                        <div class="legend-item">
-                            <div class="legend-structure president">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <div class="legend-text">Под руководством Президента РФ</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-structure government">
-                                <i class="fas fa-landmark"></i>
-                            </div>
-                            <div class="legend-text">Под руководством Правительства РФ</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Блоки классификации -->
-        <section class="classification-blocks">
-            <div class="container">
-                <div class="section-header">
-                    <h2><i class="fas fa-cubes"></i> Классификация ФОИВ</h2>
-                    <p class="section-subtitle">Выберите систему классификации для изучения федеральных органов исполнительной власти</p>
-                </div>
-                
-                <div class="blocks-grid">
-                    <!-- Система -->
-                    <div class="classification-block system">
-                        <div class="block-header">
-                            <div class="block-icon-wrapper">
-                                <i class="fas fa-sitemap"></i>
-                            </div>
-                            <h3>Система ФОИВ</h3>
-                            <p class="block-description">Классификация по типу органов: федеральные министерства, службы и агентства с указанием их основных функций и полномочий</p>
-                        </div>
-                        <div class="block-body">
-                            <div class="system-details">
-                                <h4><i class="fas fa-gavel"></i> Федеральное министерство</h4>
-                                <p>Федеральное министерство является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
-                                <p>Под функциями по принятию нормативных правовых актов понимается издание правил поведения, распространяющихся на неопределенный круг лиц.</p>
-                                <p><strong>Перечень 21 министерств</strong></p>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-shield-alt"></i> Федеральная служба</h4>
-                                <p>Федеральная служба (служба) является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности.</p>
-                                <p><strong>Перечень 20 служб</strong></p>
-                                <p>А также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности.</p>
-                                <p><strong>Перечень 10 служб</strong></p>
-                                <p>Под функциями по контролю и надзору понимаются:</p>
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> осуществление действий по контролю и надзору за исполнением общеобязательных правил поведения;</li>
-                                    <li><i class="fas fa-check-circle"></i> выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
-                                    <li><i class="fas fa-check-circle"></i> регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов.</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-building"></i> Федеральное агентство</h4>
-                                <p>Федеральное агентство является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
-                                <p><strong>Перечень 18 агентств</strong></p>
-                                <p>Под функциями по управлению государственным имуществом понимается осуществление полномочий собственника в отношении федерального имущества, а также управление находящимися в федеральной собственности акциями открытых акционерных обществ.</p>
-                                <p>Под функциями по оказанию государственных услуг понимается предоставление федеральными органами исполнительной власти непосредственно или через подведомственные им федеральные государственные учреждения либо иные организации безвозмездно или по регулируемым органами государственной власти ценам услуг гражданам и организациям в области образования, здравоохранения, социальной защиты населения и в других областях, установленных федеральными законами.</p>
-                            </div>
-                            
-                            <div class="block-footer">
-                                <a href="system/index.html" class="block-link">
-                                    <i class="fas fa-arrow-right"></i> Перейти к системе ФОИВ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Структура -->
-                    <div class="classification-block structure">
-                        <div class="block-header">
-                            <div class="block-icon-wrapper">
-                                <i class="fas fa-network-wired"></i>
-                            </div>
-                            <h3>Структура подчинения</h3>
-                            <p class="block-description">Перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
-                        </div>
-                        <div class="block-body">
-                            <div class="system-details">
-                                <h4><i class="fas fa-user-tie"></i> Структура включает ФОИВы, непосредственно подчиненные:</h4>
-                                <ul>
-                                    <li><i class="fas fa-caret-right"></i> <strong>1. Президенту РФ</strong></li>
-                                    <li><i class="fas fa-caret-right"></i> <strong>2. Правительству РФ</strong></li>
-                                </ul>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-sitemap"></i> Иерархия подчинения</h4>
-                                <p>Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ.</p>
-                                <p>Все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней.</p>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-project-diagram"></i> Основные характеристики</h4>
-                                <ul>
-                                    <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Президента РФ</li>
-                                    <li><i class="fas fa-check-circle"></i> ФОИВы под руководством Правительства РФ</li>
-                                    <li><i class="fas fa-check-circle"></i> Министерства с подведомственными службами и агентствами</li>
-                                    <li><i class="fas fa-check-circle"></i> Иерархия и взаимодействие органов</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="block-footer">
-                                <a href="structure/index.html" class="block-link">
-                                    <i class="fas fa-arrow-right"></i> Перейти к структуре подчинения
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Сферы -->
-                    <div class="classification-block spheres">
-                        <div class="block-header">
-                            <div class="block-icon-wrapper">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <h3>Сферы деятельности</h3>
-                            <p class="block-description">Классификация по сферам общественной жизни: экономическая, социально-культурная и административно-политическая сферы</p>
-                        </div>
-                        <div class="block-body">
-                            <div class="system-details">
-                                <h4><i class="fas fa-chart-line" style="color: var(--economic);"></i> 1. Экономическая сфера</h4>
-                                <ul>
-                                    <li><i class="fas fa-caret-right"></i> управление экономическим развитием</li>
-                                    <li><i class="fas fa-caret-right"></i> финансы</li>
-                                    <li><i class="fas fa-caret-right"></i> промышленность и торговля</li>
-                                    <li><i class="fas fa-caret-right"></i> антимонопольное регулирование</li>
-                                    <li><i class="fas fa-caret-right"></i> агропромышленный комплекс</li>
-                                    <li><i class="fas fa-caret-right"></i> энергетика</li>
-                                    <li><i class="fas fa-caret-right"></i> транспорт</li>
-                                    <li><i class="fas fa-caret-right"></i> строительство и жилищно-коммунальное хозяйство</li>
-                                    <li><i class="fas fa-caret-right"></i> цифровое развитие, связь, массовые коммуникации</li>
-                                    <li><i class="fas fa-caret-right"></i> таможенное дело</li>
-                                    <li><i class="fas fa-caret-right"></i> экология, окружающая среда</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-users" style="color: var(--social);"></i> 2. Социально-культурная сфера</h4>
-                                <ul>
-                                    <li><i class="fas fa-caret-right"></i> образование и наука</li>
-                                    <li><i class="fas fa-caret-right"></i> культура</li>
-                                    <li><i class="fas fa-caret-right"></i> здравоохранение</li>
-                                    <li><i class="fas fa-caret-right"></i> труд и социальная защита</li>
-                                    <li><i class="fas fa-caret-right"></i> физическая культура и спорт</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="system-details">
-                                <h4><i class="fas fa-shield-alt" style="color: var(--political);"></i> 3. Административно-политическая сфера</h4>
-                                <ul>
-                                    <li><i class="fas fa-caret-right"></i> оборона</li>
-                                    <li><i class="fas fa-caret-right"></i> государственная безопасность</li>
-                                    <li><i class="fas fa-caret-right"></i> внутренние дела</li>
-                                    <li><i class="fas fa-caret-right"></i> иностранные дела</li>
-                                    <li><i class="fas fa-caret-right"></i> юстиция</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="block-footer">
-                                <a href="spheres/index.html" class="block-link">
-                                    <i class="fas fa-arrow-right"></i> Перейти к сферам деятельности
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1265,19 +1152,6 @@
             document.querySelectorAll('.breadcrumbs a').forEach(link => {
                 link.addEventListener('click', () => {
                     document.querySelector('.breadcrumbs').classList.remove('active');
-                });
-            });
-            
-            // Обработка кликов по полномочиям с проверкой существования страниц
-            document.querySelectorAll('.legend-power-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    // Проверяем, существует ли страница (простая проверка через fetch)
-                    const url = this.getAttribute('href');
-                    
-                    // Если хотите добавить дополнительную логику при клике, можно добавить здесь
-                    // Например, можно показывать уведомление, если страница еще не создана
-                    
-                    // Сейчас просто разрешаем переход
                 });
             });
         });
