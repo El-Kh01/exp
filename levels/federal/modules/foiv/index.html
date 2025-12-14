@@ -345,7 +345,18 @@
             font-size: 2.8rem;
             color: var(--primary-blue);
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
             font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section-header h2 i {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .section-subtitle {
@@ -428,6 +439,13 @@
             border-radius: 8px;
             transform: rotate(45deg);
             flex-shrink: 0;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .legend-badge:hover {
+            transform: rotate(45deg) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .legend-badge span {
@@ -548,6 +566,14 @@
             color: var(--primary-blue);
             margin-bottom: 1rem;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .system-details h4 a {
+            text-decoration: none;
         }
         
         .system-details p {
@@ -600,6 +626,64 @@
         .block-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(30, 60, 114, 0.4);
+        }
+        
+        /* Специальный символ для структуры с тремя уровнями */
+        .structure-diagram {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .structure-diagram .level {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .structure-diagram .level-1 {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .structure-diagram .level-2 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 20px;
+        }
+        
+        .structure-diagram .level-3 {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            gap: 10px;
+        }
+        
+        .structure-diagram .node {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .structure-diagram .level-1 .node {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .structure-diagram .level-2 .node {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .structure-diagram .level-3 .node {
+            width: 8px;
+            height: 8px;
         }
         
         /* ===== СОВРЕМЕННЫЙ ПОДВАЛ ===== */
@@ -936,15 +1020,24 @@
                         </div>
                         <div class="block-body">
                             <div class="system-details">
-                                <h4>1. федеральное министерство</h4>
+                                <h4>
+                                    <a href="powers/normative/index.html" title="Принятие нормативных правовых актов">
+                                        <div class="legend-badge"><span>НПА</span></div>
+                                    </a>
+                                    федеральное министерство
+                                </h4>
                                 <p>является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
                                 <p>под функциями по принятию нормативных правовых актов понимается издание правил поведения, распространяющихся на неопределенный круг лиц;</p>
-                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Принятие нормативных правовых актов ФОИВ</a></p>
                                 <p>Перечень 21 министерств</p>
                             </div>
                             
                             <div class="system-details">
-                                <h4>2. федеральная служба</h4>
+                                <h4>
+                                    <a href="powers/supervision/index.html" title="Административный надзор">
+                                        <div class="legend-badge"><span>АН</span></div>
+                                    </a>
+                                    федеральная служба
+                                </h4>
                                 <p>является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности, Перечень 20 служб</p>
                                 <p>а также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности. Перечень 10 служб</p>
                                 <p>под функциями по контролю и надзору понимаются:</p>
@@ -953,16 +1046,21 @@
                                     <li>выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
                                     <li>регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов;</li>
                                 </ul>
-                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Административный надзор</a></p>
                             </div>
                             
                             <div class="system-details">
-                                <h4>3. федеральное агентство</h4>
+                                <h4>
+                                    <a href="powers/property/index.html" title="Управление государственным имуществом">
+                                        <div class="legend-badge"><span>ГИ</span></div>
+                                    </a>
+                                    <a href="powers/services/index.html" title="Оказание государственных услуг" style="margin-left: 10px;">
+                                        <div class="legend-badge"><span>ГУ</span></div>
+                                    </a>
+                                    федеральное агентство
+                                </h4>
                                 <p>является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции. Перечень 18 агентств</p>
                                 <p>под функциями по управлению государственным имуществом понимается осуществление полномочий собственника в отношении федерального имущества, а также управление находящимися в федеральной собственности акциями открытых акционерных обществ;</p>
-                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Управление государственным имуществом</a></p>
                                 <p>под функциями по оказанию государственных услуг понимается предоставление федеральными органами исполнительной власти непосредственно или через подведомственные им федеральные государственные учреждения либо иные организации безвозмездно или по регулируемым органами государственной власти ценам услуг гражданам и организациям в области образования, здравоохранения, социальной защиты населения и в других областях, установленных федеральными законами.</p>
-                                <p><a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Оказание государственных услуг</a></p>
                             </div>
                             
                             <div class="system-details">
@@ -975,7 +1073,21 @@
                     <div class="classification-block structure">
                         <div class="block-header">
                             <div class="block-icon-wrapper">
-                                <i class="fas fa-network-wired"></i>
+                                <div class="structure-diagram">
+                                    <div class="level level-1">
+                                        <div class="node"></div>
+                                    </div>
+                                    <div class="level level-2">
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                    </div>
+                                    <div class="level level-3">
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                        <div class="node"></div>
+                                    </div>
+                                </div>
                             </div>
                             <h3>СТРУКТУРА</h3>
                             <p class="block-description">перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
@@ -1050,8 +1162,7 @@
         <section class="legend-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Условные обозначения</h2>
-                    <p class="section-subtitle">Система обозначений для классификации ФОИВов <br><small style="font-size: 0.9em; color: #666;"></small></p>
+                    <h2><i class="fas fa-info-circle"></i> Условные обозначения</h2>
                 </div>
                 
                 <div class="legend-grid">
@@ -1068,18 +1179,6 @@
                         <div class="legend-item">
                             <div class="legend-color" style="background: var(--social);"></div>
                             <div class="legend-text">Социально-культурная сфера</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-politics-economic);"></div>
-                            <div class="legend-text">Смешанная: политическая + экономическая</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-politics-social);"></div>
-                            <div class="legend-text">Смешанная: политическая + социальная</div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: var(--mixed-economic-social);"></div>
-                            <div class="legend-text">Смешанная: экономическая + социальная</div>
                         </div>
                     </div>
                     
@@ -1188,6 +1287,16 @@
             document.querySelectorAll('.breadcrumbs a').forEach(link => {
                 link.addEventListener('click', () => {
                     document.querySelector('.breadcrumbs').classList.remove('active');
+                });
+            });
+            
+            // Обработка кликов по знакам в блоках
+            document.querySelectorAll('.legend-badge').forEach(badge => {
+                badge.addEventListener('click', function() {
+                    const link = this.closest('a');
+                    if (link && link.href) {
+                        window.location.href = link.href;
+                    }
                 });
             });
         });
