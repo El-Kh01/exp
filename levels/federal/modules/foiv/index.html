@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Полный сброс и базовые стили */
+        /* Detroit: Become Human тема */
         * {
             margin: 0;
             padding: 0;
@@ -16,47 +17,66 @@
         }
         
         :root {
-            --political: #e80909;
-            --economic: #1013e3;
-            --social: #f5d442;
+            /* Detroit цветовая палитра - неон на темном фоне */
+            --bg-primary: #0a0e17;
+            --bg-secondary: #121826;
+            --bg-tertiary: #1a1f2e;
+            --bg-card: rgba(26, 31, 46, 0.8);
+            --bg-glass: rgba(20, 25, 40, 0.7);
             
-            --primary-blue: #1e3c72;
-            --primary-light: #2a5298;
-            --accent-blue: #2d89ef;
-            --light-blue: #e3f2fd;
+            /* Неоновые акценты как в Detroit */
+            --neon-blue: #00b4ff;
+            --neon-cyan: #00ffff;
+            --neon-purple: #9d4edd;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff9d;
+            --neon-red: #ff0055;
+            --neon-yellow: #ffdd00;
             
-            --success: #00b09b;
-            --info: #17a2b8;
-            --danger: #dc3545;
+            /* Сферы деятельности - неоновые версии */
+            --political: var(--neon-red);
+            --economic: var(--neon-cyan);
+            --social: var(--neon-green);
             
-            --light-gray: #f8fafc;
-            --medium-gray: #e9ecef;
-            --dark-gray: #6c757d;
-            --text-dark: #212529;
+            /* Текст */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8c3;
+            --text-muted: #6b7280;
+            
+            /* Эффекты */
+            --glow-blue: 0 0 15px rgba(0, 180, 255, 0.7);
+            --glow-cyan: 0 0 15px rgba(0, 255, 255, 0.7);
+            --glow-purple: 0 0 15px rgba(157, 78, 221, 0.7);
+            --glow-red: 0 0 15px rgba(255, 0, 85, 0.7);
+            --glow-green: 0 0 15px rgba(0, 255, 157, 0.7);
             
             --border-radius: 12px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --border-radius-lg: 20px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(0, 180, 255, 0.3);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             
-            --gradient-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            --gradient-dark: linear-gradient(135deg, #0f1b3d 0%, #1e3c72 100%);
-            --gradient-green: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
-            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-primary: linear-gradient(135deg, #00b4ff 0%, #0077ff 100%);
+            --gradient-cyber: linear-gradient(135deg, #00ffff 0%, #9d4edd 100%);
+            --gradient-danger: linear-gradient(135deg, #ff0055 0%, #ff5500 100%);
+            --gradient-success: linear-gradient(135deg, #00ff9d 0%, #00cc88 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0e17 0%, #121826 100%);
         }
         
         html {
             scroll-behavior: smooth;
+            background: var(--bg-primary);
         }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: #ffffff;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
         
         .container {
@@ -65,16 +85,16 @@
             padding: 0 1.5rem;
         }
         
-        /* ===== СОВРЕМЕННАЯ ШАПКА ===== */
+        /* Кибер-шапка */
         .site-header {
-            background: white;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 180, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
             padding: 1rem 0;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
         
         .header-wrapper {
@@ -89,6 +109,7 @@
             align-items: center;
             gap: 1rem;
             text-decoration: none;
+            position: relative;
         }
         
         .logo-icon {
@@ -101,20 +122,42 @@
             justify-content: center;
             font-size: 1.25rem;
             color: white;
+            box-shadow: var(--glow-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         
         .logo-text h1 {
             font-size: 1.25rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--neon-blue);
             line-height: 1.2;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .logo-subtitle {
             font-size: 0.8rem;
-            color: var(--dark-gray);
+            color: var(--text-secondary);
             font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .breadcrumbs {
@@ -122,28 +165,47 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .breadcrumbs a {
-            color: var(--primary-blue);
+            color: var(--neon-cyan);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .breadcrumbs a:hover {
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
         
         .breadcrumbs .separator {
-            color: var(--dark-gray);
+            color: var(--neon-blue);
         }
         
         .breadcrumbs .current {
-            color: var(--text-dark);
+            color: var(--text-primary);
             font-weight: 600;
         }
         
-        /* ===== ГЕРОЙ СЕКЦИЯ ===== */
+        /* Технологичная герой-секция */
         .foiv-module-hero {
-            background: var(--light-gray);
-            padding: 4rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, rgba(10, 14, 23, 0.9) 0%, rgba(18, 24, 38, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(0,180,255,0.05)" fill="none" stroke-width="0.5"/></svg>');
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .foiv-module-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: var(--glow-blue);
         }
         
         .hero-module-content {
@@ -151,101 +213,188 @@
             grid-template-columns: 1fr auto;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .hero-module-text h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
             line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-module-text h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-primary);
+            box-shadow: var(--glow-blue);
         }
         
         .hero-module-text p {
             font-size: 1.25rem;
-            color: var(--dark-gray);
-            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
             max-width: 500px;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
         }
         
-        /* Статистика */
+        /* Статистика в стиле Detroit */
         .hero-stats {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         
         .hero-stat-item {
-            padding: 1.5rem;
-            background: white;
+            padding: 1.8rem 1.5rem;
+            background: var(--bg-card);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            min-width: 120px;
-            text-align: center;
             transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 180, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-stat-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover), var(--glow-blue);
+            border-color: var(--neon-blue);
+        }
+        
+        .hero-stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
         }
         
         .hero-stat-item .number {
             display: block;
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 2.8rem;
+            font-weight: 900;
             margin-bottom: 0.5rem;
-            color: var(--primary-blue);
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 180, 255, 0.5);
         }
         
         .hero-stat-item .label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--dark-gray);
+            color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .foiv-module-logo {
             width: 280px;
             height: 280px;
-            background: var(--gradient-primary);
+            background: var(--gradient-cyber);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 5rem;
             color: white;
-            box-shadow: 0 20px 40px rgba(30, 60, 114, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 180, 255, 0.3),
+                        inset 0 0 60px rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: pulse 4s infinite;
         }
         
-        /* ===== СЕКЦИИ ===== */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .foiv-module-logo::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.3), transparent) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Секции */
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding-top: 4rem;
+            margin-bottom: 4rem;
+            padding-top: 5rem;
+            position: relative;
         }
         
         .section-header h2 {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-primary);
+            margin: 1rem auto;
+            box-shadow: var(--glow-blue);
         }
         
         .section-subtitle {
             font-size: 1.1rem;
-            color: var(--dark-gray);
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* ===== БЛОКИ КЛАССИФИКАЦИИ ===== */
+        /* Технологичные блоки классификации */
         .classification-blocks {
-            padding: 2rem 0 4rem;
+            padding: 2rem 0 6rem;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+        
+        .classification-blocks::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: var(--glow-blue);
         }
         
         .blocks-grid {
@@ -256,97 +405,127 @@
         }
         
         .classification-block {
-            background: white;
-            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid transparent;
+            position: relative;
         }
         
         .classification-block:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover), var(--shadow-glow);
         }
         
         .classification-block.system {
-            border-top: 4px solid var(--primary-blue);
+            border-top: 4px solid var(--neon-blue);
         }
         
         .classification-block.structure {
-            border-top: 4px solid var(--success);
+            border-top: 4px solid var(--neon-green);
         }
         
         .classification-block.spheres {
-            border-top: 4px solid var(--info);
+            border-top: 4px solid var(--neon-purple);
         }
         
         .block-header {
-            padding: 2rem 2rem 1rem;
+            padding: 2.5rem 2rem 1.5rem;
+            position: relative;
         }
         
         .block-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: white;
             margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .block-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 2s infinite;
         }
         
         .classification-block.system .block-icon-wrapper { 
             background: var(--gradient-primary);
+            box-shadow: var(--glow-blue);
         }
         
         .classification-block.structure .block-icon-wrapper { 
-            background: var(--gradient-green);
+            background: var(--gradient-success);
+            box-shadow: var(--glow-green);
         }
         
         .classification-block.spheres .block-icon-wrapper { 
-            background: var(--gradient-accent);
+            background: var(--gradient-cyber);
+            box-shadow: var(--glow-purple);
         }
         
         .block-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: var(--primary-blue);
-            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .block-description {
-            color: var(--dark-gray);
+            color: var(--text-secondary);
             line-height: 1.5;
             margin-bottom: 1rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .block-body {
-            padding: 0 2rem 2rem;
+            padding: 0 2rem 2.5rem;
         }
         
         .system-details {
-            background: var(--light-blue);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary-blue);
+            background: rgba(10, 14, 23, 0.6);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            border-left: 4px solid var(--neon-blue);
+            border: 1px solid rgba(0, 180, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        
+        .system-details:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.2);
         }
         
         .system-details h4 {
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
         }
         
         .system-details p {
-            color: var(--text-dark);
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 0.8rem;
             font-size: 0.95rem;
@@ -354,22 +533,23 @@
         
         .system-details ul {
             list-style: none;
-            margin-top: 0.8rem;
+            margin-top: 1rem;
         }
         
         .system-details li {
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: var(--text-secondary);
             font-size: 0.95rem;
-            padding-left: 1rem;
+            padding-left: 1.5rem;
             position: relative;
         }
         
         .system-details li:before {
-            content: "•";
-            color: var(--primary-blue);
+            content: "▸";
+            color: var(--neon-blue);
             position: absolute;
             left: 0;
+            font-weight: bold;
         }
         
         .links-container {
@@ -378,44 +558,50 @@
             gap: 0.75rem;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(0, 180, 255, 0.2);
         }
         
         .link-item {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(30, 60, 114, 0.05);
-            border-radius: 6px;
-            color: var(--primary-blue);
+            padding: 0.7rem 1.2rem;
+            background: rgba(0, 180, 255, 0.1);
+            border-radius: 8px;
+            color: var(--neon-blue);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             transition: var(--transition);
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .link-item:hover {
-            background: rgba(30, 60, 114, 0.1);
+            background: rgba(0, 180, 255, 0.2);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 180, 255, 0.3);
+            transform: translateY(-2px);
         }
         
         /* Структура диаграмма */
         .structure-diagram {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto;
-            background: var(--gradient-green);
-            border-radius: 10px;
+            background: var(--gradient-success);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: var(--glow-green);
         }
         
         .structure-diagram .hierarchy {
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
         }
         
         .structure-diagram .level {
@@ -427,116 +613,85 @@
         }
         
         .structure-diagram .level-1 {
-            top: 4px;
+            top: 5px;
         }
         
         .structure-diagram .level-2 {
-            top: 18px;
-            gap: 20px;
+            top: 20px;
+            gap: 22px;
         }
         
         .structure-diagram .level-3 {
-            top: 32px;
-            gap: 8px;
+            top: 35px;
+            gap: 9px;
         }
         
         .structure-diagram .node {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: white;
-            border-radius: 1px;
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
         }
         
         .structure-diagram .level-1 .node {
-            width: 12px;
-            height: 12px;
-            background: #ffd700;
+            width: 14px;
+            height: 14px;
+            background: var(--neon-yellow);
+            box-shadow: 0 0 10px var(--neon-yellow);
         }
         
         .structure-diagram .level-2 .node {
-            width: 10px;
-            height: 10px;
-            background: #17a2b8;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
         }
         
         .structure-diagram .level-3 .node {
-            width: 6px;
-            height: 6px;
-            background: #28a745;
-        }
-        
-        /* Линии соединения */
-        .structure-diagram .connector {
-            position: absolute;
-            background: white;
-        }
-        
-        .structure-diagram .connector-1 {
-            top: 16px;
-            left: 50%;
-            width: 2px;
-            height: 2px;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .connector-2 {
-            top: 23px;
-            left: 50%;
-            width: 20px;
-            height: 2px;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .connector-3 {
-            top: 29px;
-            left: 50%;
-            width: 2px;
-            height: 3px;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .connector-4 {
-            top: 29px;
-            left: calc(50% - 10px);
-            width: 7px;
-            height: 2px;
-        }
-        
-        .structure-diagram .connector-5 {
-            top: 29px;
-            left: calc(50% + 3px);
-            width: 7px;
-            height: 2px;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            box-shadow: 0 0 6px var(--neon-green);
         }
         
         /* Стиль для ссылок на указы */
         .law-reference {
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            color: var(--dark-gray);
+            border-top: 1px solid rgba(0, 180, 255, 0.2);
+            color: var(--text-secondary);
             font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .law-reference a {
-            color: var(--primary-blue);
+            color: var(--neon-blue);
             text-decoration: none;
             font-weight: 600;
+            transition: var(--transition);
         }
         
-        /* Значки */
+        .law-reference a:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        /* Значки в стиле Detroit */
         .legend-badge {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--text-dark);
-            color: white;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #1a1f2e, #2a2f3e);
+            color: var(--neon-cyan);
+            border-radius: 8px;
             transform: rotate(45deg);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 700;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+            font-family: 'Orbitron', sans-serif;
         }
         
         .legend-badge span {
@@ -544,119 +699,170 @@
         }
         
         .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px currentColor;
         }
         
         /* Сферы */
         .sphere-list {
             list-style: none;
-            margin-top: 0.8rem;
+            margin-top: 1rem;
         }
         
         .sphere-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
         
         .sphere-list li a {
-            color: var(--text-dark);
+            color: var(--text-secondary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
             transition: var(--transition);
             font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .sphere-list li a:hover {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: currentColor;
+            box-shadow: 0 0 15px currentColor;
+            color: white;
+            transform: translateX(5px);
         }
         
         .sphere-list li a i {
             font-size: 0.8rem;
-            color: var(--primary-blue);
+            color: inherit;
         }
         
-        /* ===== ОБОЗНАЧЕНИЯ ===== */
+        /* Легенда в стиле Detroit */
         .legend-section {
-            padding: 4rem 0;
-            background: var(--light-gray);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 6rem 0;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .legend-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            box-shadow: var(--glow-cyan);
         }
         
         .legend-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         
         .legend-category {
-            padding: 2rem;
-            background: white;
-            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .legend-category:hover {
+            border-color: var(--neon-blue);
+            box-shadow: var(--shadow-hover), var(--shadow-glow);
         }
         
         .legend-category h4 {
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 700;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--light-blue);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border-radius: 8px;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding: 1rem;
+            border-radius: 10px;
             transition: var(--transition);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
         }
         
         .legend-item:hover {
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 180, 255, 0.3);
+            transform: translateX(5px);
         }
         
         .legend-text {
             font-size: 0.95rem;
-            color: var(--text-dark);
+            color: var(--text-secondary);
             font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .legend-structure {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: white;
+            box-shadow: 0 0 15px currentColor;
+            flex-shrink: 0;
         }
         
         .legend-structure.president { 
-            background: var(--danger);
+            background: var(--gradient-danger);
+            box-shadow: var(--glow-red);
         }
         
         .legend-structure.government { 
-            background: var(--info);
+            background: var(--gradient-primary);
+            box-shadow: var(--glow-blue);
         }
         
-        /* ===== ПОДВАЛ ===== */
+        /* Кибер-подвал */
         .site-footer {
-            background: var(--gradient-dark);
+            background: linear-gradient(180deg, #0a0e17 0%, #080c14 100%);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 5rem 0 2rem;
+            position: relative;
+            border-top: 1px solid rgba(0, 180, 255, 0.2);
+        }
+        
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: var(--glow-blue);
         }
         
         .footer-content {
@@ -667,16 +873,20 @@
         }
         
         .footer-section h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.8rem;
+            color: var(--neon-cyan);
             font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .footer-section p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
         .footer-links {
@@ -684,28 +894,68 @@
         }
         
         .footer-links li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.8rem;
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             text-decoration: none;
             transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .footer-links a:hover {
-            color: white;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            padding-left: 5px;
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(0, 180, 255, 0.2);
             padding-top: 2rem;
             text-align: center;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
             font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        /* ===== АДАПТИВНОСТЬ ===== */
+        /* Эффекты сканирования */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            box-shadow: 0 0 20px var(--neon-cyan);
+            z-index: 9999;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100vh; }
+        }
+        
+        /* Технологичные разделители */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--neon-blue), 
+                var(--neon-cyan), 
+                var(--neon-blue), 
+                transparent
+            );
+            margin: 4rem 0;
+            box-shadow: var(--glow-blue);
+        }
+        
+        /* Адаптивность */
         @media (max-width: 992px) {
             .hero-module-content {
                 grid-template-columns: 1fr;
@@ -713,25 +963,37 @@
                 text-align: center;
             }
             
+            .hero-module-text h1::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
             .hero-module-text p {
                 margin: 0 auto 2rem;
             }
             
             .hero-stats {
-                justify-content: center;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .foiv-module-logo {
-                width: 200px;
-                height: 200px;
-                font-size: 3.5rem;
+                width: 220px;
+                height: 220px;
+                font-size: 4rem;
                 margin: 0 auto;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
         
         @media (max-width: 768px) {
             .hero-module-text h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .hero-module-text p {
@@ -739,24 +1001,28 @@
             }
             
             .hero-stat-item {
-                padding: 1rem;
-                min-width: 100px;
+                padding: 1.5rem 1rem;
             }
             
             .hero-stat-item .number {
-                font-size: 2rem;
-            }
-            
-            .blocks-grid {
-                grid-template-columns: 1fr;
+                font-size: 2.2rem;
             }
             
             .section-header {
-                padding-top: 2rem;
+                padding-top: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
             }
             
             .legend-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .block-header,
+            .block-body {
+                padding: 2rem;
             }
         }
         
@@ -776,38 +1042,65 @@
             }
             
             .hero-module-text h1 {
-                font-size: 1.75rem;
+                font-size: 1.8rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .hero-stat-item {
-                width: calc(50% - 0.75rem);
+                width: 100%;
             }
             
-            .block-header,
-            .block-body {
-                padding: 1.5rem;
+            .foiv-module-logo {
+                width: 180px;
+                height: 180px;
+                font-size: 3rem;
             }
         }
         
         /* Утилитарные классы */
         .text-link {
-            color: var(--primary-blue);
+            color: var(--neon-blue);
             text-decoration: none;
             font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .text-link:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
         }
         
         .mb-2 { margin-bottom: 2rem; }
         .mt-2 { margin-top: 2rem; }
+        
+        /* Специальные эффекты */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .cyber-border {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                        linear-gradient(45deg, var(--neon-blue), var(--neon-cyan)) border-box;
+        }
     </style>
 </head>
 <body>
+    <!-- Эффект сканирования -->
+    <div class="scan-line"></div>
+
     <!-- Шапка с навигацией -->
     <header class="site-header">
         <div class="container">
             <div class="header-wrapper">
                 <a href="https://el-kh01.github.io/exp/index.html" class="logo">
                     <div class="logo-icon">
-                        <i class="fas fa-flag"></i>
+                        <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="logo-text">
                         <h1>Федеральный уровень</h1>
@@ -855,12 +1148,15 @@
                     
                     <div class="hero-module-visual">
                         <div class="foiv-module-logo">
-                            <i class="fas fa-landmark"></i>
+                            <i class="fas fa-server"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Разделитель -->
+        <div class="section-divider"></div>
 
         <!-- Блоки классификации -->
         <section class="classification-blocks">
@@ -872,7 +1168,7 @@
                 
                 <div class="blocks-grid">
                     <!-- Система -->
-                    <div class="classification-block system">
+                    <div class="classification-block system cyber-border">
                         <div class="block-header">
                             <div class="block-icon-wrapper">
                                 <i class="fas fa-sitemap"></i>
@@ -891,7 +1187,7 @@
                                 
                                 <div class="links-container">
                                     <a href="/system/ministries/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 21 министерств
+                                        <i class="fas fa-microchip"></i> Перечень 21 министерств
                                     </a>
                                 </div>
                             </div>
@@ -905,7 +1201,7 @@
                                 
                                 <div class="links-container">
                                     <a href="/system/services/20/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 20 служб
+                                        <i class="fas fa-shield-alt"></i> Перечень 20 служб
                                     </a>
                                 </div>
                                 
@@ -913,7 +1209,7 @@
                                 
                                 <div class="links-container">
                                     <a href="/system/services/10/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 10 служб
+                                        <i class="fas fa-user-shield"></i> Перечень 10 служб
                                     </a>
                                 </div>
                                 
@@ -937,7 +1233,7 @@
                                 
                                 <div class="links-container">
                                     <a href="/system/agencies/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 18 агентств
+                                        <i class="fas fa-cogs"></i> Перечень 18 агентств
                                     </a>
                                 </div>
                             </div>
@@ -949,16 +1245,10 @@
                     </div>
                     
                     <!-- Структура -->
-                    <div class="classification-block structure">
+                    <div class="classification-block structure cyber-border">
                         <div class="block-header">
                             <div class="block-icon-wrapper">
                                 <div class="structure-diagram">
-                                    <div class="connector connector-1"></div>
-                                    <div class="connector connector-2"></div>
-                                    <div class="connector connector-3"></div>
-                                    <div class="connector connector-4"></div>
-                                    <div class="connector connector-5"></div>
-                                    
                                     <div class="hierarchy">
                                         <div class="level level-1">
                                             <div class="node"></div>
@@ -982,25 +1272,27 @@
                         <div class="block-body">
                             <div class="system-details">
                                 <h4>Структура включает ФОИВы, непосредственно подчиненные:</h4>
-                                <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0;">
-                                    <a href="/structure/president/" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; padding: 1rem; background: rgba(220, 53, 69, 0.05); border-radius: 8px;">
+                                <div style="display: flex; flex-direction: column; gap: 1.2rem; margin: 1.8rem 0;">
+                                    <a href="/structure/president/" style="display: flex; align-items: center; gap: 1.2rem; text-decoration: none; color: inherit; padding: 1.2rem; background: rgba(255, 0, 85, 0.05); border-radius: 12px; border: 1px solid rgba(255, 0, 85, 0.2); transition: var(--transition);">
                                         <div class="legend-structure president">
                                             <i class="fas fa-user-tie"></i>
                                         </div>
                                         <div>
-                                            <strong style="color: var(--primary-blue);">Президенту РФ</strong>
-                                            <div style="font-size: 0.9rem; color: var(--dark-gray); margin-top: 0.2rem;">Высший уровень руководства</div>
+                                            <strong style="color: var(--neon-red);" class="glow-text">Президенту РФ</strong>
+                                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem; font-family: 'Rajdhani', sans-serif;">Высший уровень руководства</div>
                                         </div>
+                                        <i class="fas fa-arrow-right ml-auto" style="margin-left: auto; color: var(--neon-red);"></i>
                                     </a>
                                     
-                                    <a href="/structure/government/" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; padding: 1rem; background: rgba(23, 162, 184, 0.05); border-radius: 8px;">
+                                    <a href="/structure/government/" style="display: flex; align-items: center; gap: 1.2rem; text-decoration: none; color: inherit; padding: 1.2rem; background: rgba(0, 180, 255, 0.05); border-radius: 12px; border: 1px solid rgba(0, 180, 255, 0.2); transition: var(--transition);">
                                         <div class="legend-structure government">
-                                            <i class="fas fa-landmark"></i>
+                                            <i class="fas fa-server"></i>
                                         </div>
                                         <div>
-                                            <strong style="color: var(--primary-blue);">Правительству РФ</strong>
-                                            <div style="font-size: 0.9rem; color: var(--dark-gray); margin-top: 0.2rem;">Основной уровень руководства</div>
+                                            <strong style="color: var(--neon-blue);" class="glow-text">Правительству РФ</strong>
+                                            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem; font-family: 'Rajdhani', sans-serif;">Основной уровень руководства</div>
                                         </div>
+                                        <i class="fas fa-arrow-right ml-auto" style="margin-left: auto; color: var(--neon-blue);"></i>
                                     </a>
                                 </div>
                                 <p>Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ (все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней).</p>
@@ -1013,7 +1305,7 @@
                     </div>
                     
                     <!-- Сферы -->
-                    <div class="classification-block spheres">
+                    <div class="classification-block spheres cyber-border">
                         <div class="block-header">
                             <div class="block-icon-wrapper">
                                 <i class="fas fa-globe-americas"></i>
@@ -1024,49 +1316,49 @@
                         <div class="block-body">
                             <div class="system-details">
                                 <h4>
-                                    <div class="legend-color" style="background: var(--economic);"></div>
+                                    <div class="legend-color" style="background: var(--economic); color: var(--economic);"></div>
                                     Экономическая сфера
                                 </h4>
                                 <ul class="sphere-list">
-                                    <li><a href="/spheres/economic/management/"><i class="fas fa-arrow-right"></i> управление экономическим развитием</a></li>
-                                    <li><a href="/spheres/economic/finance/"><i class="fas fa-arrow-right"></i> финансы</a></li>
-                                    <li><a href="/spheres/economic/industry/"><i class="fas fa-arrow-right"></i> промышленность и торговля</a></li>
-                                    <li><a href="/spheres/economic/antimonopoly/"><i class="fas fa-arrow-right"></i> антимонопольное регулирование</a></li>
-                                    <li><a href="/spheres/economic/agriculture/"><i class="fas fa-arrow-right"></i> агропромышленный комплекс</a></li>
-                                    <li><a href="/spheres/economic/energy/"><i class="fas fa-arrow-right"></i> энергетика</a></li>
-                                    <li><a href="/spheres/economic/transport/"><i class="fas fa-arrow-right"></i> транспорт</a></li>
-                                    <li><a href="/spheres/economic/construction/"><i class="fas fa-arrow-right"></i> строительство и ЖКХ</a></li>
-                                    <li><a href="/spheres/economic/digital/"><i class="fas fa-arrow-right"></i> цифровое развитие, связь</a></li>
-                                    <li><a href="/spheres/economic/customs/"><i class="fas fa-arrow-right"></i> таможенное дело</a></li>
-                                    <li><a href="/spheres/economic/ecology/"><i class="fas fa-arrow-right"></i> экология, окружающая среда</a></li>
+                                    <li><a href="/spheres/economic/management/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> управление экономическим развитием</a></li>
+                                    <li><a href="/spheres/economic/finance/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> финансы</a></li>
+                                    <li><a href="/spheres/economic/industry/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> промышленность и торговля</a></li>
+                                    <li><a href="/spheres/economic/antimonopoly/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> антимонопольное регулирование</a></li>
+                                    <li><a href="/spheres/economic/agriculture/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> агропромышленный комплекс</a></li>
+                                    <li><a href="/spheres/economic/energy/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> энергетика</a></li>
+                                    <li><a href="/spheres/economic/transport/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> транспорт</a></li>
+                                    <li><a href="/spheres/economic/construction/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> строительство и ЖКХ</a></li>
+                                    <li><a href="/spheres/economic/digital/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> цифровое развитие, связь</a></li>
+                                    <li><a href="/spheres/economic/customs/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> таможенное дело</a></li>
+                                    <li><a href="/spheres/economic/ecology/" style="color: var(--economic);"><i class="fas fa-arrow-right"></i> экология, окружающая среда</a></li>
                                 </ul>
                             </div>
                             
                             <div class="system-details">
                                 <h4>
-                                    <div class="legend-color" style="background: var(--social);"></div>
+                                    <div class="legend-color" style="background: var(--social); color: var(--social);"></div>
                                     Социально-культурная сфера
                                 </h4>
                                 <ul class="sphere-list">
-                                    <li><a href="/spheres/social/education/"><i class="fas fa-arrow-right"></i> образование и наука</a></li>
-                                    <li><a href="/spheres/social/culture/"><i class="fas fa-arrow-right"></i> культура</a></li>
-                                    <li><a href="/spheres/social/healthcare/"><i class="fas fa-arrow-right"></i> здравоохранение</a></li>
-                                    <li><a href="/spheres/social/labor/"><i class="fas fa-arrow-right"></i> труд и социальная защита</a></li>
-                                    <li><a href="/spheres/social/sports/"><i class="fas fa-arrow-right"></i> физическая культура и спорт</a></li>
+                                    <li><a href="/spheres/social/education/" style="color: var(--social);"><i class="fas fa-arrow-right"></i> образование и наука</a></li>
+                                    <li><a href="/spheres/social/culture/" style="color: var(--social);"><i class="fas fa-arrow-right"></i> культура</a></li>
+                                    <li><a href="/spheres/social/healthcare/" style="color: var(--social);"><i class="fas fa-arrow-right"></i> здравоохранение</a></li>
+                                    <li><a href="/spheres/social/labor/" style="color: var(--social);"><i class="fas fa-arrow-right"></i> труд и социальная защита</a></li>
+                                    <li><a href="/spheres/social/sports/" style="color: var(--social);"><i class="fas fa-arrow-right"></i> физическая культура и спорт</a></li>
                                 </ul>
                             </div>
                             
                             <div class="system-details">
                                 <h4>
-                                    <div class="legend-color" style="background: var(--political);"></div>
+                                    <div class="legend-color" style="background: var(--political); color: var(--political);"></div>
                                     Административно-политическая сфера
                                 </h4>
                                 <ul class="sphere-list">
-                                    <li><a href="/spheres/political/defense/"><i class="fas fa-arrow-right"></i> оборона</a></li>
-                                    <li><a href="/spheres/political/security/"><i class="fas fa-arrow-right"></i> государственная безопасность</a></li>
-                                    <li><a href="/spheres/political/internal/"><i class="fas fa-arrow-right"></i> внутренние дела</a></li>
-                                    <li><a href="/spheres/political/foreign/"><i class="fas fa-arrow-right"></i> иностранные дела</a></li>
-                                    <li><a href="/spheres/political/justice/"><i class="fas fa-arrow-right"></i> юстиция</a></li>
+                                    <li><a href="/spheres/political/defense/" style="color: var(--political);"><i class="fas fa-arrow-right"></i> оборона</a></li>
+                                    <li><a href="/spheres/political/security/" style="color: var(--political);"><i class="fas fa-arrow-right"></i> государственная безопасность</a></li>
+                                    <li><a href="/spheres/political/internal/" style="color: var(--political);"><i class="fas fa-arrow-right"></i> внутренние дела</a></li>
+                                    <li><a href="/spheres/political/foreign/" style="color: var(--political);"><i class="fas fa-arrow-right"></i> иностранные дела</a></li>
+                                    <li><a href="/spheres/political/justice/" style="color: var(--political);"><i class="fas fa-arrow-right"></i> юстиция</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1074,6 +1366,9 @@
                 </div>
             </div>
         </section>
+
+        <!-- Разделитель -->
+        <div class="section-divider"></div>
 
         <!-- Обозначения -->
         <section class="legend-section">
@@ -1084,23 +1379,23 @@
                 </div>
                 
                 <div class="legend-grid">
-                    <div class="legend-category">
+                    <div class="legend-category cyber-border">
                         <h4>Сферы деятельности</h4>
                         <div class="legend-item">
-                            <div class="legend-color" style="background: var(--political);"></div>
+                            <div class="legend-color" style="background: var(--political); color: var(--political);"></div>
                             <div class="legend-text">Административно-политическая сфера</div>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background: var(--economic);"></div>
+                            <div class="legend-color" style="background: var(--economic); color: var(--economic);"></div>
                             <div class="legend-text">Экономическая сфера</div>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background: var(--social);"></div>
+                            <div class="legend-color" style="background: var(--social); color: var(--social);"></div>
                             <div class="legend-text">Социально-культурная сфера</div>
                         </div>
                     </div>
                     
-                    <div class="legend-category">
+                    <div class="legend-category cyber-border">
                         <h4>Полномочия</h4>
                         <div class="legend-item">
                             <div class="legend-badge"><span>НПА</span></div>
@@ -1120,7 +1415,7 @@
                         </div>
                     </div>
                     
-                    <div class="legend-category">
+                    <div class="legend-category cyber-border">
                         <h4>Структура подчинения</h4>
                         <div class="legend-item">
                             <div class="legend-structure president">
@@ -1130,7 +1425,7 @@
                         </div>
                         <div class="legend-item">
                             <div class="legend-structure government">
-                                <i class="fas fa-landmark"></i>
+                                <i class="fas fa-server"></i>
                             </div>
                             <div class="legend-text">Под руководством Правительства РФ</div>
                         </div>
@@ -1152,18 +1447,18 @@
                 <div class="footer-section">
                     <h4>Навигация</h4>
                     <ul class="footer-links">
-                        <li><a href="https://el-kh01.github.io/exp/index.html">На главную</a></li>
-                        <li><a href="https://el-kh01.github.io/exp/levels/regional/index.html">Региональный уровень</a></li>
-                        <li><a href="https://el-kh01.github.io/exp/levels/local/index.html">Местный уровень</a></li>
+                        <li><a href="https://el-kh01.github.io/exp/index.html"><i class="fas fa-home"></i> На главную</a></li>
+                        <li><a href="https://el-kh01.github.io/exp/levels/regional/index.html"><i class="fas fa-map"></i> Региональный уровень</a></li>
+                        <li><a href="https://el-kh01.github.io/exp/levels/local/index.html"><i class="fas fa-city"></i> Местный уровень</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Ресурсы</h4>
                     <ul class="footer-links">
-                        <li><a href="http://kremlin.ru" target="_blank">Президент России</a></li>
-                        <li><a href="http://government.ru" target="_blank">Правительство РФ</a></li>
-                        <li><a href="http://pravo.gov.ru" target="_blank">Официальный портал правовой информации</a></li>
+                        <li><a href="http://kremlin.ru" target="_blank"><i class="fas fa-external-link-alt"></i> Президент России</a></li>
+                        <li><a href="http://government.ru" target="_blank"><i class="fas fa-external-link-alt"></i> Правительство РФ</a></li>
+                        <li><a href="http://pravo.gov.ru" target="_blank"><i class="fas fa-external-link-alt"></i> Официальный портал правовой информации</a></li>
                     </ul>
                 </div>
             </div>
@@ -1175,23 +1470,56 @@
     </footer>
 
     <script>
-        // Минимальный JavaScript для интерактивности
+        // Улучшенные анимации для Detroit стиля
         document.addEventListener('DOMContentLoaded', function() {
-            // Плавная прокрутка
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+            // Эффект сканирования
+            const scanLine = document.querySelector('.scan-line');
+            let scanDelay = 0;
+            
+            function restartScan() {
+                scanDelay = Math.random() * 2000;
+                setTimeout(() => {
+                    scanLine.style.animation = 'none';
+                    setTimeout(() => {
+                        scanLine.style.animation = 'scan 4s linear infinite';
+                    }, 10);
+                }, scanDelay);
+            }
+            
+            setInterval(restartScan, 6000);
+            
+            // Эффект мерцания для неоновых элементов
+            const neonElements = document.querySelectorAll('.neon-effect');
+            neonElements.forEach(el => {
+                setInterval(() => {
+                    const intensity = 0.7 + Math.random() * 0.3;
+                    el.style.opacity = intensity;
+                }, 100);
+            });
+            
+            // Эффект наведения с параллаксом
+            const cards = document.querySelectorAll('.classification-block, .legend-category');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
                 });
             });
             
-            // Простая анимация появления элементов при скролле
+            // Анимация появления элементов при скролле
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -1200,13 +1528,26 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animated');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
                 });
             }, observerOptions);
             
-            document.querySelectorAll('.classification-block, .legend-category').forEach(el => {
+            document.querySelectorAll('.classification-block, .legend-category, .hero-stat-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(el);
+            });
+            
+            // Технологичные звуковые эффекты при наведении (опционально)
+            const hoverSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
+            
+            document.querySelectorAll('.link-item, .legend-item').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    // Здесь можно добавить звуковой эффект при наличии звукового файла
+                });
             });
         });
     </script>
