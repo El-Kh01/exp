@@ -325,7 +325,7 @@
         }
         
         .hero-stat-item:hover {
-            transform: translateY(-8px) scale(1.05);
+            transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: var(--glow-blue);
         }
@@ -367,8 +367,8 @@
         }
         
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
         /* ===== СЕКЦИИ ===== */
@@ -502,7 +502,7 @@
         }
         
         .legend-color:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1);
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
         
@@ -640,7 +640,7 @@
         }
         
         .classification-block:hover .block-icon-wrapper {
-            transform: scale(1.05) rotate(5deg);
+            transform: scale(1.05);
         }
         
         .classification-block.system .block-icon-wrapper { 
@@ -753,15 +753,6 @@
             align-items: flex-start;
         }
         
-        .system-details li::before {
-            content: '•';
-            color: var(--primary-blue);
-            font-weight: bold;
-            margin-right: 0.5rem;
-            flex-shrink: 0;
-            margin-top: 0.1rem;
-        }
-        
         .system-details li a {
             color: var(--primary-blue);
             text-decoration: none;
@@ -783,7 +774,7 @@
             padding-top: 1.5rem;
         }
         
-        /* Специальный символ для структуры с тремя уровнями и иерархией */
+        /* Специальный символ для структуры - 7 квадратов без линий */
         .structure-diagram {
             position: relative;
             width: 80px;
@@ -800,19 +791,19 @@
         }
         
         .structure-diagram .level-1 {
-            top: 0;
+            top: 5px;
             z-index: 3;
         }
         
         .structure-diagram .level-2 {
             top: 30px;
-            gap: 40px;
+            gap: 35px;
             z-index: 2;
         }
         
         .structure-diagram .level-3 {
-            top: 60px;
-            gap: 20px;
+            top: 55px;
+            gap: 15px;
             z-index: 1;
         }
         
@@ -827,64 +818,47 @@
         }
         
         .structure-diagram .level-1 .node {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             background: linear-gradient(135deg, #ffd700, #ffed4e);
-            border-radius: 4px;
+            border-radius: 3px;
         }
         
         .structure-diagram .level-2 .node {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: linear-gradient(135deg, #17a2b8, #39c6d8);
             border-radius: 3px;
         }
         
         .structure-diagram .level-3 .node {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: linear-gradient(135deg, #28a745, #20c997);
             border-radius: 2px;
         }
         
-        /* Линии соединения для иерархии */
-        .structure-diagram .connector {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
-            border-radius: 1px;
-            z-index: 0;
+        /* Стиль для ссылок на указы */
+        .law-reference {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(30, 60, 114, 0.1);
+            color: var(--dark-gray);
+            font-size: 0.95rem;
         }
         
-        .structure-diagram .connector-1 {
-            width: 2px;
-            height: 15px;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+        .law-reference a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border-bottom: 1px dotted transparent;
+            padding: 0.2rem 0;
         }
         
-        .structure-diagram .connector-2 {
-            width: 40px;
-            height: 2px;
-            top: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .connector-3 {
-            width: 2px;
-            height: 15px;
-            top: 46px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .structure-diagram .connector-4 {
-            width: 40px;
-            height: 2px;
-            top: 61px;
-            left: 50%;
-            transform: translateX(-50%);
+        .law-reference a:hover {
+            color: var(--primary-light);
+            border-bottom: 1px dotted var(--primary-light);
         }
         
         /* ===== СОВРЕМЕННЫЙ ПОДВАЛ ===== */
@@ -1023,6 +997,32 @@
             background: rgba(30, 60, 114, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Стили для списков в сферах без точек */
+        .sphere-list {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+        
+        .sphere-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 0;
+        }
+        
+        .sphere-list li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .sphere-list li a:hover {
+            background: rgba(30, 60, 114, 0.08);
+            color: var(--primary-blue);
+            padding-left: 0.8rem;
         }
         
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -1346,8 +1346,8 @@
                                 </div>
                             </div>
                             
-                            <div class="system-details">
-                                <p>См. <a href="http://pravo.gov.ru/proxy/ips/?docbody=&nd=102161836" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 9 марта 2004 г. № 314</a></p>
+                            <div class="law-reference">
+                                См. <a href="https://www.consultant.ru/document/cons_doc_LAW_46892/" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 9 марта 2004 г. № 314</a>
                             </div>
                         </div>
                     </div>
@@ -1357,27 +1357,22 @@
                         <div class="block-header">
                             <div class="block-icon-wrapper">
                                 <div class="structure-diagram">
-                                    <!-- Уровень 1 -->
+                                    <!-- Уровень 1 - 1 квадрат -->
                                     <div class="level level-1">
                                         <div class="node"></div>
                                     </div>
-                                    <!-- Уровень 2 -->
+                                    <!-- Уровень 2 - 2 квадрата -->
                                     <div class="level level-2">
                                         <div class="node"></div>
                                         <div class="node"></div>
                                     </div>
-                                    <!-- Уровень 3 -->
+                                    <!-- Уровень 3 - 4 квадрата -->
                                     <div class="level level-3">
                                         <div class="node"></div>
                                         <div class="node"></div>
                                         <div class="node"></div>
                                         <div class="node"></div>
                                     </div>
-                                    <!-- Линии соединения -->
-                                    <div class="connector connector-1"></div>
-                                    <div class="connector connector-2"></div>
-                                    <div class="connector connector-3"></div>
-                                    <div class="connector connector-4"></div>
                                 </div>
                             </div>
                             <h3>СТРУКТУРА</h3>
@@ -1411,7 +1406,10 @@
                                     </li>
                                 </ul>
                                 <p style="margin-top: 1.5rem;">Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ (все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней).</p>
-                                <p>См. <a href="http://pravo.gov.ru/proxy/ips/?docbody=&nd=102161836" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 31 мая 2024г. № 326</a></p>
+                                
+                                <div class="law-reference">
+                                    См. <a href="https://www.consultant.ru/document/cons_doc_LAW_476078/" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 31 мая 2024г. № 326</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1432,7 +1430,7 @@
                                     </a>
                                     Экономическая сфера
                                 </h4>
-                                <ul>
+                                <ul class="sphere-list">
                                     <li><a href="/spheres/economic/management/"><i class="fas fa-arrow-right"></i> управление экономическим развитием</a></li>
                                     <li><a href="/spheres/economic/finance/"><i class="fas fa-arrow-right"></i> финансы</a></li>
                                     <li><a href="/spheres/economic/industry/"><i class="fas fa-arrow-right"></i> промышленность и торговля</a></li>
@@ -1454,7 +1452,7 @@
                                     </a>
                                     Социально-культурная сфера
                                 </h4>
-                                <ul>
+                                <ul class="sphere-list">
                                     <li><a href="/spheres/social/education/"><i class="fas fa-arrow-right"></i> образование и наука</a></li>
                                     <li><a href="/spheres/social/culture/"><i class="fas fa-arrow-right"></i> культура</a></li>
                                     <li><a href="/spheres/social/healthcare/"><i class="fas fa-arrow-right"></i> здравоохранение</a></li>
@@ -1470,7 +1468,7 @@
                                     </a>
                                     Административно-политическая сфера
                                 </h4>
-                                <ul>
+                                <ul class="sphere-list">
                                     <li><a href="/spheres/political/defense/"><i class="fas fa-arrow-right"></i> оборона</a></li>
                                     <li><a href="/spheres/political/security/"><i class="fas fa-arrow-right"></i> государственная безопасность</a></li>
                                     <li><a href="/spheres/political/internal/"><i class="fas fa-arrow-right"></i> внутренние дела</a></li>
@@ -1533,7 +1531,7 @@
                     </div>
                     
                     <div class="legend-category">
-                        <h4><i class="fas fa-network-wired"></i> Структура подчинения</h4>
+                        <h4><i class="fas fa-sitemap"></i> Структура подчинения</h4>
                         <a href="/structure/president/" class="legend-item" style="text-decoration: none; color: inherit;">
                             <div class="legend-structure president">
                                 <i class="fas fa-user-tie"></i>
