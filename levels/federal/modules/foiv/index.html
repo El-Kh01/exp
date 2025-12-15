@@ -465,13 +465,6 @@
             font-weight: 800;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--light-blue);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .legend-category h4 i {
-            color: var(--accent-blue);
         }
         
         .legend-item {
@@ -774,12 +767,24 @@
             padding-top: 1.5rem;
         }
         
-        /* Специальный символ для структуры - 7 квадратов без линий */
+        /* Обновленный символ для структуры - с линиями и вложенными квадратами */
         .structure-diagram {
             position: relative;
             width: 80px;
             height: 80px;
             margin: 0 auto;
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+        
+        .structure-diagram .hierarchy {
+            position: relative;
+            width: 60px;
+            height: 60px;
         }
         
         .structure-diagram .level {
@@ -796,20 +801,20 @@
         }
         
         .structure-diagram .level-2 {
-            top: 30px;
-            gap: 35px;
+            top: 25px;
+            gap: 30px;
             z-index: 2;
         }
         
         .structure-diagram .level-3 {
-            top: 55px;
-            gap: 15px;
+            top: 45px;
+            gap: 10px;
             z-index: 1;
         }
         
         .structure-diagram .node {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: white;
             border-radius: 2px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -818,24 +823,69 @@
         }
         
         .structure-diagram .level-1 .node {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: linear-gradient(135deg, #ffd700, #ffed4e);
             border-radius: 3px;
         }
         
         .structure-diagram .level-2 .node {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(135deg, #17a2b8, #39c6d8);
             border-radius: 3px;
         }
         
         .structure-diagram .level-3 .node {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: linear-gradient(135deg, #28a745, #20c997);
             border-radius: 2px;
+        }
+        
+        /* Линии соединения */
+        .structure-diagram .connector {
+            position: absolute;
+            background: white;
+            z-index: 0;
+        }
+        
+        .structure-diagram .connector-1 {
+            top: 19px;
+            left: 50%;
+            width: 2px;
+            height: 6px;
+            transform: translateX(-50%);
+        }
+        
+        .structure-diagram .connector-2 {
+            top: 31px;
+            left: 50%;
+            width: 30px;
+            height: 2px;
+            transform: translateX(-50%);
+        }
+        
+        .structure-diagram .connector-3 {
+            top: 37px;
+            left: 50%;
+            width: 2px;
+            height: 8px;
+            transform: translateX(-50%);
+        }
+        
+        .structure-diagram .connector-4 {
+            top: 37px;
+            left: calc(50% - 15px);
+            width: 10px;
+            height: 2px;
+        }
+        
+        .structure-diagram .connector-5 {
+            top: 37px;
+            left: calc(50% + 5px);
+            width: 10px;
+            height: 2px;
         }
         
         /* Стиль для ссылок на указы */
@@ -1307,22 +1357,27 @@
                                     федеральная служба
                                 </h4>
                                 <p>является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности</p>
+                                
+                                <div class="links-container">
+                                    <a href="/system/services/20/" class="link-item">
+                                        <i class="fas fa-list"></i> Перечень 20 служб
+                                    </a>
+                                </div>
+                                
                                 <p>а также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности.</p>
+                                
+                                <div class="links-container">
+                                    <a href="/system/services/10/" class="link-item">
+                                        <i class="fas fa-list"></i> Перечень 10 служб
+                                    </a>
+                                </div>
+                                
                                 <p>под функциями по контролю и надзору понимаются:</p>
                                 <ul>
                                     <li>осуществление действий по контролю и надзору за исполнением общеобязательных правил поведения;</li>
                                     <li>выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
                                     <li>регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов;</li>
                                 </ul>
-                                
-                                <div class="links-container">
-                                    <a href="/system/services/20/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 20 служб
-                                    </a>
-                                    <a href="/system/services/10/" class="link-item">
-                                        <i class="fas fa-list"></i> Перечень 10 служб
-                                    </a>
-                                </div>
                             </div>
                             
                             <div class="system-details">
@@ -1357,21 +1412,31 @@
                         <div class="block-header">
                             <div class="block-icon-wrapper">
                                 <div class="structure-diagram">
-                                    <!-- Уровень 1 - 1 квадрат -->
-                                    <div class="level level-1">
-                                        <div class="node"></div>
-                                    </div>
-                                    <!-- Уровень 2 - 2 квадрата -->
-                                    <div class="level level-2">
-                                        <div class="node"></div>
-                                        <div class="node"></div>
-                                    </div>
-                                    <!-- Уровень 3 - 4 квадрата -->
-                                    <div class="level level-3">
-                                        <div class="node"></div>
-                                        <div class="node"></div>
-                                        <div class="node"></div>
-                                        <div class="node"></div>
+                                    <!-- Линии соединения -->
+                                    <div class="connector connector-1"></div>
+                                    <div class="connector connector-2"></div>
+                                    <div class="connector connector-3"></div>
+                                    <div class="connector connector-4"></div>
+                                    <div class="connector connector-5"></div>
+                                    
+                                    <!-- Иерархия квадратов -->
+                                    <div class="hierarchy">
+                                        <!-- Уровень 1 - 1 квадрат -->
+                                        <div class="level level-1">
+                                            <div class="node"></div>
+                                        </div>
+                                        <!-- Уровень 2 - 2 квадрата -->
+                                        <div class="level level-2">
+                                            <div class="node"></div>
+                                            <div class="node"></div>
+                                        </div>
+                                        <!-- Уровень 3 - 4 квадрата -->
+                                        <div class="level level-3">
+                                            <div class="node"></div>
+                                            <div class="node"></div>
+                                            <div class="node"></div>
+                                            <div class="node"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1491,7 +1556,7 @@
                 
                 <div class="legend-grid">
                     <div class="legend-category">
-                        <h4><i class="fas fa-palette"></i> Сферы деятельности</h4>
+                        <h4>Сферы деятельности</h4>
                         <div class="legend-item">
                             <div class="legend-color" style="background: var(--political);"></div>
                             <div class="legend-text">Административно-политическая сфера</div>
@@ -1507,7 +1572,7 @@
                     </div>
                     
                     <div class="legend-category">
-                        <h4><i class="fas fa-gavel"></i> Полномочия</h4>
+                        <h4>Полномочия</h4>
                         
                         <a href="powers/normative/index.html" class="legend-item" data-power="normative" title="Нормативные правовые акты" style="text-decoration: none; color: inherit;">
                             <div class="legend-badge"><span>НПА</span></div>
@@ -1531,7 +1596,7 @@
                     </div>
                     
                     <div class="legend-category">
-                        <h4><i class="fas fa-sitemap"></i> Структура подчинения</h4>
+                        <h4>Структура подчинения</h4>
                         <a href="/structure/president/" class="legend-item" style="text-decoration: none; color: inherit;">
                             <div class="legend-structure president">
                                 <i class="fas fa-user-tie"></i>
