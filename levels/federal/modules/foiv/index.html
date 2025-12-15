@@ -42,6 +42,10 @@
             --accent-blue: var(--detroit-cyan);
             --light-blue: rgba(77, 169, 233, 0.1);
             
+            /* Цвета для структур - ВОЗВРАЩАЕМ ОРИГИНАЛЬНЫЕ */
+            --president-red: #dc3545;
+            --government-cyan: #17a2b8;
+            
             --text-dark: var(--detroit-dark-gray);
             --light-gray: var(--detroit-white);
             --medium-gray: var(--detroit-light-gray);
@@ -339,11 +343,12 @@
             color: var(--detroit-cyan);
         }
         
+        /* ВОЗВРАЩАЕМ ИКОНКУ ЗДАНИЯ */
         .foiv-module-logo {
             width: 320px;
             height: 320px;
             margin: 0 auto;
-            background: var(--detroit-dark-gray);
+            background: linear-gradient(135deg, #2A3B4D 0%, #3A5A78 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -526,20 +531,22 @@
             color: white;
             flex-shrink: 0;
             transition: var(--transition);
-            border: 1px solid var(--detroit-gray);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .legend-structure:hover {
             transform: scale(1.1);
         }
         
+        /* ВОЗВРАЩАЕМ КРАСНЫЙ ЦВЕТ ДЛЯ ПРЕЗИДЕНТА */
         .legend-structure.president { 
-            background: var(--detroit-dark-gray);
-            border-color: var(--detroit-dark-gray);
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            border-color: #dc3545;
         }
+        
         .legend-structure.government { 
-            background: var(--detroit-blue);
-            border-color: var(--detroit-blue);
+            background: linear-gradient(135deg, #17a2b8, #39c6d8);
+            border-color: #17a2b8;
         }
         
         .legend-text {
@@ -1212,8 +1219,9 @@
         <div class="container">
             <div class="header-wrapper">
                 <a href="https://el-kh01.github.io/exp/index.html" class="logo">
+                    <!-- ВОЗВРАЩАЕМ ФЛАГ ВМЕСТО РОБОТА -->
                     <div class="logo-icon">
-                        <i class="fas fa-robot"></i>
+                        <i class="fas fa-flag"></i>
                     </div>
                     <div class="logo-text">
                         <h1>Федеральный уровень</h1>
@@ -1268,8 +1276,9 @@
                     </div>
                     
                     <div class="hero-module-visual">
+                        <!-- ВОЗВРАЩАЕМ ИКОНКУ ЗДАНИЯ -->
                         <div class="foiv-module-logo">
-                            <i class="fas fa-network-wired"></i>
+                            <i class="fas fa-landmark"></i>
                         </div>
                     </div>
                 </div>
@@ -1410,7 +1419,8 @@
                                 <h4>Структура включает ФОИВы, непосредственно подчиненные:</h4>
                                 <ul style="list-style: none; padding-left: 0;">
                                     <li>
-                                        <a href="/structure/president/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(42, 45, 52, 0.05); border: 1px solid rgba(42, 45, 52, 0.1);">
+                                        <a href="/structure/president/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(220, 53, 69, 0.05); border: 1px solid rgba(220, 53, 69, 0.1);">
+                                            <!-- ВОЗВРАЩАЕМ КРАСНЫЙ ЦВЕТ ДЛЯ ПРЕЗИДЕНТА -->
                                             <div class="legend-structure president">
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
@@ -1421,7 +1431,7 @@
                                         </a>
                                     </li>
                                     <li style="margin-top: 1rem;">
-                                        <a href="/structure/government/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(64, 139, 201, 0.05); border: 1px solid rgba(64, 139, 201, 0.1);">
+                                        <a href="/structure/government/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(23, 162, 184, 0.05); border: 1px solid rgba(23, 162, 184, 0.1);">
                                             <div class="legend-structure government">
                                                 <i class="fas fa-landmark"></i>
                                             </div>
@@ -1560,6 +1570,7 @@
                     <div class="legend-category">
                         <h4>Структура подчинения</h4>
                         <a href="/structure/president/" class="legend-item" style="text-decoration: none; color: inherit;">
+                            <!-- ВОЗВРАЩАЕМ КРАСНЫЙ ЦВЕТ ДЛЯ ПРЕЗИДЕНТА -->
                             <div class="legend-structure president">
                                 <i class="fas fa-user-tie"></i>
                             </div>
