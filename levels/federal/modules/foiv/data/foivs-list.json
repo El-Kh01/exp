@@ -1,0 +1,19 @@
+{
+  "organs": [
+    {
+      "id": "minpromtorg",
+      "name": "Министерство промышленности и торговли Российской Федерации",
+      "abbreviation": "Минпромторг России",
+      "description": "Федеральный орган исполнительной власти...",
+      "system": "ministry",
+      "structure": "government", 
+      "spheres": ["economic", "social"],
+      "icon": "industry",
+      "color": "#90EE90",
+      "powers": ["НПА"],
+      "file": "minpromtorg.html",
+      "website": "https://minpromtorg.gov.ru/"
+    }
+    // Добавьте остальные 68 органов
+  ]
+}
