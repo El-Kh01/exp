@@ -1,0 +1,74 @@
+{
+  "organs": [
+    {
+      "id": "minpromtorg",
+      "name": "Министерство промышленности и торговли Российской Федерации",
+      "abbreviation": "Минпромторг России",
+      "description": "Федеральный орган исполнительной власти, осуществляющий функции по выработке государственной политики и нормативно-правовому регулированию в сфере промышленного и оборонно-промышленного комплекса...",
+      "system": "ministry",
+      "structure": "government",
+      "spheres": ["economic", "social"],
+      "icon": "industry",
+      "color": "#90EE90",
+      "powers": ["НПА"],
+      "underMinistry": null,
+      "file": "minpromtorg.html",
+      "tags": ["промышленность", "торговля", "оборонный комплекс"],
+      "website": "https://minpromtorg.gov.ru/"
+    },
+    {
+      "id": "minfin",
+      "name": "Министерство финансов Российской Федерации",
+      "abbreviation": "Минфин России",
+      "description": "Федеральный орган исполнительной власти, осуществляющий функции по выработке государственной политики и нормативно-правовому регулированию в сфере бюджетной, налоговой...",
+      "system": "ministry",
+      "structure": "government",
+      "spheres": ["economic"],
+      "icon": "money-bill-wave",
+      "color": "#1013e3",
+      "powers": ["НПА"],
+      "underMinistry": null,
+      "file": "minfin.html",
+      "tags": ["финансы", "бюджет", "налоги"],
+      "website": "https://minfin.gov.ru/"
+    },
+    {
+      "id": "fsb",
+      "name": "Федеральная служба безопасности Российской Федерации",
+      "abbreviation": "ФСБ России",
+      "description": "Федеральный орган исполнительной власти, осуществляющий функции по контролю и надзору в сфере безопасности...",
+      "system": "service",
+      "structure": "president",
+      "spheres": ["political", "security"],
+      "icon": "shield-alt",
+      "color": "#e80909",
+      "powers": ["АН"],
+      "underMinistry": null,
+      "file": "fsb.html",
+      "tags": ["безопасность", "контрразведка", "госграница"],
+      "website": "https://fsb.gov.ru/"
+    },
+    {
+      "id": "minzdrav",
+      "name": "Министерство здравоохранения Российской Федерации",
+      "abbreviation": "Минздрав России",
+      "description": "Федеральный орган исполнительной власти, осуществляющий функции по выработке и реализации государственной политики в сфере здравоохранения...",
+      "system": "ministry",
+      "structure": "government",
+      "spheres": ["social"],
+      "icon": "heartbeat",
+      "color": "#f5d442",
+      "powers": ["НПА", "ГУ"],
+      "underMinistry": null,
+      "file": "minzdrav.html",
+      "tags": ["здравоохранение", "медицина", "лекарства"],
+      "website": "https://minzdrav.gov.ru/"
+    }
+    // Добавляйте остальные 65 органов ТАКИМ ЖЕ ОБРАЗОМ
+  ],
+  "metadata": {
+    "total": 69,
+    "lastUpdated": "2024-01-20",
+    "version": "1.0"
+  }
+}
