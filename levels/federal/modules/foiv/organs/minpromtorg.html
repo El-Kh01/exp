@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Минпромторг России - Министерство промышленности и торговли</title>
+    
+    <!-- ПОДКЛЮЧАЕМ ВАШИ СУЩЕСТВУЮЩИЕ СТИЛИ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- КОПИРУЕМ ВСЕ ВАШИ СТИЛИ ИЗ index.html -->
+    <style>
+        /* ВСТАВЬТЕ СЮДА ВСЕ СТИЛИ ИЗ ВАШЕГО index.html */
+        /* Я покажу только те части, которые нужно добавить/изменить */
+        
+        /* Ваши существующие стили остаются без изменений */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Ваши переменные */
+            --political: #e80909;
+            --economic: #1013e3;
+            --social: #f5d442;
+            --mixed-politics-economic: #7C0E76;
+            --mixed-politics-social: #EF6F26;
+            --mixed-economic-social: #90EE90;
+            --detroit-white: #F5F7FA;
+            --detroit-light-gray: #E8EBF0;
+            --detroit-gray: #CCD1D9;
+            --detroit-dark-gray: #2A2D34;
+            --detroit-blue: #408BC9;
+            --detroit-light-blue: #5DA9E9;
+            --detroit-cyan: #4FC3F7;
+            --detroit-accent: #7CB9E8;
+            --detroit-grid: #D1D9E6;
+            --primary-blue: var(--detroit-blue);
+            --primary-light: var(--detroit-light-blue);
+            --secondary-blue: var(--detroit-accent);
+            --accent-blue: var(--detroit-cyan);
+            --light-blue: rgba(77, 169, 233, 0.1);
+            --president-red: #dc3545;
+            --government-cyan: #17a2b8;
+            --text-dark: var(--detroit-dark-gray);
+            --light-gray: var(--detroit-white);
+            --medium-gray: var(--detroit-light-gray);
+            --dark-gray: #7A808C;
+            --border-radius: 8px;
+            --border-radius-sm: 4px;
+            --border-radius-lg: 12px;
+            --shadow: 0 4px 12px rgba(42, 45, 52, 0.08);
+            --shadow-hover: 0 8px 24px rgba(42, 45, 52, 0.12);
+            --shadow-lg: 0 16px 48px rgba(42, 45, 52, 0.15);
+            --glow-blue: 0 0 30px rgba(64, 139, 201, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--detroit-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(to right, var(--detroit-grid) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--detroit-grid) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* ВАШИ ОСТАЛЬНЫЕ СТИЛИ ИЗ index.html */
+        /* ... */
+        
+        /* ДОБАВЛЯЕМ НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ОРГАНА */
+        .organ-page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .organ-breadcrumbs {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--detroit-light-gray);
+        }
+        
+        .organ-breadcrumbs a {
+            color: var(--detroit-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+        
+        .organ-breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        .organ-header {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 6px solid #90EE90;
+            border: 1px solid var(--detroit-light-gray);
+        }
+        
+        .organ-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .organ-icon-large {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--border-radius);
+            background: #90EE90;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .organ-title-text h1 {
+            font-size: 2.2rem;
+            color: var(--detroit-dark-gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .organ-abbreviation {
+            font-size: 1.3rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .organ-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        
+        .organ-badge {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+        
+        .organ-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .organ-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .organ-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--detroit-light-gray);
+        }
+        
+        .organ-section h2 {
+            font-size: 1.3rem;
+            color: var(--detroit-blue);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--detroit-light-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .organ-details {
+            margin-bottom: 1rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--detroit-light-gray);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--detroit-dark-gray);
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+        
+        .detail-value {
+            color: var(--text-dark);
+            flex: 1;
+        }
+        
+        .organ-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--detroit-light-gray);
+        }
+        
+        .btn-website,
+        .btn-back {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .btn-website {
+            background: var(--detroit-blue);
+            color: white;
+            border: none;
+        }
+        
+        .btn-website:hover {
+            background: var(--detroit-light-blue);
+            transform: translateY(-2px);
+        }
+        
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--detroit-blue);
+            color: var(--detroit-blue);
+        }
+        
+        .btn-back:hover {
+            background: rgba(64, 139, 201, 0.1);
+        }
+        
+        /* Ваши остальные стили */
+        /* ... */
+    </style>
+</head>
+<body>
+    <!-- ШАПКА (копируем из вашего index.html) -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="https://el-kh01.github.io/exp/index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Федеральный уровень</h1>
+                        <p class="logo-subtitle">Субъекты государственного управления РФ</p>
+                    </div>
+                </a>
+                
+                <nav class="breadcrumbs">
+                    <a href="https://el-kh01.github.io/exp/index.html"><i class="fas fa-home"></i> Главная</a>
+                    <span class="separator">/</span>
+                    <a href="../index.html"><i class="fas fa-landmark"></i> ФОИВ</a>
+                    <span class="separator">/</span>
+                    <span class="current">Минпромторг</span>
+                </nav>
+                
+                <button class="menu-toggle" aria-label="Меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="organ-page-container">
+            <!-- Хлебные крошки -->
+            <div class="organ-breadcrumbs">
+                <a href="../index.html">
+                    <i class="fas fa-arrow-left"></i> Назад к модулю ФОИВ
+                </a>
+            </div>
+            
+            <!-- Заголовок органа -->
+            <div class="organ-header">
+                <div class="organ-title">
+                    <div class="organ-icon-large">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="organ-title-text">
+                        <h1>Министерство промышленности и торговли Российской Федерации</h1>
+                        <div class="organ-abbreviation">Минпромторг России</div>
+                    </div>
+                </div>
+                
+                <p class="organ-description">
+                    Федеральный орган исполнительной власти, осуществляющий функции по выработке государственной политики 
+                    и нормативно-правовому регулированию в сфере промышленного и оборонно-промышленного комплекса, 
+                    а также в области развития авиационной техники, технического регулирования и обеспечения единства измерений, 
+                    развития торговой деятельности, внешней и внутренней торговли, защиты прав потребителей.
+                </p>
+                
+                <!-- Условные обозначения -->
+                <div class="organ-badges">
+                    <div class="organ-badge" style="background: #90EE90;">
+                        <i class="fas fa-globe-americas"></i> Смешанная сфера (экономическая + социальная)
+                    </div>
+                    <div class="organ-badge" style="background: #2a5298;">
+                        <i class="fas fa-landmark"></i> Подчинено Правительству РФ
+                    </div>
+                    <div class="organ-badge" style="background: #1e3c72;">
+                        <i class="fas fa-sitemap"></i> Министерство
+                    </div>
+                    <div class="organ-badge" style="background: #6f42c1;">
+                        <i class="fas fa-file-contract"></i> Полномочия: НПА
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Контент -->
+            <div class="organ-content">
+                <!-- Левая колонка -->
+                <div>
+                    <div class="organ-section">
+                        <h2><i class="fas fa-info-circle"></i> Основные сведения</h2>
+                        <div class="organ-details">
+                            <div class="detail-row">
+                                <div class="detail-label">Руководитель:</div>
+                                <div class="detail-value">
+                                    <strong>Денис Валентинович Мантуров</strong><br>
+                                    Министр промышленности и торговли Российской Федерации
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Дата основания:</div>
+                                <div class="detail-value">12 мая 2008 года (Указ Президента РФ № 724)</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Правовая основа:</div>
+                                <div class="detail-value">
+                                    Указ Президента Российской Федерации от 12.05.2008 № 724<br>
+                                    «Вопросы системы и структуры федеральных органов исполнительной власти»
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Официальный сайт:</div>
+                                <div class="detail-value">
+                                    <a href="https://minpromtorg.gov.ru/" target="_blank">minpromtorg.gov.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="organ-section">
+                        <h2><i class="fas fa-map-marker-alt"></i> Контакты</h2>
+                        <div class="organ-details">
+                            <div class="detail-row">
+                                <div class="detail-label">Адрес:</div>
+                                <div class="detail-value">
+                                    109074, Москва, Китайгородский проезд, д. 7
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Телефон:</div>
+                                <div class="detail-value">+7 (495) 539-21-87</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Электронная почта:</div>
+                                <div class="detail-value">info@minpromtorg.gov.ru</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка -->
+                <div>
+                    <div class="organ-section">
+                        <h2><i class="fas fa-tasks"></i> Ключевые функции</h2>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Разработка и реализация государственной политики в области промышленности и торговли
+                            </li>
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Нормативно-правовое регулирование в установленной сфере
+                            </li>
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Координация деятельности организаций оборонно-промышленного комплекса
+                            </li>
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Регулирование внешней и внутренней торговли
+                            </li>
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Защита прав потребителей
+                            </li>
+                            <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="color: #90EE90; position: absolute; left: 0;"></i>
+                                Развитие технического регулирования и метрологии
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="organ-section">
+                        <h2><i class="fas fa-sitemap"></i> Подведомственные органы</h2>
+                        <div class="organ-details">
+                            <div class="detail-row">
+                                <div class="detail-label">Федеральные службы:</div>
+                                <div class="detail-value">
+                                    <a href="#">Федеральная служба по аккредитации (Росаккредитация)</a>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Федеральные агентства:</div>
+                                <div class="detail-value">
+                                    <a href="#">Федеральное агентство по техническому регулированию и метрологии (Росстандарт)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Действия -->
+            <div class="organ-actions">
+                <a href="https://minpromtorg.gov.ru/" class="btn-website" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Официальный сайт
+                </a>
+                <a href="../index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Назад к модулю ФОИВ
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ПОДВАЛ (копируем из вашего index.html) -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Федеральный уровень</h4>
+                    <p>Изучение органов государственной власти Российской Федерации</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://el-kh01.github.io/exp/index.html"><i class="fas fa-home"></i> На главную</a></li>
+                        <li><a href="https://el-kh01.github.io/exp/levels/regional/index.html"><i class="fas fa-map"></i> Региональный уровень</a></li>
+                        <li><a href="https://el-kh01.github.io/exp/levels/local/index.html"><i class="fas fa-city"></i> Местный уровень</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <ul class="footer-links">
+                        <li><a href="http://kremlin.ru" target="_blank"><i class="fas fa-user-tie"></i> Президент России</a></li>
+                        <li><a href="http://government.ru" target="_blank"><i class="fas fa-landmark"></i> Правительство РФ</a></li>
+                        <li><a href="http://pravo.gov.ru" target="_blank"><i class="fas fa-gavel"></i> Официальный портал правовой информации</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Субъекты государственного управления РФ. Федеральный уровень.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню (копируем из вашего index.html)
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.breadcrumbs').classList.toggle('active');
+        });
+        
+        // Анимация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.organ-section, .organ-header');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>
