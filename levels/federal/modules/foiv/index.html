@@ -8,22 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Твой оригинальный CSS здесь (скопируй из твоего файла) */
-        /* Добавь это в конец стилей: */
-        .hidden { display: none; }
+        /* Твой полный оригинальный CSS здесь (скопируй из первого файла, включая добавки как .foiv-grid, .foiv-card) */
+        /* Если нужно, добавь: */
         .foiv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem; }
         .foiv-card { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .foiv-card h4 { margin-bottom: 0.5rem; }
         .foiv-card p { font-size: 0.9rem; color: #666; }
         .foiv-card a { color: blue; text-decoration: none; }
-        .link-item, .legend-item, .system-details h4 a, .sphere-list li a { cursor: pointer; } /* Чтобы ссылки выглядели кликабельно */
     </style>
 </head>
 <body>
-    <!-- Твой оригинальный header и hero здесь (скопируй из твоего файла) -->
-    <!-- ... -->
+    <!-- Твой header и hero здесь -->
 
-    <!-- Блоки классификации (обновлённые с контейнерами для списков) -->
+    <!-- Блоки классификации (с href вместо onclick) -->
     <section class="classification-blocks">
         <div class="container">
             <div class="section-header">
@@ -43,128 +40,83 @@
                     <div class="block-body">
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('ministries-list')" title="Принятие нормативных правовых актов">
+                                <a href="list.html?type=ministry&filter=system" title="Принятие нормативных правовых актов">
                                     <div class="legend-badge"><span>НПА</span></div>
                                 </a>
                                 Федеральное министерство
                             </h4>
-                            <p>Является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
-                            <p>под функциями по принятию нормативных правовых актов понимается издание правил поведения, распространяющихся на неопределенный круг лиц;</p>
-                           
+                            <!-- ... текст ... -->
                             <div class="links-container">
-                                <a class="link-item" onclick="toggleList('ministries-list')">
+                                <a class="link-item" href="list.html?type=ministry&filter=system">
                                     <i class="fas fa-list"></i> Перечень 21 министерств
                                 </a>
                             </div>
-                            <div id="ministries-list" class="foiv-grid hidden"></div>
                         </div>
                        
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('services-list')" title="Административный надзор">
+                                <a href="list.html?type=service&filter=system" title="Административный надзор">
                                     <div class="legend-badge"><span>АН</span></div>
                                 </a>
                                 Федеральная служба
                             </h4>
-                            <p>Является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности</p>
-                           
+                            <!-- ... текст ... -->
                             <div class="links-container">
-                                <a class="link-item" onclick="toggleList('services-20-list')">
+                                <a class="link-item" href="list.html?type=service&filter=system&special=false">
                                     <i class="fas fa-list"></i> Перечень 20 служб
                                 </a>
                             </div>
-                            <div id="services-20-list" class="foiv-grid hidden"></div>
-                           
-                            <p>а также специальные функции в области обороны, государственной безопасности, защиты и охраны государственной границы Российской Федерации, борьбы с преступностью, общественной безопасности.</p>
-                           
+                            <!-- ... текст ... -->
                             <div class="links-container">
-                                <a class="link-item" onclick="toggleList('services-10-list')">
+                                <a class="link-item" href="list.html?type=service&filter=system&special=true">
                                     <i class="fas fa-list"></i> Перечень 10 служб
                                 </a>
                             </div>
-                            <div id="services-10-list" class="foiv-grid hidden"></div>
-                           
-                            <p>под функциями по контролю и надзору понимаются:</p>
-                            <ul>
-                                <li>осуществление действий по контролю и надзору за исполнением общеобязательных правил поведения;</li>
-                                <li>выдача разрешений (лицензий) на осуществление определенного вида деятельности и (или) конкретных действий юридическим лицам и гражданам;</li>
-                                <li>регистрация актов, документов, прав, объектов, а также издание индивидуальных правовых актов;</li>
-                            </ul>
                         </div>
                        
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('agencies-list')" title="Управление государственным имуществом">
+                                <a href="list.html?type=agency&filter=system" title="Управление государственным имуществом">
                                     <div class="legend-badge"><span>ГИ</span></div>
                                 </a>
-                                <a onclick="toggleList('services-list')" title="Оказание государственных услуг" style="margin-left: 10px;">
+                                <a href="list.html?type=service&filter=system" title="Оказание государственных услуг" style="margin-left: 10px;">
                                     <div class="legend-badge"><span>ГУ</span></div>
                                 </a>
                                 Федеральное агентство
                             </h4>
-                            <p>Является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
-                            <p>под функциями по управлению государственным имуществом понимается осуществление полномочий собственника в отношении федерального имущества, а также управление находящимися в федеральной собственности акциями открытых акционерных обществ;</p>
-                            <p>под функциями по оказанию государственных услуг понимается предоставление федеральными органами исполнительной власти непосредственно или через подведомственные им федеральные государственные учреждения либо иные организации безвозмездно или по регулируемым органами государственной власти ценам услуг гражданам и организациям в области образования, здравоохранения, социальной защиты населения и в других областях, установленных федеральными законами.</p>
-                           
+                            <!-- ... текст ... -->
                             <div class="links-container">
-                                <a class="link-item" onclick="toggleList('agencies-list')">
+                                <a class="link-item" href="list.html?type=agency&filter=system">
                                     <i class="fas fa-list"></i> Перечень 18 агентств
                                 </a>
                             </div>
-                            <div id="agencies-list" class="foiv-grid hidden"></div>
                         </div>
                        
-                        <div class="law-reference">
-                            См. <a href="https://www.consultant.ru/document/cons_doc_LAW_46892/" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 9 марта 2004 г. № 314</a>
-                        </div>
+                        <!-- law-reference -->
                     </div>
                 </div>
                
                 <!-- Структура -->
                 <div class="classification-block structure">
                     <div class="block-header">
-                        <div class="block-icon-wrapper">
-                            <div class="structure-diagram">
-                                <!-- Твой код диаграммы здесь -->
-                            </div>
-                        </div>
-                        <h3>СТРУКТУРА</h3>
-                        <p class="block-description">перечень конкретных органов, входящих в систему ФОИВ и обеспечивающих реализацию Правительством РФ возложенных задач и полномочий</p>
+                        <!-- ... -->
                     </div>
                     <div class="block-body">
                         <div class="system-details">
                             <h4>Структура включает ФОИВы, непосредственно подчиненные:</h4>
                             <ul style="list-style: none; padding-left: 0;">
                                 <li>
-                                    <a onclick="toggleList('president-list')" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(220, 53, 69, 0.05); border: 1px solid rgba(220, 53, 69, 0.1);">
-                                        <div class="legend-structure president">
-                                            <i class="fas fa-user-tie"></i>
-                                        </div>
-                                        <div>
-                                            <strong style="color: var(--detroit-dark-gray);">Президенту РФ</strong>
-                                            <div style="font-size: 0.9rem; color: var(--dark-gray); margin-top: 0.2rem;">Высший уровень руководства</div>
-                                        </div>
+                                    <a href="list.html?type=president&filter=structure" style="...">
+                                        <!-- ... -->
                                     </a>
-                                    <div id="president-list" class="foiv-grid hidden"></div>
                                 </li>
                                 <li style="margin-top: 1rem;">
-                                    <a onclick="toggleList('government-list')" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; padding: 0.8rem; border-radius: var(--border-radius); transition: var(--transition); background: rgba(23, 162, 184, 0.05); border: 1px solid rgba(23, 162, 184, 0.1);">
-                                        <div class="legend-structure government">
-                                            <i class="fas fa-landmark"></i>
-                                        </div>
-                                        <div>
-                                            <strong style="color: var(--detroit-dark-gray);">Правительству РФ</strong>
-                                            <div style="font-size: 0.9rem; color: var(--dark-gray); margin-top: 0.2rem;">Основной уровень руководства</div>
-                                        </div>
+                                    <a href="list.html?type=government&filter=structure" style="...">
+                                        <!-- ... -->
                                     </a>
-                                    <div id="government-list" class="foiv-grid hidden"></div>
                                 </li>
                             </ul>
-                            <p style="margin-top: 1.5rem;">Ряд ФОИВов подчинен министерствам, которые в свою очередь находятся в подчинении Правительства РФ или Президента РФ (все органы занимают неравноценное положение в Структуре: в пределах одного или двух иерархических уровней).</p>
-                           
-                            <div class="law-reference">
-                                См. <a href="https://www.consultant.ru/document/cons_doc_LAW_476078/" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> УП РФ от 31 мая 2024г. № 326</a>
-                            </div>
+                            <!-- ... текст и law-reference ... -->
                         </div>
                     </div>
                 </div>
@@ -172,159 +124,71 @@
                 <!-- Сферы -->
                 <div class="classification-block spheres">
                     <div class="block-header">
-                        <div class="block-icon-wrapper">
-                            <i class="fas fa-globe-americas"></i>
-                        </div>
-                        <h3>СФЕРЫ ОБЩЕСТВЕННОЙ ЖИЗНИ</h3>
+                        <!-- ... -->
                     </div>
                     <div class="block-body">
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('economic-sphere-list')" title="Экономическая сфера">
+                                <a href="list.html?type=economic&filter=sphere" title="Экономическая сфера">
                                     <div class="legend-color" style="background: var(--economic); display: inline-block; margin-right: 10px;"></div>
                                 </a>
                                 Экономическая сфера
                             </h4>
                             <ul class="sphere-list">
-                                <li><a onclick="toggleList('management-list')"><i class="fas fa-arrow-right"></i> управление экономическим развитием</a></li>
-                                <div id="management-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('finance-list')"><i class="fas fa-arrow-right"></i> финансы</a></li>
-                                <div id="finance-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('industry-list')"><i class="fas fa-arrow-right"></i> промышленность и торговля</a></li>
-                                <div id="industry-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('antimonopoly-list')"><i class="fas fa-arrow-right"></i> антимонопольное регулирование</a></li>
-                                <div id="antimonopoly-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('agriculture-list')"><i class="fas fa-arrow-right"></i> агропромышленный комплекс</a></li>
-                                <div id="agriculture-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('energy-list')"><i class="fas fa-arrow-right"></i> энергетика</a></li>
-                                <div id="energy-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('transport-list')"><i class="fas fa-arrow-right"></i> транспорт</a></li>
-                                <div id="transport-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('construction-list')"><i class="fas fa-arrow-right"></i> строительство и жилищно-коммунальное хозяйство</a></li>
-                                <div id="construction-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('digital-list')"><i class="fas fa-arrow-right"></i> цифровое развитие, связь, массовые коммуникации</a></li>
-                                <div id="digital-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('customs-list')"><i class="fas fa-arrow-right"></i> таможенное дело</a></li>
-                                <div id="customs-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('ecology-list')"><i class="fas fa-arrow-right"></i> экология, окружающая среда</a></li>
-                                <div id="ecology-list" class="foiv-grid hidden"></div>
+                                <li><a href="list.html?type=management&filter=subsphere"><i class="fas fa-arrow-right"></i> управление экономическим развитием</a></li>
+                                <li><a href="list.html?type=finance&filter=subsphere"><i class="fas fa-arrow-right"></i> финансы</a></li>
+                                <li><a href="list.html?type=industry&filter=subsphere"><i class="fas fa-arrow-right"></i> промышленность и торговля</a></li>
+                                <li><a href="list.html?type=antimonopoly&filter=subsphere"><i class="fas fa-arrow-right"></i> антимонопольное регулирование</a></li>
+                                <li><a href="list.html?type=agriculture&filter=subsphere"><i class="fas fa-arrow-right"></i> агропромышленный комплекс</a></li>
+                                <li><a href="list.html?type=energy&filter=subsphere"><i class="fas fa-arrow-right"></i> энергетика</a></li>
+                                <li><a href="list.html?type=transport&filter=subsphere"><i class="fas fa-arrow-right"></i> транспорт</a></li>
+                                <li><a href="list.html?type=construction&filter=subsphere"><i class="fas fa-arrow-right"></i> строительство и жилищно-коммунальное хозяйство</a></li>
+                                <li><a href="list.html?type=digital&filter=subsphere"><i class="fas fa-arrow-right"></i> цифровое развитие, связь, массовые коммуникации</a></li>
+                                <li><a href="list.html?type=customs&filter=subsphere"><i class="fas fa-arrow-right"></i> таможенное дело</a></li>
+                                <li><a href="list.html?type=ecology&filter=subsphere"><i class="fas fa-arrow-right"></i> экология, окружающая среда</a></li>
                             </ul>
-                            <div id="economic-sphere-list" class="foiv-grid hidden"></div>
                         </div>
                        
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('social-sphere-list')" title="Социально-культурная сфера">
+                                <a href="list.html?type=social&filter=sphere" title="Социально-культурная сфера">
                                     <div class="legend-color" style="background: var(--social); display: inline-block; margin-right: 10px;"></div>
                                 </a>
                                 Социально-культурная сфера
                             </h4>
                             <ul class="sphere-list">
-                                <li><a onclick="toggleList('education-list')"><i class="fas fa-arrow-right"></i> образование и наука</a></li>
-                                <div id="education-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('culture-list')"><i class="fas fa-arrow-right"></i> культура</a></li>
-                                <div id="culture-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('healthcare-list')"><i class="fas fa-arrow-right"></i> здравоохранение</a></li>
-                                <div id="healthcare-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('labor-list')"><i class="fas fa-arrow-right"></i> труд и социальная защита</a></li>
-                                <div id="labor-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('sports-list')"><i class="fas fa-arrow-right"></i> физическая культура и спорт</a></li>
-                                <div id="sports-list" class="foiv-grid hidden"></div>
+                                <li><a href="list.html?type=education&filter=subsphere"><i class="fas fa-arrow-right"></i> образование и наука</a></li>
+                                <li><a href="list.html?type=culture&filter=subsphere"><i class="fas fa-arrow-right"></i> культура</a></li>
+                                <li><a href="list.html?type=healthcare&filter=subsphere"><i class="fas fa-arrow-right"></i> здравоохранение</a></li>
+                                <li><a href="list.html?type=labor&filter=subsphere"><i class="fas fa-arrow-right"></i> труд и социальная защита</a></li>
+                                <li><a href="list.html?type=sports&filter=subsphere"><i class="fas fa-arrow-right"></i> физическая культура и спорт</a></li>
                             </ul>
-                            <div id="social-sphere-list" class="foiv-grid hidden"></div>
                         </div>
                        
                         <div class="system-details">
                             <h4>
-                                <a onclick="toggleList('political-sphere-list')" title="Административно-политическая сфера">
+                                <a href="list.html?type=political&filter=sphere" title="Административно-политическая сфера">
                                     <div class="legend-color" style="background: var(--political); display: inline-block; margin-right: 10px;"></div>
                                 </a>
                                 Административно-политическая сфера
                             </h4>
                             <ul class="sphere-list">
-                                <li><a onclick="toggleList('defense-list')"><i class="fas fa-arrow-right"></i> оборона</a></li>
-                                <div id="defense-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('security-list')"><i class="fas fa-arrow-right"></i> государственная безопасность</a></li>
-                                <div id="security-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('internal-list')"><i class="fas fa-arrow-right"></i> внутренние дела</a></li>
-                                <div id="internal-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('foreign-list')"><i class="fas fa-arrow-right"></i> иностранные дела</a></li>
-                                <div id="foreign-list" class="foiv-grid hidden"></div>
-                                <li><a onclick="toggleList('justice-list')"><i class="fas fa-arrow-right"></i> юстиция</a></li>
-                                <div id="justice-list" class="foiv-grid hidden"></div>
+                                <li><a href="list.html?type=defense&filter=subsphere"><i class="fas fa-arrow-right"></i> оборона</a></li>
+                                <li><a href="list.html?type=security&filter=subsphere"><i class="fas fa-arrow-right"></i> государственная безопасность</a></li>
+                                <li><a href="list.html?type=internal&filter=subsphere"><i class="fas fa-arrow-right"></i> внутренние дела</a></li>
+                                <li><a href="list.html?type=foreign&filter=subsphere"><i class="fas fa-arrow-right"></i> иностранные дела</a></li>
+                                <li><a href="list.html?type=justice&filter=subsphere"><i class="fas fa-arrow-right"></i> юстиция</a></li>
                             </ul>
-                            <div id="political-sphere-list" class="foiv-grid hidden"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Твой оригинальный legend-section и footer здесь -->
-    <!-- ... -->
+    <!-- Твой legend и footer -->
 
     <script>
-        // Твой оригинальный скрипт здесь
-        // Добавь это в конец:
-
-        // Функция для показа/скрытия списка
-        function toggleList(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('hidden');
-            }
-        }
-
-        // Массив всех JSON-файлов (добавь имена всех 69 файлов сюда, когда создашь)
-        const foivFiles = [
-            'minzdrav.json',
-            'fsb.json',
-            'minfin.json',
-            'rosreestr.json',
-            'rosobrnadzor.json'
-            // Добавь остальные, например: 'minoborony.json', 'fns.json' и т.д.
-        ];
-
-        // Загрузка и распределение
-        document.addEventListener('DOMContentLoaded', async function() {
-            const foivs = await Promise.all(
-                foivFiles.map(file => fetch(`data/foivs/${file}`).then(res => res.json()).catch(() => null))
-            ).then(results => results.filter(f => f !== null));
-
-            // Функция рендера карточки
-            function renderFoiv(foiv) {
-                return `
-                    <div class="foiv-card">
-                        <h4>${foiv.name}</h4>
-                        <p>${foiv.description}</p>
-                        <a href="${foiv.website}" target="_blank">Сайт</a>
-                    </div>
-                `;
-            }
-
-            // Распределение по системе
-            document.getElementById('ministries-list').innerHTML = foivs.filter(f => f.system === 'ministry').map(renderFoiv).join('');
-            document.getElementById('services-20-list').innerHTML = foivs.filter(f => f.system === 'service' && f.subsphere !== 'special').map(renderFoiv).join(''); // Пример для 20 обычных
-            document.getElementById('services-10-list').innerHTML = foivs.filter(f => f.system === 'service' && f.subsphere === 'special').map(renderFoiv).join(''); // Для 10 специальных (добавь 'subsphere': 'special' в JSON для них)
-            document.getElementById('agencies-list').innerHTML = foivs.filter(f => f.system === 'agency').map(renderFoiv).join('');
-
-            // По структуре
-            document.getElementById('president-list').innerHTML = foivs.filter(f => f.structure === 'president').map(renderFoiv).join('');
-            document.getElementById('government-list').innerHTML = foivs.filter(f => f.structure === 'government').map(renderFoiv).join('');
-
-            // По сферам
-            document.getElementById('economic-sphere-list').innerHTML = foivs.filter(f => f.sphere === 'economic').map(renderFoiv).join('');
-            document.getElementById('social-sphere-list').innerHTML = foivs.filter(f => f.sphere === 'social').map(renderFoiv).join('');
-            document.getElementById('political-sphere-list').innerHTML = foivs.filter(f => f.sphere === 'political').map(renderFoiv).join('');
-
-            // По подсферам (добавь ID для каждого, как в HTML выше)
-            document.getElementById('management-list').innerHTML = foivs.filter(f => f.subsphere === 'management').map(renderFoiv).join('');
-            document.getElementById('finance-list').innerHTML = foivs.filter(f => f.subsphere === 'finance').map(renderFoiv).join('');
-            // Аналогично для остальных подсфер: industry, antimonopoly, agriculture, energy, transport, construction, digital, customs, ecology,
-            // education, culture, healthcare, labor, sports,
-            // defense, security, internal, foreign, justice
-            // Добавь строки вроде: document.getElementById('industry-list').innerHTML = foivs.filter(f => f.subsphere === 'industry').map(renderFoiv).join('');
-        });
+        // Твой оригинальный скрипт (без toggle, так как теперь href)
     </script>
 </body>
 </html>
