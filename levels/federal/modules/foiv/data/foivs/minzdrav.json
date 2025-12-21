@@ -1,0 +1,10 @@
+{
+  "name": "Министерство здравоохранения РФ",
+  "description": "Осуществляет функции по выработке государственной политики в сфере здравоохранения.",
+  "system": "ministry",
+  "structure": "government",
+  "sphere": "social",
+  "subsphere": "healthcare",
+  "website": "https://minzdrav.gov.ru",
+  "icon": "fas fa-hospital"
+}
