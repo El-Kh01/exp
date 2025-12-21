@@ -1,0 +1,10 @@
+{
+  "name": "Министерство финансов РФ",
+  "description": "Выработка финансовой политики.",
+  "system": "ministry",
+  "structure": "government",
+  "sphere": "economic",
+  "subsphere": "finance",
+  "website": "https://minfin.ru",
+  "icon": "fas fa-money-bill"
+}
