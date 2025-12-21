@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нормативные правовые акты (НПА) - Полномочия ФОИВов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Копируй ВЕСЬ CSS из главной страницы сюда */
+        /* Или вынеси в отдельный файл и подключи через <link> */
+    </style>
+</head>
+<body>
+    <!-- Шапка (аналогичная главной) -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="../../index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Нормативные правовые акты</h1>
+                        <p class="logo-subtitle">Полномочия ФОИВов</p>
+                    </div>
+                </a>
+                
+                <nav class="breadcrumbs">
+                    <a href="../../index.html"><i class="fas fa-home"></i> ФОИВы</a>
+                    <span class="separator">/</span>
+                    <a href="../index.html">Полномочия</a>
+                    <span class="separator">/</span>
+                    <span class="current">НПА</span>
+                </nav>
+            </div>
+        </div>
+    </header>
 
+    <main class="main-content">
+        <!-- Герой-секция для НПА -->
+        <section class="foiv-module-hero">
+            <div class="container">
+                <div class="hero-module-content">
+                    <div class="hero-module-text">
+                        <h1>НПА</h1>
+                        <p>Нормативные правовые акты</p>
+                        
+                        <div class="hero-stats">
+                            <div class="hero-stat-single">
+                                <div class="hero-stat-item">
+                                    <span class="number" id="normative-count">21</span>
+                                    <span class="label">ФОИВов с полномочием</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-module-visual">
+                        <div class="foiv-module-logo">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Список ФОИВов с полномочием НПА -->
+        <section class="classification-blocks">
+            <div class="container">
+                <div class="section-header">
+                    <h2>ФОИВы с полномочием принятия НПА</h2>
+                    <p class="section-subtitle">Федеральные органы исполнительной власти, осуществляющие функции по выработке государственной политики и нормативно-правовому регулированию</p>
+                </div>
+                
+                <div class="system-details">
+                    <h4>
+                        <div class="legend-badge"><span>НПА</span></div>
+                        Федеральные министерства
+                    </h4>
+                    <p>ФОИВы, осуществляющие функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности.</p>
+                    
+                    <div id="normative-list" class="foiv-list-container">
+                        <!-- Здесь JavaScript автоматически добавит все ФОИВы с полномочием НПА -->
+                    </div>
+                </div>
+                
+                <div class="law-reference">
+                    <h4>Правовая основа:</h4>
+                    <p>Полномочие принятия нормативных правовых актов определено в <a href="https://www.consultant.ru/document/cons_doc_LAW_46892/" class="text-link" target="_blank"><i class="fas fa-external-link-alt"></i> Указе Президента РФ от 9 марта 2004 г. № 314</a> как издание правил поведения, распространяющихся на неопределенный круг лиц.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="site-footer">
+        <!-- Копируй подвал из главной -->
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="../../js/foiv-data.js"></script>
+    <script>
+        // Скрипт для страницы НПА
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.FOIV_DATA) {
+                console.error('Данные ФОИВов не загружены!');
+                return;
+            }
+            
+            // Фильтруем ФОИВы с полномочием НПА
+            const normativeFOIVs = window.FOIV_DATA.filter(foiv => 
+                foiv.powers && foiv.powers.includes('normative')
+            );
+            
+            // Обновляем статистику
+            document.getElementById('normative-count').textContent = normativeFOIVs.length;
+            
+            // Отображаем список
+            const container = document.getElementById('normative-list');
+            if (container && normativeFOIVs.length > 0) {
+                container.innerHTML = normativeFOIVs.map(foiv => `
+                    <div class="foiv-card">
+                        <div class="foiv-card-header">
+                            <div class="foiv-icon" style="background: ${getTypeColor(foiv.type)};">
+                                <i class="fas fa-${getTypeIcon(foiv.type)}"></i>
+                            </div>
+                            <div class="foiv-title">
+                                <h3><a href="../../foiv/${foiv.id}.html">${foiv.name}</a></h3>
+                                <p>${foiv.shortName}</p>
+                            </div>
+                        </div>
+                        <div class="foiv-card-body">
+                            <span class="sphere-badge" style="background: ${getSphereColor(foiv.sphere)};">
+                                ${getSphereLabel(foiv.sphere)}
+                            </span>
+                            <div class="foiv-actions">
+                                <a href="../../foiv/${foiv.id}.html" class="btn-details">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Вспомогательные функции
+            function getTypeIcon(type) {
+                const icons = { ministry: 'landmark', service: 'shield-alt', agency: 'cogs' };
+                return icons[type] || 'building';
+            }
+            
+            function getTypeColor(type) {
+                const colors = { 
+                    ministry: 'var(--president-red)', 
+                    service: 'var(--government-cyan)', 
+                    agency: 'var(--detroit-blue)' 
+                };
+                return colors[type] || '#ccc';
+            }
+            
+            function getSphereColor(sphere) {
+                const colors = { 
+                    political: 'var(--political)', 
+                    economic: 'var(--economic)', 
+                    social: 'var(--social)' 
+                };
+                return colors[sphere] || '#ccc';
+            }
+            
+            function getSphereLabel(sphere) {
+                const labels = { 
+                    political: 'Адм.-политическая', 
+                    economic: 'Экономическая', 
+                    social: 'Социально-культурная' 
+                };
+                return labels[sphere] || sphere;
+            }
+        });
+    </script>
+</body>
+</html>
