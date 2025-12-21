@@ -1,0 +1,10 @@
+{
+  "name": "Федеральная служба государственной регистрации, кадастра и картографии",
+  "description": "Регистрация прав на имущество.",
+  "system": "service",
+  "structure": "government",
+  "sphere": "economic",
+  "subsphere": "property",
+  "website": "https://rosreestr.ru",
+  "icon": "fas fa-map"
+}
