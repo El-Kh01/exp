@@ -1,0 +1,10 @@
+{
+  "name": "Федеральная служба по надзору в сфере образования и науки",
+  "description": "Надзор в образовании.",
+  "system": "service",
+  "structure": "government",
+  "sphere": "social",
+  "subsphere": "education",
+  "website": "https://obrnadzor.gov.ru",
+  "icon": "fas fa-graduation-cap"
+}
