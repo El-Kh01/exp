@@ -1,10 +1,11 @@
 {
   "name": "Федеральная служба безопасности РФ",
-  "description": "Обеспечивает государственную безопасность.",
+  "description": "Государственная безопасность.",
   "system": "service",
   "structure": "president",
   "sphere": "political",
   "subsphere": "security",
   "website": "https://fsb.ru",
-  "icon": "fas fa-shield-alt"
+  "icon": "fas fa-shield-alt",
+  "special": true
 }
