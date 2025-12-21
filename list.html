@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список ФОИВов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Скопируй весь CSS из index.html, чтобы дизайн был таким же */
+        /* Добавь для страницы: */
+        body { padding: 2rem; }
+        #list-title { text-align: center; margin-bottom: 2rem; }
+        #foiv-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .foiv-card { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .foiv-card h4 { margin-bottom: 0.5rem; }
+        .foiv-card p { font-size: 0.9rem; color: #666; }
+        .foiv-card a { color: blue; text-decoration: none; }
+        .back-link { display: block; text-align: center; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <h1 id="list-title">Загрузка...</h1>
+    <div id="foiv-list"></div>
+    <a href="index.html" class="back-link">Назад на главную</a>
+
+    <script>
+        // Массив всех JSON-файлов (добавь все 69 имен)
+        const foivFiles = [
+            'minzdrav.json', 'fsb.json', 'minfin.json', 'rosreestr.json', 'rosobrnadzor.json',
+            'minoborony.json', 'fas.json'
+            // Добавь остальные: 'mvd.json', 'mid.json', 'fns.json' и т.д.
+        ];
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type');
+            const filter = params.get('filter');
+            const special = params.get('special') === 'true'; // Для 10 специальных служб
+
+            // Заголовок страницы
+            document.getElementById('list-title').innerText = `Список ФОИВов: ${type.toUpperCase()}`;
+
+            const foivs = await Promise.all(
+                foivFiles.map(file => fetch(`data/foivs/${file}`).then(res => res.json()).catch(() => null))
+            ).then(results => results.filter(f => f !== null));
+
+            // Фильтрация
+            let filtered = foivs;
+            if (filter === 'system') {
+                filtered = filtered.filter(f => f.system === type);
+                if (type === 'service' && special) filtered = filtered.filter(f => f.special === true);
+                if (type === 'service' && !special) filtered = filtered.filter(f => f.special !== true);
+            } else if (filter === 'structure') {
+                filtered = filtered.filter(f => f.structure === type);
+            } else if (filter === 'sphere') {
+                filtered = filtered.filter(f => f.sphere === type);
+            } else if (filter === 'subsphere') {
+                filtered = filtered.filter(f => f.subsphere === type);
+            }
+
+            // Рендер
+            function renderFoiv(foiv) {
+                return `
+                    <div class="foiv-card">
+                        <h4>${foiv.name}</h4>
+                        <p>${foiv.description}</p>
+                        <a href="${foiv.website}" target="_blank">Сайт</a>
+                    </div>
+                `;
+            }
+            document.getElementById('foiv-list').innerHTML = filtered.map(renderFoiv).join('');
+        });
+    </script>
+</body>
+</html>
