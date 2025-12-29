@@ -118,50 +118,72 @@ class TabManager {
     }
     
     createListItem(tabId, item) {
-        let badges = '';
-        
-        switch(tabId) {
-            case 'system':
-                badges = `
-                    <div class="foiv-item-meta">
-                        <span class="foiv-badge" style="background: ${this.getTypeColor(item.type)}; color: white;">
-                            ${this.getTypeAbbreviation(item.type)}
-                        </span>
-                        <span class="foiv-badge" style="background: ${this.getSphereColor(item.sphere)};">
-                            ${this.getSphereName(item.sphere)}
-                        </span>
-                    </div>
-                `;
-                break;
-            case 'structure':
-                const leader = item.leader || 'government';
-                badges = `
-                    <div class="foiv-item-meta">
-                        <span class="foiv-badge" style="background: ${leader === 'president' ? 'rgba(220, 53, 69, 0.1)' : 'rgba(23, 162, 184, 0.1)'}; 
-                              color: ${leader === 'president' ? '#dc3545' : '#17a2b8'};">
-                            <i class="fas fa-${leader === 'president' ? 'user-tie' : 'landmark'}"></i>
-                            ${leader === 'president' ? 'Президент' : 'Правительство'}
-                        </span>
-                    </div>
-                `;
-                break;
-            case 'spheres':
-                badges = `
-                    <div class="foiv-item-meta">
-                        <span class="foiv-badge" style="background: ${this.getSphereColor(item.sphere)};">
-                            <i class="fas fa-${this.getSphereIcon(item.sphere)}"></i>
-                            ${this.getSphereName(item.sphere)}
-                        </span>
-                    </div>
-                `;
-                break;
+        // Определяем полномочия на основе типа органа
+        let powers = [];
+        if (item.type === 'ministry') {
+            powers = ['npa']; // Нормативные правовые акты
+        } else if (item.type === 'service') {
+            powers = ['supervision']; // Административный надзор
+        } else if (item.type === 'agency') {
+            powers = ['property', 'services']; // Управление имуществом и услуги
         }
+        
+        // Определяем цвет сферы
+        let sphereColor;
+        if (item.sphere === 'political' || item.sphere === 'security') {
+            sphereColor = '#e80909'; // красный
+        } else if (item.sphere === 'economic') {
+            sphereColor = '#1013e3'; // синий
+        } else if (item.sphere === 'social') {
+            sphereColor = '#f5d442'; // желтый
+        }
+        
+        // Создаем значки полномочий
+        let powersHTML = '';
+        powers.forEach(power => {
+            let powerColor, powerText, powerTitle;
+            if (power === 'npa') {
+                powerColor = '#1e3c72';
+                powerText = 'НПА';
+                powerTitle = 'Нормативные правовые акты';
+            } else if (power === 'supervision') {
+                powerColor = '#2a5298';
+                powerText = 'АН';
+                powerTitle = 'Административный надзор';
+            } else if (power === 'property') {
+                powerColor = '#408BC9';
+                powerText = 'ГИ';
+                powerTitle = 'Управление государственным имуществом';
+            } else if (power === 'services') {
+                powerColor = '#5DA9E9';
+                powerText = 'ГУ';
+                powerTitle = 'Оказание государственных услуг';
+            }
+            
+            powersHTML += `
+                <div class="foiv-power-badge" style="background: ${powerColor};" title="${powerTitle}">
+                    <span>${powerText}</span>
+                </div>
+            `;
+        });
+        
+        // Определяем значок подчинения
+        const leader = item.leader || 'government';
+        const leaderIcon = leader === 'president' ? 'fas fa-user-tie' : 'fas fa-landmark';
+        const leaderClass = leader === 'president' ? 'president' : 'government';
+        const leaderTitle = leader === 'president' ? 'Подчиняется Президенту РФ' : 'Подчиняется Правительству РФ';
         
         return `
             <div class="foiv-item" data-id="${item.id}">
                 <div class="foiv-item-title">${item.name}</div>
                 <div class="foiv-item-subtitle">${item.shortName}</div>
-                ${badges}
+                <div class="foiv-item-badges">
+                    <div class="foiv-sphere-badge" style="background: ${sphereColor};" title="${item.sphere === 'political' ? 'Политическая сфера' : item.sphere === 'economic' ? 'Экономическая сфера' : item.sphere === 'social' ? 'Социальная сфера' : 'Сфера безопасности'}"></div>
+                    <div class="foiv-powers">${powersHTML}</div>
+                    <div class="foiv-leader-badge ${leaderClass}" title="${leaderTitle}">
+                        <i class="${leaderIcon}"></i>
+                    </div>
+                </div>
             </div>
         `;
     }
@@ -241,18 +263,6 @@ class TabManager {
                         icon.className = 'fas fa-chevron-down';
                     }
                 }
-                
-                // Закрываем другие секции (опционально)
-                // sectionHeaders.forEach(otherHeader => {
-                //     if (otherHeader !== header) {
-                //         const otherContent = otherHeader.nextElementSibling;
-                //         const otherIcon = otherHeader.querySelector('.toggle-icon i');
-                //         otherContent.classList.remove('active');
-                //         if (otherIcon) {
-                //             otherIcon.className = 'fas fa-chevron-down';
-                //         }
-                //     }
-                // });
             });
         });
     }
@@ -297,52 +307,6 @@ class TabManager {
         if (countElement) {
             countElement.textContent = count;
         }
-    }
-    
-    // Вспомогательные методы
-    getTypeColor(type) {
-        const colors = {
-            'ministry': '#1e3c72',
-            'service': '#2a5298',
-            'agency': '#408BC9'
-        };
-        return colors[type] || '#408BC9';
-    }
-    
-    getTypeAbbreviation(type) {
-        const abbreviations = {
-            'ministry': 'М',
-            'service': 'С',
-            'agency': 'А'
-        };
-        return abbreviations[type] || type.charAt(0).toUpperCase();
-    }
-    
-    getSphereColor(sphere) {
-        const colors = {
-            'political': 'rgba(232, 9, 9, 0.1)',
-            'economic': 'rgba(16, 19, 227, 0.1)',
-            'social': 'rgba(245, 212, 66, 0.1)'
-        };
-        return colors[sphere] || 'rgba(64, 139, 201, 0.1)';
-    }
-    
-    getSphereName(sphere) {
-        const names = {
-            'political': 'Политическая',
-            'economic': 'Экономическая',
-            'social': 'Социальная'
-        };
-        return names[sphere] || sphere;
-    }
-    
-    getSphereIcon(sphere) {
-        const icons = {
-            'political': 'shield-alt',
-            'economic': 'chart-line',
-            'social': 'users'
-        };
-        return icons[sphere] || 'circle';
     }
 }
 
