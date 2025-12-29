@@ -168,9 +168,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по типу:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="ministry"><div class="system-type-badge ministry">М</div>Министерства</button>
-                                                <button class="filter-btn" data-filter="service"><div class="system-type-badge service">С</div>Службы</button>
-                                                <button class="filter-btn" data-filter="agency"><div class="system-type-badge agency">А</div>Агентства</button>
+                                                <button class="filter-btn" data-filter="ministry"><div class="power-badge" data-power="npa" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">М</div>Министерства</button>
+                                                <button class="filter-btn" data-filter="service"><div class="power-badge" data-power="supervision" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">С</div>Службы</button>
+                                                <button class="filter-btn" data-filter="agency"><div class="power-badge" data-power="property" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">А</div>Агентства</button>
                                             </div>
                                         </div>
                                     </div>
@@ -413,19 +413,19 @@
                     <div class="legend-category">
                         <h4>Полномочия</h4>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="npa">НПА</div>
+                            <div class="power-badge" data-power="npa" style="transform: none; margin-right: 10px;">НПА</div>
                             <div class="legend-text">Принятие нормативных правовых актов</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="supervision">АН</div>
+                            <div class="power-badge" data-power="supervision" style="transform: none; margin-right: 10px;">АН</div>
                             <div class="legend-text">Административный надзор</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="property">ГИ</div>
+                            <div class="power-badge" data-power="property" style="transform: none; margin-right: 10px;">ГИ</div>
                             <div class="legend-text">Управление государственным имуществом</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="services">ГУ</div>
+                            <div class="power-badge" data-power="services" style="transform: none; margin-right: 10px;">ГУ</div>
                             <div class="legend-text">Оказание государственных услуг</div>
                         </div>
                     </div>
@@ -595,33 +595,6 @@
             background: #5DA9E9;
         }
         
-        /* Значки для фильтров в системе */
-        .system-type-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background: var(--detroit-dark-gray);
-            color: white;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            margin-right: 8px;
-        }
-        
-        .system-type-badge.ministry {
-            background: #1e3c72;
-        }
-        
-        .system-type-badge.service {
-            background: #2a5298;
-        }
-        
-        .system-type-badge.agency {
-            background: #408BC9;
-        }
-        
         /* Значки для фильтров в структуре */
         .leader-badge {
             display: inline-flex;
@@ -709,7 +682,11 @@
             border-color: var(--detroit-blue);
         }
         
-        .filter-btn.active .system-type-badge,
+        .filter-btn.active .power-badge {
+            background: white;
+            color: var(--detroit-blue);
+        }
+        
         .filter-btn.active .leader-badge,
         .filter-btn.active .sphere-filter-badge {
             background: white;
@@ -747,7 +724,7 @@
                 padding: 8px;
             }
             
-            .filter-btn .system-type-badge,
+            .filter-btn .power-badge,
             .filter-btn .leader-badge,
             .filter-btn .sphere-filter-badge {
                 margin-right: 0;
