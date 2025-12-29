@@ -114,7 +114,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="power-badge" data-power="npa">НПА</div>
+                                        <div class="legend-badge"><span>НПА</span></div>
                                         Федеральное министерство
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
@@ -130,7 +130,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="power-badge" data-power="supervision">АН</div>
+                                        <div class="legend-badge"><span>АН</span></div>
                                         Федеральная служба
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности</p>
@@ -146,8 +146,8 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="power-badge" data-power="property">ГИ</div>
-                                        <div class="power-badge" data-power="services" style="margin-left: 10px;">ГУ</div>
+                                        <div class="legend-badge"><span>ГИ</span></div>
+                                        <div class="legend-badge" style="margin-left: 10px;"><span>ГУ</span></div>
                                         Федеральное агентство
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
@@ -168,9 +168,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по типу:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="ministry"><div class="power-badge" data-power="npa" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">М</div>Министерства</button>
-                                                <button class="filter-btn" data-filter="service"><div class="power-badge" data-power="supervision" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">С</div>Службы</button>
-                                                <button class="filter-btn" data-filter="agency"><div class="power-badge" data-power="property" style="transform: none; width: 20px; height: 20px; font-size: 0.7rem; margin-right: 8px;">А</div>Агентства</button>
+                                                <button class="filter-btn" data-filter="ministry"><div class="legend-badge"><span>М</span></div>Министерства</button>
+                                                <button class="filter-btn" data-filter="service"><div class="legend-badge"><span>С</span></div>Службы</button>
+                                                <button class="filter-btn" data-filter="agency"><div class="legend-badge"><span>А</span></div>Агентства</button>
                                             </div>
                                         </div>
                                     </div>
@@ -413,19 +413,19 @@
                     <div class="legend-category">
                         <h4>Полномочия</h4>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="npa" style="transform: none; margin-right: 10px;">НПА</div>
+                            <div class="legend-badge"><span>НПА</span></div>
                             <div class="legend-text">Принятие нормативных правовых актов</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="supervision" style="transform: none; margin-right: 10px;">АН</div>
+                            <div class="legend-badge"><span>АН</span></div>
                             <div class="legend-text">Административный надзор</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="property" style="transform: none; margin-right: 10px;">ГИ</div>
+                            <div class="legend-badge"><span>ГИ</span></div>
                             <div class="legend-text">Управление государственным имуществом</div>
                         </div>
                         <div class="legend-item">
-                            <div class="power-badge" data-power="services" style="transform: none; margin-right: 10px;">ГУ</div>
+                            <div class="legend-badge"><span>ГУ</span></div>
                             <div class="legend-text">Оказание государственных услуг</div>
                         </div>
                     </div>
@@ -564,35 +564,61 @@
 
     <style>
         /* Дополнительные стили для фильтров и значков */
-        .power-badge {
-            display: inline-flex;
+        .legend-badge {
+            width: 36px;
+            height: 36px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
             background: var(--detroit-dark-gray);
             color: var(--detroit-white);
             border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.8rem;
             transform: rotate(45deg);
+            flex-shrink: 0;
+            transition: var(--transition);
+            font-weight: 600;
             border: 1px solid var(--detroit-gray);
         }
         
-        .power-badge[data-power="npa"] {
+        .legend-badge:hover {
+            transform: rotate(45deg) scale(1.1);
+            background: var(--detroit-blue);
+        }
+        
+        .legend-badge span {
+            transform: rotate(-45deg);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        /* Специальные цвета для разных типов полномочий */
+        .legend-badge:has(span[data-power="npa"]) {
             background: #1e3c72;
         }
         
-        .power-badge[data-power="supervision"] {
+        .legend-badge:has(span[data-power="supervision"]) {
             background: #2a5298;
         }
         
-        .power-badge[data-power="property"] {
+        .legend-badge:has(span[data-power="property"]) {
             background: #408BC9;
         }
         
-        .power-badge[data-power="services"] {
+        .legend-badge:has(span[data-power="services"]) {
             background: #5DA9E9;
+        }
+        
+        /* Цвета для ромбиков в фильтрах (М, С, А) */
+        .filter-btn[data-filter="ministry"] .legend-badge {
+            background: #1e3c72;
+        }
+        
+        .filter-btn[data-filter="service"] .legend-badge {
+            background: #2a5298;
+        }
+        
+        .filter-btn[data-filter="agency"] .legend-badge {
+            background: #408BC9;
         }
         
         /* Значки для фильтров в структуре */
@@ -682,8 +708,12 @@
             border-color: var(--detroit-blue);
         }
         
-        .filter-btn.active .power-badge {
+        .filter-btn.active .legend-badge {
             background: white;
+            color: var(--detroit-blue);
+        }
+        
+        .filter-btn.active .legend-badge span {
             color: var(--detroit-blue);
         }
         
@@ -724,7 +754,7 @@
                 padding: 8px;
             }
             
-            .filter-btn .power-badge,
+            .filter-btn .legend-badge,
             .filter-btn .leader-badge,
             .filter-btn .sphere-filter-badge {
                 margin-right: 0;
