@@ -1,0 +1,296 @@
+/* Дополнительные стили для ФОИВ модуля */
+
+.legend-badge {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--detroit-dark-gray);
+    color: var(--detroit-white);
+    border-radius: 6px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    transition: var(--transition);
+    font-weight: 600;
+    border: 1px solid var(--detroit-gray);
+}
+
+.legend-badge:hover {
+    transform: rotate(45deg) scale(1.1);
+    background: var(--detroit-blue);
+}
+
+.legend-badge span {
+    transform: rotate(-45deg);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Стили для элементов списка ФОИВ */
+.foiv-list-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--detroit-light-gray);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.foiv-list-item:hover {
+    background: rgba(64, 139, 201, 0.1);
+}
+
+.foiv-list-item.active {
+    background: rgba(64, 139, 201, 0.15);
+    border-left: 3px solid var(--detroit-blue);
+}
+
+.foiv-name {
+    font-weight: 600;
+    color: var(--detroit-dark-gray);
+    font-size: 1rem;
+}
+
+.foiv-badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.foiv-sphere-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.foiv-powers {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.foiv-power-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.foiv-power-badge span {
+    transform: rotate(-45deg);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.foiv-leader-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: white;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.foiv-leader-badge.president {
+    background: linear-gradient(135deg, #dc3545, #ff6b6b);
+}
+
+.foiv-leader-badge.government {
+    background: linear-gradient(135deg, #17a2b8, #39c6d8);
+}
+
+/* Стили для цветных значков сфер */
+.sphere-color-badge {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-sm);
+    margin-right: 10px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Улучшение фильтров */
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid var(--detroit-gray);
+    border-radius: var(--border-radius);
+    background: var(--detroit-white);
+    color: var(--detroit-dark-gray);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    width: 100%;
+}
+
+.filter-btn:hover {
+    background: var(--detroit-light-gray);
+    border-color: var(--detroit-blue);
+}
+
+.filter-btn.active {
+    background: var(--detroit-blue);
+    color: white;
+    border-color: var(--detroit-blue);
+}
+
+/* Стили для контента ФОИВ */
+.foiv-detail-header {
+    background: linear-gradient(135deg, var(--detroit-blue), #5DA9E9);
+    color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.foiv-detail-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.foiv-detail-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.foiv-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.foiv-info-card {
+    background: var(--detroit-white);
+    border: 1px solid var(--detroit-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.foiv-info-card h4 {
+    color: var(--detroit-dark-gray);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.foiv-info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.foiv-info-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--detroit-light-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.foiv-info-list li:last-child {
+    border-bottom: none;
+}
+
+/* Стили для состояния загрузки и ошибок */
+.loading-list, .error-list, .empty-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: var(--dark-gray);
+}
+
+.loading-list i, .error-list i, .empty-list i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--detroit-blue);
+}
+
+.error-list i {
+    color: #dc3545;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filter-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        min-width: calc(50% - 8px);
+        justify-content: center;
+        text-align: center;
+        padding: 8px;
+    }
+    
+    .foiv-badges {
+        gap: 6px;
+    }
+    
+    .foiv-sphere-badge,
+    .foiv-power-badge,
+    .foiv-leader-badge {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .foiv-power-badge span {
+        font-size: 0.7rem;
+    }
+    
+    .foiv-leader-badge {
+        font-size: 0.8rem;
+    }
+    
+    .foiv-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-btn {
+        min-width: 100%;
+    }
+    
+    .foiv-badges {
+        gap: 4px;
+    }
+    
+    .foiv-sphere-badge,
+    .foiv-power-badge,
+    .foiv-leader-badge {
+        width: 22px;
+        height: 22px;
+    }
+}
