@@ -168,9 +168,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по типу:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="ministry"><div class="legend-badge"><span>М</span></div>Министерства</button>
-                                                <button class="filter-btn" data-filter="service"><div class="legend-badge"><span>С</span></div>Службы</button>
-                                                <button class="filter-btn" data-filter="agency"><div class="legend-badge"><span>А</span></div>Агентства</button>
+                                                <button class="filter-btn" data-filter="ministry">Министерства</button>
+                                                <button class="filter-btn" data-filter="service">Службы</button>
+                                                <button class="filter-btn" data-filter="agency">Агентства</button>
                                             </div>
                                         </div>
                                     </div>
@@ -257,8 +257,8 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по подчинению:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="president"><div class="leader-badge president"><i class="fas fa-user-tie"></i></div>Президенту РФ</button>
-                                                <button class="filter-btn" data-filter="government"><div class="leader-badge government"><i class="fas fa-landmark"></i></div>Правительству РФ</button>
+                                                <button class="filter-btn" data-filter="president">Президенту РФ</button>
+                                                <button class="filter-btn" data-filter="government">Правительству РФ</button>
                                             </div>
                                         </div>
                                     </div>
@@ -352,9 +352,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по сфере:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="political"><div class="sphere-filter-badge political"></div>Политическая</button>
-                                                <button class="filter-btn" data-filter="economic"><div class="sphere-filter-badge economic"></div>Экономическая</button>
-                                                <button class="filter-btn" data-filter="social"><div class="sphere-filter-badge social"></div>Социальная</button>
+                                                <button class="filter-btn" data-filter="political">Политическая</button>
+                                                <button class="filter-btn" data-filter="economic">Экономическая</button>
+                                                <button class="filter-btn" data-filter="social">Социальная</button>
                                             </div>
                                         </div>
                                     </div>
@@ -591,80 +591,17 @@
             font-weight: 700;
         }
         
-        /* Специальные цвета для разных типов полномочий */
-        .legend-badge:has(span[data-power="npa"]) {
-            background: #1e3c72;
-        }
-        
-        .legend-badge:has(span[data-power="supervision"]) {
-            background: #2a5298;
-        }
-        
-        .legend-badge:has(span[data-power="property"]) {
-            background: #408BC9;
-        }
-        
-        .legend-badge:has(span[data-power="services"]) {
-            background: #5DA9E9;
-        }
-        
-        /* Цвета для ромбиков в фильтрах (М, С, А) */
-        .filter-btn[data-filter="ministry"] .legend-badge {
-            background: #1e3c72;
-        }
-        
-        .filter-btn[data-filter="service"] .legend-badge {
-            background: #2a5298;
-        }
-        
-        .filter-btn[data-filter="agency"] .legend-badge {
-            background: #408BC9;
-        }
-        
-        /* Значки для фильтров в структуре */
+        /* Значки для фильтров в структуре (убраны) */
         .leader-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 8px;
-            font-size: 0.8rem;
-            color: white;
+            display: none;
         }
         
-        .leader-badge.president {
-            background: linear-gradient(135deg, #dc3545, #ff6b6b);
-        }
-        
-        .leader-badge.government {
-            background: linear-gradient(135deg, #17a2b8, #39c6d8);
-        }
-        
-        /* Значки для фильтров в сферах */
+        /* Значки для фильтров в сферах (убраны) */
         .sphere-filter-badge {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 8px;
-            border: 2px solid white;
+            display: none;
         }
         
-        .sphere-filter-badge.political {
-            background: var(--political);
-        }
-        
-        .sphere-filter-badge.economic {
-            background: var(--economic);
-        }
-        
-        .sphere-filter-badge.social {
-            background: var(--social);
-        }
-        
-        /* Стили для цветных значков сфер */
+        /* Стили для цветных значков сфер (оставляем только в описании) */
         .sphere-color-badge {
             display: inline-block;
             width: 32px;
@@ -708,34 +645,11 @@
             border-color: var(--detroit-blue);
         }
         
-        .filter-btn.active .legend-badge {
-            background: white;
-            color: var(--detroit-blue);
-        }
-        
-        .filter-btn.active .legend-badge span {
-            color: var(--detroit-blue);
-        }
-        
+        /* Убираем все стили для значков в активных фильтрах */
+        .filter-btn.active .legend-badge,
         .filter-btn.active .leader-badge,
         .filter-btn.active .sphere-filter-badge {
-            background: white;
-            color: var(--detroit-blue);
-        }
-        
-        .filter-btn.active .sphere-filter-badge.political {
-            background: white;
-            border: 1px solid var(--political);
-        }
-        
-        .filter-btn.active .sphere-filter-badge.economic {
-            background: white;
-            border: 1px solid var(--economic);
-        }
-        
-        .filter-btn.active .sphere-filter-badge.social {
-            background: white;
-            border: 1px solid var(--social);
+            display: none;
         }
         
         /* Адаптивность для фильтров */
@@ -754,11 +668,11 @@
                 padding: 8px;
             }
             
+            /* Убираем отступы для несуществующих значков */
             .filter-btn .legend-badge,
             .filter-btn .leader-badge,
             .filter-btn .sphere-filter-badge {
-                margin-right: 0;
-                margin-bottom: 5px;
+                display: none;
             }
         }
         
