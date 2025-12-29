@@ -1,0 +1,92 @@
+[
+    {
+        "id": "mchs",
+        "name": "Министерство Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий",
+        "shortName": "МЧС России",
+        "type": "ministry",
+        "sphere": "security",
+        "leader": "government",
+        "officialWebsite": "https://www.mchs.gov.ru"
+    },
+    {
+        "id": "fsb",
+        "name": "Федеральная служба безопасности Российской Федерации",
+        "shortName": "ФСБ России",
+        "type": "service",
+        "sphere": "political",
+        "leader": "president",
+        "officialWebsite": "https://www.fsb.ru"
+    },
+    {
+        "id": "mid",
+        "name": "Министерство иностранных дел Российской Федерации",
+        "shortName": "МИД России",
+        "type": "ministry",
+        "sphere": "political",
+        "leader": "president",
+        "officialWebsite": "https://mid.ru"
+    },
+    {
+        "id": "mincifry",
+        "name": "Министерство цифрового развития, связи и массовых коммуникаций Российской Федерации",
+        "shortName": "Минцифры России",
+        "type": "ministry",
+        "sphere": "economic",
+        "leader": "government",
+        "officialWebsite": "https://digital.gov.ru"
+    },
+    {
+        "id": "minzdrav",
+        "name": "Министерство здравоохранения Российской Федерации",
+        "shortName": "Минздрав России",
+        "type": "ministry",
+        "sphere": "social",
+        "leader": "government",
+        "officialWebsite": "https://minzdrav.gov.ru"
+    },
+    {
+        "id": "mineconomy",
+        "name": "Министерство экономического развития Российской Федерации",
+        "shortName": "Минэкономразвития России",
+        "type": "ministry",
+        "sphere": "economic",
+        "leader": "government",
+        "officialWebsite": "https://www.economy.gov.ru"
+    },
+    {
+        "id": "rosgvardiya",
+        "name": "Федеральная служба войск национальной гвардии Российской Федерации",
+        "shortName": "Росгвардия",
+        "type": "service",
+        "sphere": "security",
+        "leader": "president",
+        "officialWebsite": "https://rosguard.gov.ru"
+    },
+    {
+        "id": "rosreestr",
+        "name": "Федеральная служба государственной регистрации, кадастра и картографии",
+        "shortName": "Росреестр",
+        "type": "service",
+        "sphere": "economic",
+        "leader": "government",
+        "officialWebsite": "https://rosreestr.gov.ru"
+    },
+    {
+        "id": "mintrud",
+        "name": "Министерство труда и социальной защиты Российской Федерации",
+        "shortName": "Минтруд России",
+        "type": "ministry",
+        "sphere": "social",
+        "leader": "government",
+        "officialWebsite": "https://mintrud.gov.ru"
+    },
+    {
+        "id": "minjust",
+        "name": "Министерство юстиции Российской Федерации",
+        "shortName": "Минюст России",
+        "type": "ministry",
+        "sphere": "political",
+        "leader": "president",
+        "officialWebsite": "https://minjust.gov.ru"
+    }
+]
