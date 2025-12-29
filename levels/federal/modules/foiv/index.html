@@ -95,17 +95,14 @@
                         <button class="tab-btn active" data-tab="system">
                             <i class="fas fa-sitemap"></i>
                             <span>Система</span>
-                            <small>По типу органов</small>
                         </button>
                         <button class="tab-btn" data-tab="structure">
                             <i class="fas fa-project-diagram"></i>
                             <span>Структура</span>
-                            <small>По подчинению</small>
                         </button>
                         <button class="tab-btn" data-tab="spheres">
                             <i class="fas fa-globe-americas"></i>
                             <span>Сферы</span>
-                            <small>По деятельности</small>
                         </button>
                     </div>
                     
@@ -117,7 +114,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <span class="legend-badge"><span>НПА</span></span>
+                                        <div class="power-badge" data-power="npa">НПА</div>
                                         Федеральное министерство
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим функции по выработке государственной политики и нормативно-правовому регулированию в установленной сфере деятельности; осуществляет координацию и контроль деятельности находящихся в его ведении федеральных служб и федеральных агентств.</p>
@@ -133,7 +130,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <span class="legend-badge"><span>АН</span></span>
+                                        <div class="power-badge" data-power="supervision">АН</div>
                                         Федеральная служба
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим функции по контролю и надзору в установленной сфере деятельности</p>
@@ -149,8 +146,8 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <span class="legend-badge"><span>ГИ</span></span>
-                                        <span class="legend-badge" style="margin-left: 10px;"><span>ГУ</span></span>
+                                        <div class="power-badge" data-power="property">ГИ</div>
+                                        <div class="power-badge" data-power="services" style="margin-left: 10px;">ГУ</div>
                                         Федеральное агентство
                                     </h4>
                                     <p>Является ФОИВом, осуществляющим в установленной сфере деятельности функции по оказанию государственных услуг, по управлению государственным имуществом и правоприменительные функции.</p>
@@ -171,9 +168,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по типу:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="ministry">Министерства</button>
-                                                <button class="filter-btn" data-filter="service">Службы</button>
-                                                <button class="filter-btn" data-filter="agency">Агентства</button>
+                                                <button class="filter-btn" data-filter="ministry"><div class="system-type-badge ministry">М</div>Министерства</button>
+                                                <button class="filter-btn" data-filter="service"><div class="system-type-badge service">С</div>Службы</button>
+                                                <button class="filter-btn" data-filter="agency"><div class="system-type-badge agency">А</div>Агентства</button>
                                             </div>
                                         </div>
                                     </div>
@@ -260,8 +257,8 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по подчинению:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="president">Президенту РФ</button>
-                                                <button class="filter-btn" data-filter="government">Правительству РФ</button>
+                                                <button class="filter-btn" data-filter="president"><div class="leader-badge president"><i class="fas fa-user-tie"></i></div>Президенту РФ</button>
+                                                <button class="filter-btn" data-filter="government"><div class="leader-badge government"><i class="fas fa-landmark"></i></div>Правительству РФ</button>
                                             </div>
                                         </div>
                                     </div>
@@ -296,7 +293,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="legend-color" style="background: var(--economic); display: inline-block; margin-right: 10px;"></div>
+                                        <div class="sphere-color-badge" style="background: var(--economic);"></div>
                                         Экономическая сфера
                                     </h4>
                                     <ul class="sphere-list">
@@ -316,7 +313,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="legend-color" style="background: var(--social); display: inline-block; margin-right: 10px;"></div>
+                                        <div class="sphere-color-badge" style="background: var(--social);"></div>
                                         Социально-культурная сфера
                                     </h4>
                                     <ul class="sphere-list">
@@ -330,7 +327,7 @@
                                 
                                 <div class="system-details">
                                     <h4>
-                                        <div class="legend-color" style="background: var(--political); display: inline-block; margin-right: 10px;"></div>
+                                        <div class="sphere-color-badge" style="background: var(--political);"></div>
                                         Административно-политическая сфера
                                     </h4>
                                     <ul class="sphere-list">
@@ -355,9 +352,9 @@
                                             <h4><i class="fas fa-filter"></i> Фильтр по сфере:</h4>
                                             <div class="filter-buttons">
                                                 <button class="filter-btn active" data-filter="all">Все</button>
-                                                <button class="filter-btn" data-filter="political">Политическая</button>
-                                                <button class="filter-btn" data-filter="economic">Экономическая</button>
-                                                <button class="filter-btn" data-filter="social">Социальная</button>
+                                                <button class="filter-btn" data-filter="political"><div class="sphere-filter-badge political"></div>Политическая</button>
+                                                <button class="filter-btn" data-filter="economic"><div class="sphere-filter-badge economic"></div>Экономическая</button>
+                                                <button class="filter-btn" data-filter="social"><div class="sphere-filter-badge social"></div>Социальная</button>
                                             </div>
                                         </div>
                                     </div>
@@ -416,19 +413,19 @@
                     <div class="legend-category">
                         <h4>Полномочия</h4>
                         <div class="legend-item">
-                            <div class="legend-badge"><span>НПА</span></div>
+                            <div class="power-badge" data-power="npa">НПА</div>
                             <div class="legend-text">Принятие нормативных правовых актов</div>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-badge"><span>АН</span></div>
+                            <div class="power-badge" data-power="supervision">АН</div>
                             <div class="legend-text">Административный надзор</div>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-badge"><span>ГИ</span></div>
+                            <div class="power-badge" data-power="property">ГИ</div>
                             <div class="legend-text">Управление государственным имуществом</div>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-badge"><span>ГУ</span></div>
+                            <div class="power-badge" data-power="services">ГУ</div>
                             <div class="legend-text">Оказание государственных услуг</div>
                         </div>
                     </div>
@@ -564,5 +561,205 @@
             }, 100);
         });
     </script>
+
+    <style>
+        /* Дополнительные стили для фильтров и значков */
+        .power-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--detroit-dark-gray);
+            color: var(--detroit-white);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+            border: 1px solid var(--detroit-gray);
+        }
+        
+        .power-badge[data-power="npa"] {
+            background: #1e3c72;
+        }
+        
+        .power-badge[data-power="supervision"] {
+            background: #2a5298;
+        }
+        
+        .power-badge[data-power="property"] {
+            background: #408BC9;
+        }
+        
+        .power-badge[data-power="services"] {
+            background: #5DA9E9;
+        }
+        
+        /* Значки для фильтров в системе */
+        .system-type-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--detroit-dark-gray);
+            color: white;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+        
+        .system-type-badge.ministry {
+            background: #1e3c72;
+        }
+        
+        .system-type-badge.service {
+            background: #2a5298;
+        }
+        
+        .system-type-badge.agency {
+            background: #408BC9;
+        }
+        
+        /* Значки для фильтров в структуре */
+        .leader-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 0.8rem;
+            color: white;
+        }
+        
+        .leader-badge.president {
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+        }
+        
+        .leader-badge.government {
+            background: linear-gradient(135deg, #17a2b8, #39c6d8);
+        }
+        
+        /* Значки для фильтров в сферах */
+        .sphere-filter-badge {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 8px;
+            border: 2px solid white;
+        }
+        
+        .sphere-filter-badge.political {
+            background: var(--political);
+        }
+        
+        .sphere-filter-badge.economic {
+            background: var(--economic);
+        }
+        
+        .sphere-filter-badge.social {
+            background: var(--social);
+        }
+        
+        /* Стили для цветных значков сфер */
+        .sphere-color-badge {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--border-radius-sm);
+            margin-right: 10px;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Улучшение фильтров */
+        .filter-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid var(--detroit-gray);
+            border-radius: var(--border-radius);
+            background: var(--detroit-white);
+            color: var(--detroit-dark-gray);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            width: 100%;
+        }
+        
+        .filter-btn:hover {
+            background: var(--detroit-light-gray);
+            border-color: var(--detroit-blue);
+        }
+        
+        .filter-btn.active {
+            background: var(--detroit-blue);
+            color: white;
+            border-color: var(--detroit-blue);
+        }
+        
+        .filter-btn.active .system-type-badge,
+        .filter-btn.active .leader-badge,
+        .filter-btn.active .sphere-filter-badge {
+            background: white;
+            color: var(--detroit-blue);
+        }
+        
+        .filter-btn.active .sphere-filter-badge.political {
+            background: white;
+            border: 1px solid var(--political);
+        }
+        
+        .filter-btn.active .sphere-filter-badge.economic {
+            background: white;
+            border: 1px solid var(--economic);
+        }
+        
+        .filter-btn.active .sphere-filter-badge.social {
+            background: white;
+            border: 1px solid var(--social);
+        }
+        
+        /* Адаптивность для фильтров */
+        @media (max-width: 768px) {
+            .filter-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                flex: 1;
+                min-width: calc(50% - 8px);
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+                padding: 8px;
+            }
+            
+            .filter-btn .system-type-badge,
+            .filter-btn .leader-badge,
+            .filter-btn .sphere-filter-badge {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .filter-btn {
+                min-width: 100%;
+            }
+        }
+    </style>
 </body>
 </html>
