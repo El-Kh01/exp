@@ -69,10 +69,13 @@ class TabManager {
     }
     
     setupBackToTop() {
-        document.querySelector('.back-to-top').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        const backToTopBtn = document.querySelector('.back-to-top');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     }
     
     animateCounters() {
@@ -92,13 +95,6 @@ class TabManager {
             };
             updateCounter();
         });
-    }
-    
-    updateCount(tabId, count) {
-        const countElement = document.getElementById(`${tabId}Count`);
-        if (countElement) {
-            countElement.textContent = count;
-        }
     }
 }
 
