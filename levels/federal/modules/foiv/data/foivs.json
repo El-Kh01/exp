@@ -7,41 +7,6 @@
         "sphere": "economic",
         "leader": "government",
         "officialWebsite": "https://minpromtorg.gov.ru"
-    },
-    {
-        "id": "mchs",
-        "name": "Министерство Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий",
-        "shortName": "МЧС России",
-        "type": "ministry",
-        "sphere": "security",
-        "leader": "government",
-        "officialWebsite": "https://www.mchs.gov.ru"
-    },
-    {
-        "id": "fsb",
-        "name": "Федеральная служба безопасности Российской Федерации",
-        "shortName": "ФСБ России",
-        "type": "service",
-        "sphere": "political",
-        "leader": "president",
-        "officialWebsite": "https://www.fsb.ru"
-    },
-    {
-        "id": "minzdrav",
-        "name": "Министерство здравоохранения Российской Федерации",
-        "shortName": "Минздрав России",
-        "type": "ministry",
-        "sphere": "social",
-        "leader": "government",
-        "officialWebsite": "https://minzdrav.gov.ru"
-    },
-    {
-        "id": "mineconomy",
-        "name": "Министерство экономического развития Российской Федерации",
-        "shortName": "Минэкономразвития России",
-        "type": "ministry",
-        "sphere": "economic",
-        "leader": "government",
-        "officialWebsite": "https://www.economy.gov.ru"
     }
+    /* Пока оставляйте ТОЛЬКО этот, пока не создадите остальные */
 ]
