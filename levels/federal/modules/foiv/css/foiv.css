@@ -1,56 +1,146 @@
 /* Дополнительные стили для ФОИВ модуля */
 
-/* Исправление для контейнера контента */
-.content {
+/* Контейнер модуля */
+.module-content {
+    display: flex;
+    height: 700px;
+    overflow: hidden;
+}
+
+/* Боковая панель */
+.sidebar {
+    flex: 0 0 350px;
+    border-right: 1px solid var(--detroit-light-gray);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Поиск */
+.search-box {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dark-gray);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    border: 1px solid var(--detroit-gray);
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--detroit-blue);
+    box-shadow: 0 0 0 3px rgba(64, 139, 201, 0.1);
+}
+
+/* Фильтры */
+.filters {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-group h4 {
+    font-size: 0.95rem;
+    color: var(--detroit-dark-gray);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid var(--detroit-gray);
+    border-radius: var(--border-radius);
+    background: var(--detroit-white);
+    color: var(--detroit-dark-gray);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    width: 100%;
+}
+
+.filter-btn:hover {
+    background: var(--detroit-light-gray);
+    border-color: var(--detroit-blue);
+}
+
+.filter-btn.active {
+    background: var(--detroit-blue);
+    color: white;
+    border-color: var(--detroit-blue);
+}
+
+/* Список ФОИВ */
+.foiv-list-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    height: 600px;
 }
 
-.content-placeholder {
-    flex: 1;
+.list-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    padding: 3rem;
-    color: var(--dark-gray);
-    text-align: center;
-    height: 100%;
+    background: var(--detroit-light-gray);
 }
 
-/* Контейнер для детальной информации ФОИВ */
-.foiv-details-container {
+.list-header h4 {
+    font-size: 1rem;
+    color: var(--detroit-dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.list-header .count {
+    background: var(--detroit-blue);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.foiv-list {
     flex: 1;
     overflow-y: auto;
-    padding: 2rem;
-    height: 100%;
-    max-height: none;
+    padding: 0;
 }
 
-/* Убираем фиксированные высоты у контейнеров с информацией */
-.foiv-detail-header,
-.foiv-info-grid,
-.foiv-info-card,
-.foiv-sections {
-    margin-bottom: 2rem;
-}
-
-/* Увеличиваем максимальную высоту для раскрывающихся секций */
-.section-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.3s ease;
-}
-
-.section-content.active {
-    max-height: 5000px;
-    padding: 1.5rem;
-}
-
-/* Стили для элементов списка ФОИВ */
 .foiv-list-item {
     padding: 12px 15px;
     border-bottom: 1px solid var(--detroit-light-gray);
@@ -137,333 +227,24 @@
     background: linear-gradient(135deg, #17a2b8, #39c6d8);
 }
 
-/* Улучшение фильтров */
-.filter-buttons {
+/* Основной контент */
+.content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-.filter-btn {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border: 1px solid var(--detroit-gray);
-    border-radius: var(--border-radius);
-    background: var(--detroit-white);
-    color: var(--detroit-dark-gray);
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: left;
-    width: 100%;
-}
-
-.filter-btn:hover {
-    background: var(--detroit-light-gray);
-    border-color: var(--detroit-blue);
-}
-
-.filter-btn.active {
-    background: var(--detroit-blue);
-    color: white;
-    border-color: var(--detroit-blue);
-}
-
-/* Стили для контента ФОИВ */
-.foiv-detail-header {
-    background: linear-gradient(135deg, var(--detroit-blue), #5DA9E9);
-    color: white;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 2rem;
-}
-
-.foiv-detail-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.foiv-detail-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-.foiv-meta {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
-    flex-wrap: wrap;
-}
-
-.foiv-sphere-badge {
-    padding: 0.5rem 1.2rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.foiv-official-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.8rem 1.5rem;
-    background: white;
-    color: var(--detroit-blue);
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: var(--transition);
-    margin-top: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.foiv-official-link:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-.foiv-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.foiv-info-card {
-    background: var(--detroit-white);
-    border: 1px solid var(--detroit-gray);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.foiv-info-card h4 {
-    color: var(--detroit-dark-gray);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.foiv-info-list {
-    list-style: none;
-    padding: 0;
-}
-
-.foiv-info-list li {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid var(--detroit-light-gray);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    word-wrap: break-word;
-}
-
-.foiv-info-list li:last-child {
-    border-bottom: none;
-}
-
-.foiv-sections {
-    margin-top: 2rem;
-}
-
-.foiv-section {
-    margin-bottom: 2rem;
-    background: white;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--detroit-light-gray);
     overflow: hidden;
 }
 
-.section-header {
-    background: var(--detroit-light-gray);
-    padding: 1.2rem 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: var(--transition);
-    border-bottom: 1px solid transparent;
-}
-
-.section-header:hover {
-    background: #e8ebf0;
-}
-
-.section-header h4 {
-    font-size: 1.1rem;
-    color: var(--detroit-dark-gray);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.toggle-icon {
-    transition: transform 0.3s ease;
-}
-
-.section-content p {
-    line-height: 1.7;
-    margin-bottom: 1.2rem;
-    text-align: justify;
-}
-
-.section-content ul {
-    padding-left: 1.5rem;
-    margin-bottom: 1.2rem;
-}
-
-.section-content li {
-    margin-bottom: 0.8rem;
-    line-height: 1.5;
-}
-
-/* Стили для состояния загрузки и ошибок */
-.loading-list, .error-list, .empty-list {
+.content-placeholder {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 3rem;
+    color: var(--dark-gray);
     text-align: center;
-    color: var(--dark-gray);
     height: 100%;
-}
-
-.loading-list i, .error-list i, .empty-list i {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: var(--detroit-blue);
-}
-
-.error-list i {
-    color: #dc3545;
-}
-
-.loading-list i.fa-spinner {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Контейнер модуля */
-.module-content {
-    display: flex;
-    min-height: 600px;
-    height: 600px;
-    overflow: hidden;
-}
-
-/* Боковая панель */
-.sidebar {
-    flex: 0 0 350px;
-    border-right: 1px solid var(--detroit-light-gray);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.search-box {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--detroit-light-gray);
-    position: relative;
-}
-
-.search-box i {
-    position: absolute;
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--dark-gray);
-}
-
-.search-box input {
-    width: 100%;
-    padding: 0.9rem 1rem 0.9rem 2.8rem;
-    border: 1px solid var(--detroit-gray);
-    border-radius: var(--border-radius);
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-
-.search-box input:focus {
-    outline: none;
-    border-color: var(--detroit-blue);
-    box-shadow: 0 0 0 3px rgba(64, 139, 201, 0.1);
-}
-
-.filters {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--detroit-light-gray);
-}
-
-.filter-group {
-    margin-bottom: 1.5rem;
-}
-
-.filter-group:last-child {
-    margin-bottom: 0;
-}
-
-.filter-group h4 {
-    font-size: 0.95rem;
-    color: var(--detroit-dark-gray);
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.foiv-list-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.list-header {
-    padding: 1.2rem 1.5rem;
-    border-bottom: 1px solid var(--detroit-light-gray);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--detroit-light-gray);
-}
-
-.list-header h4 {
-    font-size: 1rem;
-    color: var(--detroit-dark-gray);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.list-header .count {
-    background: var(--detroit-blue);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.foiv-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0;
 }
 
 .placeholder-icon {
@@ -503,18 +284,159 @@
     color: var(--detroit-blue);
 }
 
-/* Анимация для детальной информации */
+/* Контейнер для загруженного HTML-контента ФОИВа */
+.foiv-content-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* Анимация загрузки */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.foiv-details-container {
+.foiv-content-container > * {
     animation: fadeIn 0.5s ease;
+}
+
+/* Стили для состояния загрузки и ошибок */
+.loading-list, .error-list, .empty-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: var(--dark-gray);
+    height: 100%;
+}
+
+.loading-list i, .error-list i, .empty-list i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--detroit-blue);
+}
+
+.error-list i {
+    color: #dc3545;
+}
+
+.loading-list i.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Базовые стили для контента ФОИВов (будут применяться ко всем) */
+.foiv-details-container {
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Базовые стили для заголовков в контенте ФОИВа */
+.foiv-details-container h1,
+.foiv-details-container h2,
+.foiv-details-container h3,
+.foiv-details-container h4 {
+    color: var(--detroit-dark-gray);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.foiv-details-container h1 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--detroit-blue);
+    padding-bottom: 0.5rem;
+}
+
+.foiv-details-container h2 {
+    font-size: 1.4rem;
+    border-left: 4px solid var(--detroit-blue);
+    padding-left: 1rem;
+}
+
+.foiv-details-container h3 {
+    font-size: 1.2rem;
+}
+
+.foiv-details-container p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.foiv-details-container ul,
+.foiv-details-container ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.foiv-details-container li {
+    margin-bottom: 0.5rem;
+}
+
+.foiv-details-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.foiv-details-container th,
+.foiv-details-container td {
+    padding: 0.75rem;
+    border: 1px solid var(--detroit-light-gray);
+    text-align: left;
+}
+
+.foiv-details-container th {
+    background: rgba(64, 139, 201, 0.1);
+    font-weight: 600;
+}
+
+.foiv-details-container blockquote {
+    border-left: 4px solid var(--detroit-blue);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(64, 139, 201, 0.05);
+    font-style: italic;
+}
+
+.foiv-details-container code {
+    background: var(--detroit-light-gray);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--border-radius-sm);
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.foiv-details-container pre {
+    background: var(--detroit-dark-gray);
+    color: var(--detroit-white);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin: 1rem 0;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    .module-content {
+        flex-direction: column;
+        height: auto;
+        min-height: 800px;
+    }
+    
+    .sidebar {
+        flex: none;
+        width: 100%;
+        max-height: 400px;
+    }
+    
     .filter-buttons {
         flex-direction: row;
         flex-wrap: wrap;
@@ -545,22 +467,6 @@
     
     .foiv-leader-badge {
         font-size: 0.8rem;
-    }
-    
-    .foiv-info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .module-content {
-        flex-direction: column;
-        height: auto;
-        min-height: 800px;
-    }
-    
-    .sidebar {
-        flex: none;
-        width: 100%;
-        max-height: 400px;
     }
 }
 
