@@ -1,30 +1,53 @@
 /* Дополнительные стили для ФОИВ модуля */
 
-.legend-badge {
-    width: 36px;
-    height: 36px;
+/* Исправление для контейнера контента */
+.content {
+    flex: 1;
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 600px;
+}
+
+.content-placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--detroit-dark-gray);
-    color: var(--detroit-white);
-    border-radius: 6px;
-    transform: rotate(45deg);
-    flex-shrink: 0;
-    transition: var(--transition);
-    font-weight: 600;
-    border: 1px solid var(--detroit-gray);
+    padding: 3rem;
+    color: var(--dark-gray);
+    text-align: center;
+    height: 100%;
 }
 
-.legend-badge:hover {
-    transform: rotate(45deg) scale(1.1);
-    background: var(--detroit-blue);
+/* Контейнер для детальной информации ФОИВ */
+.foiv-details-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    height: 100%;
+    max-height: none;
 }
 
-.legend-badge span {
-    transform: rotate(-45deg);
-    font-size: 0.85rem;
-    font-weight: 700;
+/* Убираем фиксированные высоты у контейнеров с информацией */
+.foiv-detail-header,
+.foiv-info-grid,
+.foiv-info-card,
+.foiv-sections {
+    margin-bottom: 2rem;
+}
+
+/* Увеличиваем максимальную высоту для раскрывающихся секций */
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+}
+
+.section-content.active {
+    max-height: 5000px;
+    padding: 1.5rem;
 }
 
 /* Стили для элементов списка ФОИВ */
@@ -114,17 +137,6 @@
     background: linear-gradient(135deg, #17a2b8, #39c6d8);
 }
 
-/* Стили для цветных значков сфер */
-.sphere-color-badge {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--border-radius-sm);
-    margin-right: 10px;
-    border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
 /* Улучшение фильтров */
 .filter-buttons {
     display: flex;
@@ -178,6 +190,47 @@
     opacity: 0.9;
 }
 
+.foiv-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.foiv-sphere-badge {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.foiv-official-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    background: white;
+    color: var(--detroit-blue);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.foiv-official-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
 .foiv-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -207,15 +260,72 @@
 }
 
 .foiv-info-list li {
-    padding: 0.5rem 0;
+    padding: 0.8rem 0;
     border-bottom: 1px solid var(--detroit-light-gray);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
+    word-wrap: break-word;
 }
 
 .foiv-info-list li:last-child {
     border-bottom: none;
+}
+
+.foiv-sections {
+    margin-top: 2rem;
+}
+
+.foiv-section {
+    margin-bottom: 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--detroit-light-gray);
+    overflow: hidden;
+}
+
+.section-header {
+    background: var(--detroit-light-gray);
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+    border-bottom: 1px solid transparent;
+}
+
+.section-header:hover {
+    background: #e8ebf0;
+}
+
+.section-header h4 {
+    font-size: 1.1rem;
+    color: var(--detroit-dark-gray);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.section-content p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
+.section-content ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.section-content li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
 }
 
 /* Стили для состояния загрузки и ошибок */
@@ -227,6 +337,7 @@
     padding: 3rem;
     text-align: center;
     color: var(--dark-gray);
+    height: 100%;
 }
 
 .loading-list i, .error-list i, .empty-list i {
@@ -237,6 +348,169 @@
 
 .error-list i {
     color: #dc3545;
+}
+
+.loading-list i.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Контейнер модуля */
+.module-content {
+    display: flex;
+    min-height: 600px;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Боковая панель */
+.sidebar {
+    flex: 0 0 350px;
+    border-right: 1px solid var(--detroit-light-gray);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.search-box {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dark-gray);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    border: 1px solid var(--detroit-gray);
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--detroit-blue);
+    box-shadow: 0 0 0 3px rgba(64, 139, 201, 0.1);
+}
+
+.filters {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-group h4 {
+    font-size: 0.95rem;
+    color: var(--detroit-dark-gray);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.foiv-list-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.list-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--detroit-light-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--detroit-light-gray);
+}
+
+.list-header h4 {
+    font-size: 1rem;
+    color: var(--detroit-dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.list-header .count {
+    background: var(--detroit-blue);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.foiv-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    color: var(--detroit-blue);
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+}
+
+.content-placeholder h3 {
+    font-size: 1.8rem;
+    color: var(--detroit-dark-gray);
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-placeholder p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.placeholder-tip {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    background: rgba(64, 139, 201, 0.05);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--detroit-blue);
+    color: var(--detroit-dark-gray);
+    font-size: 0.95rem;
+}
+
+.placeholder-tip i {
+    color: var(--detroit-blue);
+}
+
+/* Анимация для детальной информации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.foiv-details-container {
+    animation: fadeIn 0.5s ease;
 }
 
 /* Адаптивность */
@@ -275,6 +549,18 @@
     
     .foiv-info-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .module-content {
+        flex-direction: column;
+        height: auto;
+        min-height: 800px;
+    }
+    
+    .sidebar {
+        flex: none;
+        width: 100%;
+        max-height: 400px;
     }
 }
 
