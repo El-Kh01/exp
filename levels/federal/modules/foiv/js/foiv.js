@@ -31,13 +31,11 @@ class FoivManager {
     }
     
     updateHeroCounters() {
-        // Подсчитываем количество по типам
         const ministries = this.allFoivs.filter(f => f.type === 'ministry').length;
         const services = this.allFoivs.filter(f => f.type === 'service').length;
         const agencies = this.allFoivs.filter(f => f.type === 'agency').length;
         const total = this.allFoivs.length;
         
-        // Обновляем числа с анимацией
         this.animateCounter('.hero-stat-single .number', total);
         this.animateCounter('.hero-stat-row .hero-stat-item:nth-child(1) .number', ministries);
         this.animateCounter('.hero-stat-row .hero-stat-item:nth-child(2) .number', services);
@@ -66,16 +64,9 @@ class FoivManager {
     }
     
     setupEventListeners() {
-        // Фильтрация по типам (вкладка "Система")
         this.setupFilterButtons('system-tab', 'type');
-        
-        // Фильтрация по подчинению (вкладка "Структура")
         this.setupFilterButtons('structure-tab', 'leader');
-        
-        // Фильтрация по сферам (вкладка "Сферы")
         this.setupFilterButtons('spheres-tab', 'sphere');
-        
-        // Поиск по всем вкладкам
         this.setupSearch();
     }
     
@@ -83,16 +74,12 @@ class FoivManager {
         const filterButtons = document.querySelectorAll(`#${tabId} .filter-btn`);
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                // Убираем активный класс со всех кнопок в группе
                 const filterGroup = e.target.closest('.filter-group');
                 filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 
-                // Добавляем активный класс нажатой кнопке
                 e.target.classList.add('active');
-                
-                // Применяем фильтр
                 this.filterCurrentList(filterType, e.target.dataset.filter);
             });
         });
@@ -111,12 +98,10 @@ class FoivManager {
     }
     
     renderAllLists() {
-        // Рендерим списки для всех вкладок
         this.renderList('system', this.allFoivs);
         this.renderList('structure', this.allFoivs);
         this.renderList('spheres', this.allFoivs);
         
-        // Обновляем счетчики
         this.updateCount('system', this.allFoivs.length);
         this.updateCount('structure', this.allFoivs.length);
         this.updateCount('spheres', this.allFoivs.length);
@@ -136,15 +121,12 @@ class FoivManager {
             return;
         }
         
-        // Очищаем контейнер
         listContainer.innerHTML = '';
         
-        // Добавляем элементы
         data.forEach(foiv => {
             const listItem = this.createListItem(foiv);
             listContainer.appendChild(listItem);
             
-            // Добавляем обработчик клика
             listItem.addEventListener('click', () => {
                 this.selectFoiv(foiv.id, tabId);
             });
@@ -159,14 +141,10 @@ class FoivManager {
         div.dataset.sphere = foiv.sphere;
         div.dataset.leader = foiv.leader;
         
-        // Определяем цвет сферы
         const sphereColor = this.getSphereColor(foiv.sphere);
-        
-        // Определяем значок подчинения
         const leaderIcon = foiv.leader === 'president' ? 'fas fa-user-tie' : 'fas fa-landmark';
         const leaderClass = foiv.leader === 'president' ? 'president' : 'government';
         
-        // Создаем значки полномочий
         let powersHTML = '';
         if (foiv.powers && Array.isArray(foiv.powers)) {
             foiv.powers.forEach(power => {
@@ -183,7 +161,6 @@ class FoivManager {
                 `;
             });
         } else {
-            // Если powers не указаны, определяем по типу
             const powers = this.getPowersByType(foiv.type);
             powers.forEach(power => {
                 const powerColor = this.getPowerColor(power);
@@ -262,7 +239,6 @@ class FoivManager {
         const tabId = specificTab || window.tabManager.currentTab;
         let filteredData = [...this.allFoivs];
         
-        // Применяем фильтры
         if (filterType === 'search' && filterValue) {
             filteredData = filteredData.filter(foiv => 
                 foiv.name.toLowerCase().includes(filterValue) ||
@@ -272,7 +248,6 @@ class FoivManager {
             filteredData = filteredData.filter(foiv => foiv[filterType] === filterValue);
         }
         
-        // Рендерим отфильтрованный список
         this.renderList(tabId, filteredData);
         this.updateCount(tabId, filteredData.length);
     }
@@ -292,17 +267,14 @@ class FoivManager {
         const foiv = this.allFoivs.find(f => f.id === foivId);
         if (!foiv) return;
         
-        // Убираем активный класс у всех элементов списка
         const listItems = document.querySelectorAll(`#${tabId}List .foiv-list-item`);
         listItems.forEach(item => item.classList.remove('active'));
         
-        // Добавляем активный класс выбранному элементу
         const selectedItem = document.querySelector(`#${tabId}List .foiv-list-item[data-id="${foivId}"]`);
         if (selectedItem) {
             selectedItem.classList.add('active');
         }
         
-        // Загружаем и отображаем детальную информацию
         await this.showFoivDetails(foiv, tabId);
     }
     
@@ -324,21 +296,42 @@ class FoivManager {
                 `;
                 contentContainer.style.opacity = '1';
                 
-                // Пробуем загрузить HTML файл ФОИВа
                 try {
+                    // Пробуем загрузить HTML-файл ФОИВа из папки foivs
                     const response = await fetch(`foivs/${foiv.id}.html`);
                     
                     if (response.ok) {
-                        // Если файл существует, загружаем его
                         const content = await response.text();
-                        contentContainer.innerHTML = content;
+                        
+                        // Создаем новый контейнер для контента
+                        const container = document.createElement('div');
+                        container.className = 'foiv-content-container';
+                        container.innerHTML = content;
+                        
+                        // Заменяем содержимое contentContainer
+                        contentContainer.innerHTML = '';
+                        contentContainer.appendChild(container);
+                        
+                        // Выполняем скрипты внутри загруженного контента
+                        this.executeScriptsInContent(container);
+                        
+                        // Инициализируем раскрывающиеся секции
+                        this.initAccordions();
+                        
+                        // Обновляем высоту контейнера
+                        setTimeout(() => {
+                            if (window.tabManager && window.tabManager.updateContentHeight) {
+                                window.tabManager.updateContentHeight();
+                            }
+                        }, 100);
+                        
                     } else {
-                        // Если файла нет, генерируем информацию на основе данных
-                        contentContainer.innerHTML = this.generateFoivContent(foiv);
+                        // Если файла нет, показываем сообщение
+                        contentContainer.innerHTML = this.generateFallbackContent(foiv);
                     }
                 } catch (error) {
                     console.error('Ошибка загрузки контента:', error);
-                    contentContainer.innerHTML = this.generateFoivContent(foiv);
+                    contentContainer.innerHTML = this.generateFallbackContent(foiv);
                 }
                 
                 contentContainer.style.opacity = '1';
@@ -347,12 +340,51 @@ class FoivManager {
             
         } catch (error) {
             console.error('Ошибка загрузки контента:', error);
-            contentContainer.innerHTML = this.generateFoivContent(foiv);
+            contentContainer.innerHTML = this.generateFallbackContent(foiv);
             contentContainer.style.opacity = '1';
         }
     }
     
-    generateFoivContent(foiv) {
+    // Выполнение скриптов внутри загруженного контента
+    executeScriptsInContent(container) {
+        const scripts = container.getElementsByTagName('script');
+        for (let script of scripts) {
+            const newScript = document.createElement('script');
+            if (script.src) {
+                newScript.src = script.src;
+            } else {
+                newScript.textContent = script.textContent;
+            }
+            newScript.async = false;
+            document.body.appendChild(newScript);
+        }
+    }
+    
+    // Инициализация раскрывающихся секций
+    initAccordions() {
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        sectionHeaders.forEach(header => {
+            // Если у header уже есть обработчик, не добавляем новый
+            if (header.dataset.hasListener) return;
+            
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.toggle-icon');
+                
+                if (content) {
+                    content.classList.toggle('active');
+                    
+                    if (icon) {
+                        icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+                    }
+                }
+            });
+            
+            header.dataset.hasListener = 'true';
+        });
+    }
+    
+    generateFallbackContent(foiv) {
         const sphereText = {
             'political': 'Административно-политическая сфера',
             'economic': 'Экономическая сфера',
@@ -382,71 +414,8 @@ class FoivManager {
             return texts[power];
         });
         
-        // Генерируем дополнительные поля, если они есть в данных
-        const additionalSections = [];
-        
-        if (foiv.description) {
-            additionalSections.push(`
-                <div class="foiv-section">
-                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
-                        <h4><i class="fas fa-file-alt"></i> Общая характеристика</h4>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="section-content">
-                        <p>${foiv.description}</p>
-                    </div>
-                </div>
-            `);
-        }
-        
-        if (foiv.functions && Array.isArray(foiv.functions) && foiv.functions.length > 0) {
-            additionalSections.push(`
-                <div class="foiv-section">
-                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
-                        <h4><i class="fas fa-tasks"></i> Основные функции</h4>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="section-content">
-                        <ul>
-                            ${foiv.functions.map(func => `<li>${func}</li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `);
-        }
-        
-        if (foiv.structure && Array.isArray(foiv.structure) && foiv.structure.length > 0) {
-            additionalSections.push(`
-                <div class="foiv-section">
-                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
-                        <h4><i class="fas fa-sitemap"></i> Структурные подразделения</h4>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="section-content">
-                        <ul>
-                            ${foiv.structure.map(unit => `<li>${unit}</li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `);
-        }
-        
-        if (foiv.history) {
-            additionalSections.push(`
-                <div class="foiv-section">
-                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
-                        <h4><i class="fas fa-history"></i> История создания</h4>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="section-content">
-                        <p>${foiv.history}</p>
-                    </div>
-                </div>
-            `);
-        }
-        
         return `
-            <div class="foiv-details-container">
+            <div class="foiv-content-container">
                 <div class="foiv-detail-header">
                     <div class="foiv-detail-title">${foiv.name}</div>
                     <div class="foiv-detail-subtitle">${foiv.shortName}</div>
@@ -470,9 +439,6 @@ class FoivManager {
                             <li><strong>Сфера деятельности:</strong> ${sphereText[foiv.sphere] || foiv.sphere}</li>
                             <li><strong>Подчинение:</strong> ${leaderText[foiv.leader]}</li>
                             <li><strong>Краткое наименование:</strong> ${foiv.shortName}</li>
-                            ${foiv.leaderName ? `<li><strong>Руководитель:</strong> ${foiv.leaderName}</li>` : ''}
-                            ${foiv.founded ? `<li><strong>Дата образования:</strong> ${foiv.founded}</li>` : ''}
-                            ${foiv.location ? `<li><strong>Местонахождение:</strong> ${foiv.location}</li>` : ''}
                         </ul>
                     </div>
                     
@@ -492,47 +458,25 @@ class FoivManager {
                                     <i class="fas fa-globe"></i> Официальный сайт
                                 </a>
                             </li>
-                            ${foiv.legalBasis ? `
-                            <li>
-                                <a href="${foiv.legalBasis}" target="_blank" class="text-link">
-                                    <i class="fas fa-book"></i> Правовая основа деятельности
-                                </a>
-                            </li>
-                            ` : ''}
                         </ul>
                     </div>
                     ` : ''}
                 </div>
                 
-                ${additionalSections.length > 0 ? `
-                <div class="foiv-sections">
-                    ${additionalSections.join('')}
-                </div>
-                ` : ''}
-                
-                <div class="foiv-section">
-                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
-                        <h4><i class="fas fa-book"></i> Нормативно-правовая база</h4>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="section-content">
-                        <p>Деятельность ${foiv.shortName} регулируется следующими основными нормативными правовыми актами:</p>
-                        <ul>
-                            <li>Конституция Российской Федерации</li>
-                            <li>Федеральный конституционный закон "О Правительстве Российской Федерации"</li>
-                            <li>Указ Президента РФ "О системе и структуре федеральных органов исполнительной власти"</li>
-                            ${foiv.specificLaws ? foiv.specificLaws.map(law => `<li>${law}</li>`).join('') : `
-                            <li>Положение о ${foiv.type === 'ministry' ? 'Министерстве' : foiv.type === 'service' ? 'Федеральной службе' : 'Федеральном агентстве'}</li>
-                            `}
-                        </ul>
-                    </div>
+                <div class="foiv-info-card">
+                    <h4><i class="fas fa-file-alt"></i> Подробная информация</h4>
+                    <p>Для получения полной информации о структуре, функциях и полномочиях данного федерального органа исполнительной власти рекомендуется обратиться к его официальному сайту.</p>
+                    ${foiv.officialWebsite ? `
+                    <a href="${foiv.officialWebsite}" target="_blank" class="foiv-official-link" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> Перейти на официальный сайт
+                    </a>
+                    ` : ''}
                 </div>
             </div>
         `;
     }
     
     showError(message) {
-        // Показываем ошибку во всех списках
         ['systemList', 'structureList', 'spheresList'].forEach(listId => {
             const list = document.getElementById(listId);
             if (list) {
@@ -545,7 +489,6 @@ class FoivManager {
             }
         });
         
-        // Обновляем счетчики
         this.updateCount('system', 0);
         this.updateCount('structure', 0);
         this.updateCount('spheres', 0);
