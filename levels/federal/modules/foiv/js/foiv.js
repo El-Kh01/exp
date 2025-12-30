@@ -224,7 +224,7 @@ class FoivManager {
             'political': '#e80909',
             'economic': '#1013e3',
             'social': '#f5d442',
-            'security': '#e80909' // тот же цвет, что и political
+            'security': '#e80909'
         };
         return colors[sphere] || '#2A2D34';
     }
@@ -311,29 +311,44 @@ class FoivManager {
         if (!contentContainer) return;
         
         try {
-            // Показываем загрузку
-            contentContainer.innerHTML = `
-                <div class="loading-list">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Загрузка информации...</p>
-                </div>
-            `;
+            // Плавное исчезновение старого контента
+            contentContainer.style.opacity = '0.5';
+            contentContainer.style.transition = 'opacity 0.3s ease';
             
-            // Пробуем загрузить HTML файл ФОИВа
-            const response = await fetch(`foivs/${foiv.id}.html`);
-            
-            if (response.ok) {
-                // Если файл существует, загружаем его
-                const content = await response.text();
-                contentContainer.innerHTML = content;
-            } else {
-                // Если файла нет, генерируем информацию на основе данных
-                contentContainer.innerHTML = this.generateFoivContent(foiv);
-            }
+            setTimeout(async () => {
+                contentContainer.innerHTML = `
+                    <div class="loading-list">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Загрузка информации...</p>
+                    </div>
+                `;
+                contentContainer.style.opacity = '1';
+                
+                // Пробуем загрузить HTML файл ФОИВа
+                try {
+                    const response = await fetch(`foivs/${foiv.id}.html`);
+                    
+                    if (response.ok) {
+                        // Если файл существует, загружаем его
+                        const content = await response.text();
+                        contentContainer.innerHTML = content;
+                    } else {
+                        // Если файла нет, генерируем информацию на основе данных
+                        contentContainer.innerHTML = this.generateFoivContent(foiv);
+                    }
+                } catch (error) {
+                    console.error('Ошибка загрузки контента:', error);
+                    contentContainer.innerHTML = this.generateFoivContent(foiv);
+                }
+                
+                contentContainer.style.opacity = '1';
+                
+            }, 300);
             
         } catch (error) {
             console.error('Ошибка загрузки контента:', error);
             contentContainer.innerHTML = this.generateFoivContent(foiv);
+            contentContainer.style.opacity = '1';
         }
     }
     
@@ -342,7 +357,7 @@ class FoivManager {
             'political': 'Административно-политическая сфера',
             'economic': 'Экономическая сфера',
             'social': 'Социально-культурная сфера',
-            'security': 'Сфера безопасности'
+            'security': 'Сфера безопасности (оборона и безопасность)'
         };
         
         const typeText = {
@@ -356,7 +371,7 @@ class FoivManager {
             'government': 'Правительству Российской Федерации'
         };
         
-        const powers = this.getPowersByType(foiv.type);
+        const powers = foiv.powers || this.getPowersByType(foiv.type);
         const powersText = powers.map(power => {
             const texts = {
                 'npa': 'Принятие нормативных правовых актов',
@@ -367,51 +382,151 @@ class FoivManager {
             return texts[power];
         });
         
+        // Генерируем дополнительные поля, если они есть в данных
+        const additionalSections = [];
+        
+        if (foiv.description) {
+            additionalSections.push(`
+                <div class="foiv-section">
+                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
+                        <h4><i class="fas fa-file-alt"></i> Общая характеристика</h4>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <p>${foiv.description}</p>
+                    </div>
+                </div>
+            `);
+        }
+        
+        if (foiv.functions && Array.isArray(foiv.functions) && foiv.functions.length > 0) {
+            additionalSections.push(`
+                <div class="foiv-section">
+                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
+                        <h4><i class="fas fa-tasks"></i> Основные функции</h4>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            ${foiv.functions.map(func => `<li>${func}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `);
+        }
+        
+        if (foiv.structure && Array.isArray(foiv.structure) && foiv.structure.length > 0) {
+            additionalSections.push(`
+                <div class="foiv-section">
+                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
+                        <h4><i class="fas fa-sitemap"></i> Структурные подразделения</h4>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            ${foiv.structure.map(unit => `<li>${unit}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `);
+        }
+        
+        if (foiv.history) {
+            additionalSections.push(`
+                <div class="foiv-section">
+                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
+                        <h4><i class="fas fa-history"></i> История создания</h4>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <p>${foiv.history}</p>
+                    </div>
+                </div>
+            `);
+        }
+        
         return `
-            <div class="foiv-detail-header">
-                <div class="foiv-detail-title">${foiv.name}</div>
-                <div class="foiv-detail-subtitle">${foiv.shortName}</div>
-            </div>
-            
-            <div class="foiv-info-grid">
-                <div class="foiv-info-card">
-                    <h4><i class="fas fa-info-circle"></i> Общая информация</h4>
-                    <ul class="foiv-info-list">
-                        <li><strong>Тип органа:</strong> ${typeText[foiv.type]}</li>
-                        <li><strong>Сфера деятельности:</strong> ${sphereText[foiv.sphere] || foiv.sphere}</li>
-                        <li><strong>Подчинение:</strong> ${leaderText[foiv.leader]}</li>
-                    </ul>
+            <div class="foiv-details-container">
+                <div class="foiv-detail-header">
+                    <div class="foiv-detail-title">${foiv.name}</div>
+                    <div class="foiv-detail-subtitle">${foiv.shortName}</div>
+                    <div class="foiv-meta">
+                        <div class="foiv-sphere-badge" style="background: ${this.getSphereColor(foiv.sphere)};">
+                            ${sphereText[foiv.sphere] || foiv.sphere}
+                        </div>
+                    </div>
+                    ${foiv.officialWebsite ? `
+                        <a href="${foiv.officialWebsite}" target="_blank" class="foiv-official-link">
+                            <i class="fas fa-external-link-alt"></i> Официальный сайт
+                        </a>
+                    ` : ''}
                 </div>
                 
-                <div class="foiv-info-card">
-                    <h4><i class="fas fa-tasks"></i> Основные полномочия</h4>
-                    <ul class="foiv-info-list">
-                        ${powersText.map(power => `<li><i class="fas fa-check-circle"></i> ${power}</li>`).join('')}
-                    </ul>
+                <div class="foiv-info-grid">
+                    <div class="foiv-info-card">
+                        <h4><i class="fas fa-info-circle"></i> Общая информация</h4>
+                        <ul class="foiv-info-list">
+                            <li><strong>Тип органа:</strong> ${typeText[foiv.type]}</li>
+                            <li><strong>Сфера деятельности:</strong> ${sphereText[foiv.sphere] || foiv.sphere}</li>
+                            <li><strong>Подчинение:</strong> ${leaderText[foiv.leader]}</li>
+                            <li><strong>Краткое наименование:</strong> ${foiv.shortName}</li>
+                            ${foiv.leaderName ? `<li><strong>Руководитель:</strong> ${foiv.leaderName}</li>` : ''}
+                            ${foiv.founded ? `<li><strong>Дата образования:</strong> ${foiv.founded}</li>` : ''}
+                            ${foiv.location ? `<li><strong>Местонахождение:</strong> ${foiv.location}</li>` : ''}
+                        </ul>
+                    </div>
+                    
+                    <div class="foiv-info-card">
+                        <h4><i class="fas fa-gavel"></i> Полномочия</h4>
+                        <ul class="foiv-info-list">
+                            ${powersText.map(power => `<li><i class="fas fa-check-circle" style="color: var(--detroit-blue);"></i> ${power}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    ${foiv.officialWebsite ? `
+                    <div class="foiv-info-card">
+                        <h4><i class="fas fa-external-link-alt"></i> Ресурсы</h4>
+                        <ul class="foiv-info-list">
+                            <li>
+                                <a href="${foiv.officialWebsite}" target="_blank" class="text-link">
+                                    <i class="fas fa-globe"></i> Официальный сайт
+                                </a>
+                            </li>
+                            ${foiv.legalBasis ? `
+                            <li>
+                                <a href="${foiv.legalBasis}" target="_blank" class="text-link">
+                                    <i class="fas fa-book"></i> Правовая основа деятельности
+                                </a>
+                            </li>
+                            ` : ''}
+                        </ul>
+                    </div>
+                    ` : ''}
                 </div>
                 
-                ${foiv.officialWebsite ? `
-                <div class="foiv-info-card">
-                    <h4><i class="fas fa-external-link-alt"></i> Ресурсы</h4>
-                    <ul class="foiv-info-list">
-                        <li>
-                            <a href="${foiv.officialWebsite}" target="_blank" class="text-link">
-                                <i class="fas fa-globe"></i> Официальный сайт
-                            </a>
-                        </li>
-                    </ul>
+                ${additionalSections.length > 0 ? `
+                <div class="foiv-sections">
+                    ${additionalSections.join('')}
                 </div>
                 ` : ''}
-            </div>
-            
-            <div class="foiv-info-card">
-                <h4><i class="fas fa-file-alt"></i> Подробная информация</h4>
-                <p>Для получения полной информации о структуре, функциях и полномочиях данного федерального органа исполнительной власти рекомендуется обратиться к его официальному сайту и нормативным правовым актам, регулирующим его деятельность.</p>
-                ${foiv.officialWebsite ? `
-                <a href="${foiv.officialWebsite}" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">
-                    <i class="fas fa-external-link-alt"></i> Перейти на официальный сайт
-                </a>
-                ` : ''}
+                
+                <div class="foiv-section">
+                    <div class="section-header" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up'); this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down')">
+                        <h4><i class="fas fa-book"></i> Нормативно-правовая база</h4>
+                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="section-content">
+                        <p>Деятельность ${foiv.shortName} регулируется следующими основными нормативными правовыми актами:</p>
+                        <ul>
+                            <li>Конституция Российской Федерации</li>
+                            <li>Федеральный конституционный закон "О Правительстве Российской Федерации"</li>
+                            <li>Указ Президента РФ "О системе и структуре федеральных органов исполнительной власти"</li>
+                            ${foiv.specificLaws ? foiv.specificLaws.map(law => `<li>${law}</li>`).join('') : `
+                            <li>Положение о ${foiv.type === 'ministry' ? 'Министерстве' : foiv.type === 'service' ? 'Федеральной службе' : 'Федеральном агентстве'}</li>
+                            `}
+                        </ul>
+                    </div>
+                </div>
             </div>
         `;
     }
