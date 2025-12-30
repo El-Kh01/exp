@@ -10,7 +10,7 @@ class TabManager {
         this.setupTabs();
         this.setupMobileMenu();
         this.setupBackToTop();
-        this.animateCounters();
+        this.setupDynamicHeight();
     }
     
     setupTabs() {
@@ -48,6 +48,9 @@ class TabManager {
         if (window.foivManager) {
             window.foivManager.updateListForCurrentTab();
         }
+        
+        // Обновляем высоту контейнера
+        this.updateContentHeight();
     }
     
     setupMobileMenu() {
@@ -65,6 +68,13 @@ class TabManager {
                     breadcrumbs.classList.remove('active');
                 });
             });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!breadcrumbs.contains(e.target) && !menuToggle.contains(e.target)) {
+                    breadcrumbs.classList.remove('active');
+                }
+            });
         }
     }
     
@@ -78,22 +88,29 @@ class TabManager {
         }
     }
     
-    animateCounters() {
-        const counters = document.querySelectorAll('.number');
-        counters.forEach(counter => {
-            const target = parseInt(counter.textContent);
-            let current = 0;
-            const increment = target / 50;
-            
-            const updateCounter = () => {
-                if (current < target) {
-                    current += increment;
-                    if (current > target) current = target;
-                    counter.textContent = Math.round(current);
-                    setTimeout(updateCounter, 30);
-                }
-            };
-            updateCounter();
+    setupDynamicHeight() {
+        // Обновляем высоту при изменении размера окна
+        window.addEventListener('resize', () => {
+            this.updateContentHeight();
+        });
+        
+        // Инициализируем высоту
+        setTimeout(() => {
+            this.updateContentHeight();
+        }, 100);
+    }
+    
+    updateContentHeight() {
+        // Автоматически подстраиваем высоту контейнера под содержимое
+        const contentContainers = document.querySelectorAll('.content');
+        
+        contentContainers.forEach(container => {
+            const content = container.querySelector('.foiv-content-container, .content-placeholder');
+            if (content) {
+                container.style.height = 'auto';
+                const computedHeight = content.scrollHeight;
+                container.style.height = Math.max(500, computedHeight) + 'px';
+            }
         });
     }
 }
