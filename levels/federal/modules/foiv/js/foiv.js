@@ -5,7 +5,8 @@ const foivData = [
         "id": "fsb",
         "name": "Федеральная служба безопасности Российской Федерации",
         "shortName": "ФСБ России",
-        "sphere": "security",
+        "sphere": "political",
+        "topics": ["безопасность", "государственная безопасность", "внутренние дела"],
         "officialWebsite": "https://www.fsb.ru"
     },
     {
@@ -13,21 +14,23 @@ const foivData = [
         "name": "Министерство иностранных дел Российской Федерации",
         "shortName": "МИД России",
         "sphere": "political",
+        "topics": ["иностранные дела", "внешняя политика"],
         "officialWebsite": "https://mid.ru"
     },
     {
         "id": "mchs",
         "name": "Министерство Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий",
         "shortName": "МЧС России",
-        "sphere": "security",
+        "sphere": "political",
+        "topics": ["безопасность", "гражданская оборона", "чрезвычайные ситуации"],
         "officialWebsite": "https://www.mchs.gov.ru"
     },
-    // НОВЫЙ ОРГАН: МИНПРОМТОРГ
     {
         "id": "minpromtorg",
         "name": "Министерство промышленности и торговли Российской Федерации",
         "shortName": "Минпромторг России",
-        "sphere": "economic_social", // Специальная сфера для Минпромторга
+        "sphere": "economic_social",
+        "topics": ["промышленность", "торговля", "экономика", "внешняя торговля", "энергетика", "транспорт"],
         "officialWebsite": "https://minpromtorg.gov.ru"
     }
 ];
@@ -88,6 +91,7 @@ function createFoivListItem(foiv) {
     item.dataset.type = type;
     item.dataset.sphere = foiv.sphere;
     item.dataset.leader = leader;
+    item.dataset.topics = foiv.topics ? foiv.topics.join(',') : '';
 
     // Создаем значки полномочий
     let powersHTML = '';
@@ -213,6 +217,35 @@ function updateHeroCounters() {
     }
 }
 
+// Фильтрация по теме (подтеме)
+function filterByTopic(topic, listId) {
+    const listContainer = document.getElementById(listId);
+    if (!listContainer) return;
+    
+    const items = listContainer.querySelectorAll('.foiv-list-item');
+    let visibleCount = 0;
+    
+    items.forEach(item => {
+        const topics = item.dataset.topics ? item.dataset.topics.split(',') : [];
+        const showItem = topics.includes(topic);
+        
+        item.style.display = showItem ? 'flex' : 'none';
+        if (showItem) visibleCount++;
+    });
+    
+    // Обновляем счетчик
+    const tabPrefix = listId.replace('List', '');
+    const countElement = document.getElementById(`${tabPrefix}Count`);
+    if (countElement) countElement.textContent = visibleCount;
+    
+    // Показываем активную тему
+    const activeTopicElement = document.getElementById('activeTopic');
+    if (activeTopicElement) {
+        activeTopicElement.textContent = topic;
+        activeTopicElement.style.display = 'inline';
+    }
+}
+
 // Фильтрация
 function filterList(listId, filterType, filterValue) {
     const listContainer = document.getElementById(listId);
@@ -245,6 +278,12 @@ function filterList(listId, filterType, filterValue) {
         item.style.display = showItem ? 'flex' : 'none';
         if (showItem) visibleCount++;
     });
+    
+    // Скрываем активную тему при обычной фильтрации
+    const activeTopicElement = document.getElementById('activeTopic');
+    if (activeTopicElement) {
+        activeTopicElement.style.display = 'none';
+    }
     
     // Обновляем счетчик
     const tabPrefix = listId.replace('List', '');
@@ -301,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let filterType = 'type';
             if (filterValue === 'president' || filterValue === 'government') {
                 filterType = 'leader';
-            } else if (['political', 'economic', 'social', 'security'].includes(filterValue)) {
+            } else if (['political', 'economic', 'social'].includes(filterValue)) {
                 filterType = 'sphere';
             }
             
@@ -333,4 +372,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // 5. Активируем первую вкладку
     const firstTab = document.querySelector('.tab-btn');
     if (firstTab) firstTab.click();
+    
+    // 6. Инициализируем кнопки подтем
+    document.querySelectorAll('.sphere-subtopic-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const topic = this.dataset.topic;
+            const filter = this.dataset.filter;
+            const listId = 'spheresList';
+            
+            // Сбрасываем активные фильтры
+            const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
+            if (filterGroup) {
+                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.filter === filter) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Применяем фильтр по теме
+            filterByTopic(topic, listId);
+            
+            // Прокручиваем к списку
+            const listContainer = document.getElementById(listId);
+            if (listContainer) {
+                listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 });
