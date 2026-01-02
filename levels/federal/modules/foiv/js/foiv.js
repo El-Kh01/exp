@@ -15,14 +15,20 @@ const foivData = [
         "sphere": "political",
         "officialWebsite": "https://mid.ru"
     },
-    // ... добавьте ВСЕ ваши 33 органа здесь
-    // последний орган:
     {
         "id": "mchs",
         "name": "Министерство Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий",
         "shortName": "МЧС России",
         "sphere": "security",
         "officialWebsite": "https://www.mchs.gov.ru"
+    },
+    // НОВЫЙ ОРГАН: МИНПРОМТОРГ
+    {
+        "id": "minpromtorg",
+        "name": "Министерство промышленности и торговли Российской Федерации",
+        "shortName": "Минпромторг России",
+        "sphere": "economic_social", // Специальная сфера для Минпромторга
+        "officialWebsite": "https://minpromtorg.gov.ru"
     }
 ];
 
@@ -62,6 +68,7 @@ function getSphereColor(sphere) {
         case 'economic': return 'var(--economic)';
         case 'social': return 'var(--social)';
         case 'security': return 'var(--political)';
+        case 'economic_social': return '#90EE90'; // Светло-зеленый для Минпромторга
         default: return 'var(--detroit-dark-gray)';
     }
 }
@@ -220,7 +227,19 @@ function filterList(listId, filterType, filterValue) {
         switch(filterType) {
             case 'type': showItem = filterValue === 'all' || item.dataset.type === filterValue; break;
             case 'leader': showItem = filterValue === 'all' || item.dataset.leader === filterValue; break;
-            case 'sphere': showItem = filterValue === 'all' || item.dataset.sphere === filterValue; break;
+            case 'sphere': 
+                if (filterValue === 'all') {
+                    showItem = true;
+                } else if (filterValue === 'economic') {
+                    // Минпромторг показывается и в экономической сфере
+                    showItem = item.dataset.sphere === 'economic' || item.dataset.sphere === 'economic_social';
+                } else if (filterValue === 'social') {
+                    // Минпромторг показывается и в социальной сфере
+                    showItem = item.dataset.sphere === 'social' || item.dataset.sphere === 'economic_social';
+                } else {
+                    showItem = item.dataset.sphere === filterValue;
+                }
+                break;
         }
         
         item.style.display = showItem ? 'flex' : 'none';
