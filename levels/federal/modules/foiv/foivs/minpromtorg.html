@@ -1,490 +1,154 @@
-<!-- 
-Файл: foivs/НАЗВАНИЕ-ID.html
-НАЗВАНИЕ-ID должно совпадать с id в data/foivs.json
-Пример: foivs/minpromtorg.html, foivs/mchs.html
--->
+// main.js - Управление вкладками и базовой функциональностью
 
-<div class="foiv-details-container">
-    <!-- ЗАГОЛОВОЧНАЯ ЧАСТЬ -->
-    <div class="foiv-header">
-        <h1 class="foiv-title">Министерство промышленности и торговли Российской Федерации</h1>
-        <p class="foiv-short">Минпромторг России</p>
+class TabManager {
+    constructor() {
+        this.currentTab = 'system';
+        this.init();
+    }
+    
+    init() {
+        this.setupTabs();
+        this.setupMobileMenu();
+        this.setupBackToTop();
+        this.setupDynamicHeight();
+    }
+    
+    setupTabs() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
         
-        <div class="foiv-meta">
-            <span class="foiv-type-badge">Федеральное министерство</span>
-            <span class="foiv-sphere-badge" style="background: #1013e3;">Экономическая сфера</span>
-            <span class="foiv-leader-badge" style="background: #17a2b8;">Подчинение: Правительству РФ</span>
-        </div>
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                this.switchTab(tabId);
+            });
+        });
+    }
+    
+    switchTab(tabId) {
+        // Убираем активный класс со всех кнопок
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
         
-        <a href="https://minpromtorg.gov.ru" class="foiv-official-link" target="_blank">
-            <i class="fas fa-external-link-alt"></i> Официальный сайт Минпромторга России
-        </a>
-    </div>
-
-    <!-- КОНТЕЙНЕР С РАЗДЕЛАМИ -->
-    <div class="sections-container">
+        // Добавляем активный класс нажатой кнопке
+        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
         
-        <!-- ===== РАЗДЕЛ 1 ===== -->
-        <section class="info-section">
-            <div class="section-header">
-                <h2>1. Понятие и нормативно-правовое регулирование</h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-                <!-- Подраздел 1.1 -->
-                <div class="subsection">
-                    <h3>1.1. Основные понятия</h3>
-                    <div class="content-card">
-                        <p><strong>Промышленность</strong> - совокупность видов экономической деятельности...</p>
-                        <p><strong>Торговля</strong> - вид предпринимательской деятельности...</p>
-                    </div>
-                </div>
-                
-                <!-- Подраздел 1.2 -->
-                <div class="subsection">
-                    <h3>1.2. Нормативно-правовая база</h3>
-                    <div class="content-card">
-                        <h4>Основные законы:</h4>
-                        <ul>
-                            <li>Федеральный закон "О промышленной политике в РФ" от 31.12.2014 № 488-ФЗ</li>
-                            <li>Федеральный закон "Об основах государственного регулирования торговой деятельности" от 28.12.2009 № 381-ФЗ</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Добавьте другие подразделы -->
-            </div>
-        </section>
+        // Скрываем все вкладки
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+            pane.classList.remove('active');
+        });
         
-        <!-- ===== РАЗДЕЛ 2 ===== -->
-        <section class="info-section">
-            <div class="section-header">
-                <h2>2. Структура и полномочия министерства</h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-                <!-- Подраздел 2.1 -->
-                <div class="subsection">
-                    <h3>2.1. История создания</h3>
-                    <div class="content-card">
-                        <p>Министерство образовано 12 мая 2008 года...</p>
-                    </div>
-                </div>
-                
-                <!-- Подраздел 2.2 -->
-                <div class="subsection">
-                    <h3>2.2. Основные функции</h3>
-                    <div class="content-card">
-                        <ul>
-                            <li>Выработка государственной политики в сфере промышленности и торговли</li>
-                            <li>Нормативно-правовое регулирование</li>
-                            <li>Координация деятельности подведомственных служб и агентств</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Подраздел 2.3 -->
-                <div class="subsection">
-                    <h3>2.3. Структурные подразделения</h3>
-                    <div class="two-columns">
-                        <div class="column">
-                            <h4>Департаменты:</h4>
-                            <ul>
-                                <li>Департамент авиационной промышленности</li>
-                                <li>Департамент судостроительной промышленности</li>
-                                <li>Департамент химико-технологического комплекса</li>
-                            </ul>
-                        </div>
-                        <div class="column">
-                            <h4>Руководство:</h4>
-                            <ul>
-                                <li>Министр - Денис Валентинович Мантуров</li>
-                                <li>Заместители министра (8 чел.)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Добавьте другие подразделы -->
-            </div>
-        </section>
+        // Показываем выбранную вкладку
+        document.getElementById(`${tabId}-tab`).classList.add('active');
         
-        <!-- ===== РАЗДЕЛ 3 ===== -->
-        <section class="info-section">
-            <div class="section-header">
-                <h2>3. Государственные услуги и полномочия</h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-                <!-- Подраздел 3.1 -->
-                <div class="subsection">
-                    <h3>3.1. Предоставляемые услуги</h3>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <h4>Лицензирование</h4>
-                            <p>Выдача лицензий на производство лекарственных средств</p>
-                        </div>
-                        <div class="service-card">
-                            <h4>Сертификация</h4>
-                            <p>Подтверждение происхождения промышленной продукции</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Обновляем текущую вкладку
+        this.currentTab = tabId;
         
-        <!-- Добавьте другие разделы по необходимости -->
+        // Если FoivManager существует, обновляем список для текущей вкладки
+        if (window.foivManager) {
+            window.foivManager.updateListForCurrentTab();
+        }
         
-    </div>
-</div>
-
-<!-- СТИЛИ для этого конкретного ФОИВа -->
-<style>
-/* Основные стили контейнера */
-.foiv-details-container {
-    padding: 0;
-    height: 100%;
-    overflow-y: auto;
-}
-
-/* Заголовочная часть */
-.foiv-header {
-    background: linear-gradient(135deg, var(--detroit-blue), #5DA9E9);
-    color: white;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 2rem;
-}
-
-.foiv-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.foiv-short {
-    font-size: 1.3rem;
-    opacity: 0.9;
-    margin-bottom: 1.5rem;
-}
-
-.foiv-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.foiv-type-badge,
-.foiv-sphere-badge,
-.foiv-leader-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-}
-
-.foiv-type-badge {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.foiv-sphere-badge {
-    color: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.foiv-leader-badge {
-    color: white;
-}
-
-.foiv-official-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.8rem 1.5rem;
-    background: white;
-    color: var(--detroit-blue);
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.foiv-official-link:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-/* Контейнер разделов */
-.sections-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Стили для каждого раздела */
-.info-section {
-    background: white;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--detroit-light-gray);
-    overflow: hidden;
-}
-
-.section-header {
-    background: var(--detroit-light-gray);
-    padding: 1.2rem 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: var(--transition);
-}
-
-.section-header:hover {
-    background: #e8ebf0;
-}
-
-.section-header h2 {
-    font-size: 1.1rem;
-    color: var(--detroit-dark-gray);
-    margin: 0;
-    font-weight: 600;
-}
-
-.toggle-icon {
-    transition: transform 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.section-content {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-}
-
-.section-content.active {
-    max-height: 5000px;
-    padding: 1.5rem;
-}
-
-/* Стили для подразделов */
-.subsection {
-    margin-bottom: 1.5rem;
-}
-
-.subsection:last-child {
-    margin-bottom: 0;
-}
-
-.subsection h3 {
-    color: var(--detroit-dark-gray);
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--detroit-light-gray);
-}
-
-/* Карточки с контентом */
-.content-card {
-    background: #f8f9fa;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    margin: 1rem 0;
-    border-left: 4px solid var(--detroit-blue);
-}
-
-.content-card h4 {
-    color: var(--detroit-dark-gray);
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-}
-
-/* Двухколоночный макет */
-.two-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin: 1rem 0;
-}
-
-.column h4 {
-    color: var(--detroit-dark-gray);
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
-}
-
-/* Сетка услуг */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.service-card {
-    background: white;
-    border: 1px solid var(--detroit-light-gray);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    transition: var(--transition);
-}
-
-.service-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-}
-
-.service-card h4 {
-    color: var(--detroit-blue);
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
-}
-
-.service-card p {
-    color: var(--dark-gray);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-/* Таблицы */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-}
-
-th, td {
-    padding: 0.75rem;
-    border: 1px solid var(--detroit-light-gray);
-    text-align: left;
-}
-
-th {
-    background: rgba(64, 139, 201, 0.1);
-    font-weight: 600;
-    color: var(--detroit-dark-gray);
-}
-
-/* Списки */
-ul, ol {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-}
-
-li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .foiv-title {
-        font-size: 1.5rem;
+        // Обновляем высоту контейнера
+        this.updateContentHeight();
     }
     
-    .foiv-short {
-        font-size: 1.1rem;
-    }
-    
-    .foiv-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .section-header h2 {
-        font-size: 1rem;
-    }
-    
-    .two-columns {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .service-card {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .foiv-header {
-        padding: 1.5rem;
-    }
-    
-    .section-header {
-        padding: 1rem;
-    }
-    
-    .section-content.active {
-        padding: 1rem;
-    }
-    
-    .content-card {
-        padding: 1rem;
-    }
-}
-</style>
-
-<!-- JavaScript для этого ФОИВа (опционально) -->
-<script>
-// Скрипты выполнятся автоматически при загрузке контента
-console.log('Контент ФОИВа загружен');
-
-// Функция для автоматического открытия первого раздела при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    // Автоматически открываем первый раздел
-    const firstSection = document.querySelector('.section-content');
-    const firstToggle = document.querySelector('.toggle-icon');
-    
-    if (firstSection && firstToggle) {
-        firstSection.classList.add('active');
-        firstToggle.textContent = '▲';
-    }
-    
-    // Добавляем обработчики кликов на все заголовки разделов
-    const sectionHeaders = document.querySelectorAll('.section-header');
-    sectionHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector('.toggle-icon');
+    setupMobileMenu() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const breadcrumbs = document.querySelector('.breadcrumbs');
+        
+        if (menuToggle && breadcrumbs) {
+            menuToggle.addEventListener('click', function() {
+                breadcrumbs.classList.toggle('active');
+            });
             
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('.breadcrumbs a').forEach(link => {
+                link.addEventListener('click', () => {
+                    breadcrumbs.classList.remove('active');
+                });
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!breadcrumbs.contains(e.target) && !menuToggle.contains(e.target)) {
+                    breadcrumbs.classList.remove('active');
+                }
+            });
+        }
+    }
+    
+    setupBackToTop() {
+        const backToTopBtn = document.querySelector('.back-to-top');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }
+    
+    setupDynamicHeight() {
+        // Обновляем высоту при изменении размера окна
+        window.addEventListener('resize', () => {
+            this.updateContentHeight();
+        });
+        
+        // Инициализируем высоту
+        setTimeout(() => {
+            this.updateContentHeight();
+        }, 100);
+    }
+    
+    updateContentHeight() {
+        // Автоматически подстраиваем высоту контейнера под содержимое
+        const contentContainers = document.querySelectorAll('.content');
+        
+        contentContainers.forEach(container => {
+            const content = container.querySelector('.foiv-content-container, .content-placeholder');
             if (content) {
-                content.classList.toggle('active');
-                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+                container.style.height = 'auto';
+                const computedHeight = content.scrollHeight;
+                container.style.height = Math.max(500, computedHeight) + 'px';
             }
         });
-    });
+    }
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    window.tabManager = new TabManager();
     
-    // Подсветка активного раздела при скролле
+    // Анимация для легенды при скролле
     const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.parentElement.style.background = 'rgba(64, 139, 201, 0.05)';
-            } else {
-                entry.target.parentElement.style.background = '';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
     
-    // Наблюдаем за подразделами
-    document.querySelectorAll('.subsection').forEach(subsection => {
-        observer.observe(subsection);
+    // Применяем к легенде
+    document.querySelectorAll('.legend-category').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
+    
+    // Через 100мс показываем элементы
+    setTimeout(() => {
+        document.querySelectorAll('.legend-category').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    }, 100);
 });
-</script>
