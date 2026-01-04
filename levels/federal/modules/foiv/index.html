@@ -292,23 +292,37 @@
                             <div class="module-description">
                                 <h3><i class="fas fa-globe-americas"></i> СФЕРЫ ОБЩЕСТВЕННОЙ ЖИЗНИ</h3>
                                 
+                                <!-- Контейнер для активной темы -->
+                                <div class="active-topic-container" id="activeTopicContainer" style="margin-bottom: 1.5rem; display: none;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(64, 139, 201, 0.1); border-radius: var(--border-radius); border-left: 4px solid var(--detroit-blue);">
+                                        <div>
+                                            <strong>Активная тема:</strong> 
+                                            <span id="activeTopicName"></span>
+                                            <span style="font-size: 0.9rem; color: var(--dark-gray); margin-left: 0.5rem;">(показано: <span id="activeTopicCount">0</span> органов)</span>
+                                        </div>
+                                        <button id="clearTopicFilter" class="filter-btn" style="padding: 0.3rem 0.8rem; font-size: 0.85rem;">
+                                            <i class="fas fa-times"></i> Сбросить
+                                        </button>
+                                    </div>
+                                </div>
+                                
                                 <div class="system-details">
                                     <h4>
                                         <div class="sphere-color-badge" style="background: var(--economic);"></div>
                                         Экономическая сфера
                                     </h4>
                                     <ul class="sphere-list">
-                                        <li><i class="fas fa-arrow-right"></i> управление экономическим развитием</li>
-                                        <li><i class="fas fa-arrow-right"></i> финансы</li>
-                                        <li><i class="fas fa-arrow-right"></i> промышленность и торговля</li>
-                                        <li><i class="fas fa-arrow-right"></i> антимонопольное регулирование</li>
-                                        <li><i class="fas fa-arrow-right"></i> агропромышленный комплекс</li>
-                                        <li><i class="fas fa-arrow-right"></i> энергетика</li>
-                                        <li><i class="fas fa-arrow-right"></i> транспорт</li>
-                                        <li><i class="fas fa-arrow-right"></i> строительство и жилищно-коммунальное хозяйство</li>
-                                        <li><i class="fas fa-arrow-right"></i> цифровое развитие, связь, массовые коммуникации</li>
-                                        <li><i class="fas fa-arrow-right"></i> таможенное дело</li>
-                                        <li><i class="fas fa-arrow-right"></i> экология, окружающая среда</li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="управление экономическим развитием" data-filter="economic">управление экономическим развитием</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="финансы" data-filter="economic">финансы</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="промышленность и торговля" data-filter="economic">промышленность и торговля</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="антимонопольное регулирование" data-filter="economic">антимонопольное регулирование</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="агропромышленный комплекс" data-filter="economic">агропромышленный комплекс</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="энергетика" data-filter="economic">энергетика</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="транспорт" data-filter="economic">транспорт</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="строительство и жилищно-коммунальное хозяйство" data-filter="economic">строительство и жилищно-коммунальное хозяйство</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="цифровое развитие, связь, массовые коммуникации" data-filter="economic">цифровое развитие, связь, массовые коммуникации</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="таможенное дело" data-filter="economic">таможенное дело</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="экология, окружающая среда" data-filter="economic">экология, окружающая среда</a></li>
                                     </ul>
                                 </div>
                                 
@@ -318,11 +332,11 @@
                                         Социально-культурная сфера
                                     </h4>
                                     <ul class="sphere-list">
-                                        <li><i class="fas fa-arrow-right"></i> образование и наука</li>
-                                        <li><i class="fas fa-arrow-right"></i> культура</li>
-                                        <li><i class="fas fa-arrow-right"></i> здравоохранение</li>
-                                        <li><i class="fas fa-arrow-right"></i> труд и социальная защита</li>
-                                        <li><i class="fas fa-arrow-right"></i> физическая культура и спорт</li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="образование и наука" data-filter="social">образование и наука</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="культура" data-filter="social">культура</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="здравоохранение" data-filter="social">здравоохранение</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="труд и социальная защита" data-filter="social">труд и социальная защита</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="физическая культура и спорт" data-filter="social">физическая культура и спорт</a></li>
                                     </ul>
                                 </div>
                                 
@@ -332,11 +346,11 @@
                                         Административно-политическая сфера
                                     </h4>
                                     <ul class="sphere-list">
-                                        <li><i class="fas fa-arrow-right"></i> оборона</li>
-                                        <li><i class="fas fa-arrow-right"></i> государственная безопасность</li>
-                                        <li><i class="fas fa-arrow-right"></i> внутренние дела</li>
-                                        <li><i class="fas fa-arrow-right"></i> иностранные дела</li>
-                                        <li><i class="fas fa-arrow-right"></i> юстиция</li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="оборона" data-filter="political">оборона</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="государственная безопасность" data-filter="political">государственная безопасность</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="внутренние дела" data-filter="political">внутренние дела</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="иностранные дела" data-filter="political">иностранные дела</a></li>
+                                        <li><i class="fas fa-arrow-right"></i> <a href="#" class="sphere-topic-link" data-topic="юстиция" data-filter="political">юстиция</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -378,6 +392,10 @@
                                         </div>
                                         <h3>Выберите ФОИВ</h3>
                                         <p>Выберите федеральный орган исполнительной власти из списка слева, чтобы увидеть его сферу деятельности и функции.</p>
+                                        <div class="placeholder-tip" style="margin-top: 1rem;">
+                                            <i class="fas fa-lightbulb"></i>
+                                            <span>Или нажмите на тему в описании сферы для фильтрации</span>
+                                        </div>
                                     </div>
                                 </main>
                             </div>
