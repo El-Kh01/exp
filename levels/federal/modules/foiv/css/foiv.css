@@ -109,6 +109,46 @@
     border-color: var(--detroit-blue);
 }
 
+/* Контейнер для активной темы */
+.active-topic-container {
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Стили для ссылок тем */
+.sphere-topic-link {
+    color: var(--detroit-dark-gray);
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 2px 4px;
+    border-radius: 3px;
+    border-bottom: 1px dashed transparent;
+    cursor: pointer;
+}
+
+.sphere-topic-link:hover {
+    color: var(--detroit-blue);
+    background: rgba(64, 139, 201, 0.1);
+    border-bottom: 1px dashed var(--detroit-blue);
+}
+
+.sphere-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.sphere-list li i {
+    margin-right: 0.5rem;
+    color: var(--detroit-blue);
+    flex-shrink: 0;
+}
+
 /* Список ФОИВ */
 .foiv-list-container {
     flex: 1;
@@ -969,6 +1009,11 @@
     .section-header h2 {
         font-size: 1.1rem;
     }
+    
+    /* Адаптивные стили для списка тем */
+    .sphere-list li {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1071,6 +1116,15 @@
     
     .foiv-short {
         font-size: 1rem;
+    }
+    
+    /* Уменьшаем отступы в списке тем */
+    .sphere-list li {
+        font-size: 0.9rem;
+    }
+    
+    .sphere-topic-link {
+        padding: 1px 3px;
     }
 }
 
