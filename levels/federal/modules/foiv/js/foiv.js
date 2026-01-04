@@ -6,7 +6,7 @@ const foivData = [
         "name": "Федеральная служба безопасности Российской Федерации",
         "shortName": "ФСБ России",
         "sphere": "political",
-        "topics": ["безопасность", "государственная безопасность", "внутренние дела"],
+        "topics": ["государственная безопасность", "внутренние дела"],
         "officialWebsite": "https://www.fsb.ru"
     },
     {
@@ -14,7 +14,7 @@ const foivData = [
         "name": "Министерство иностранных дел Российской Федерации",
         "shortName": "МИД России",
         "sphere": "political",
-        "topics": ["иностранные дела", "внешняя политика"],
+        "topics": ["иностранные дела"],
         "officialWebsite": "https://mid.ru"
     },
     {
@@ -30,9 +30,10 @@ const foivData = [
         "name": "Министерство промышленности и торговли Российской Федерации",
         "shortName": "Минпромторг России",
         "sphere": "economic_social",
-        "topics": ["промышленность", "торговля", "экономика", "внешняя торговля", "энергетика", "транспорт"],
+        "topics": ["промышленность и торговля", "внешняя торговля"],
         "officialWebsite": "https://minpromtorg.gov.ru"
     }
+    // ДОБАВЛЯЙТЕ НОВЫЕ ОРГАНЫ ЗДЕСЬ
 ];
 
 // ========================
@@ -176,6 +177,9 @@ async function loadFoivDetails(foivId) {
                     <div class="placeholder-icon"><i class="fas fa-exclamation-triangle"></i></div>
                     <h3>Ошибка загрузки</h3>
                     <p>Создайте файл: foivs/${foivId}.html</p>
+                    <div class="error-message">
+                        ${error.message}
+                    </div>
                 </div>
             `;
         }
@@ -239,11 +243,18 @@ function filterByTopic(topic, listId) {
     if (countElement) countElement.textContent = visibleCount;
     
     // Показываем активную тему
-    const activeTopicElement = document.getElementById('activeTopic');
-    if (activeTopicElement) {
-        activeTopicElement.textContent = topic;
-        activeTopicElement.style.display = 'inline';
+    const activeTopicContainer = document.getElementById('activeTopicContainer');
+    const activeTopicName = document.getElementById('activeTopicName');
+    const activeTopicCount = document.getElementById('activeTopicCount');
+    
+    if (activeTopicContainer && activeTopicName && activeTopicCount) {
+        activeTopicName.textContent = topic;
+        activeTopicCount.textContent = visibleCount;
+        activeTopicContainer.style.display = 'block';
     }
+    
+    // Прокручиваем к списку
+    listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Фильтрация
@@ -280,9 +291,9 @@ function filterList(listId, filterType, filterValue) {
     });
     
     // Скрываем активную тему при обычной фильтрации
-    const activeTopicElement = document.getElementById('activeTopic');
-    if (activeTopicElement) {
-        activeTopicElement.style.display = 'none';
+    const activeTopicContainer = document.getElementById('activeTopicContainer');
+    if (activeTopicContainer) {
+        activeTopicContainer.style.display = 'none';
     }
     
     // Обновляем счетчик
@@ -366,6 +377,12 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             const tabPane = document.getElementById(`${tabId}-tab`);
             if (tabPane) tabPane.classList.add('active');
+            
+            // Сбрасываем активную тему при переключении вкладок
+            const activeTopicContainer = document.getElementById('activeTopicContainer');
+            if (activeTopicContainer) {
+                activeTopicContainer.style.display = 'none';
+            }
         });
     });
     
@@ -373,14 +390,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstTab = document.querySelector('.tab-btn');
     if (firstTab) firstTab.click();
     
-    // 6. Инициализируем кнопки подтем
-    document.querySelectorAll('.sphere-subtopic-btn').forEach(button => {
-        button.addEventListener('click', function() {
+    // 6. Инициализируем кликабельные темы в разделе "Сферы"
+    document.querySelectorAll('.sphere-topic-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
             const topic = this.dataset.topic;
             const filter = this.dataset.filter;
-            const listId = 'spheresList';
             
-            // Сбрасываем активные фильтры
+            // Активируем соответствующую кнопку фильтра по сфере
             const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
             if (filterGroup) {
                 filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
@@ -392,13 +410,62 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Применяем фильтр по теме
-            filterByTopic(topic, listId);
+            filterByTopic(topic, 'spheresList');
             
             // Прокручиваем к списку
-            const listContainer = document.getElementById(listId);
+            const listContainer = document.getElementById('spheresList');
             if (listContainer) {
                 listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
+    
+    // 7. Инициализируем кнопку сброса фильтра по теме
+    const clearTopicFilterBtn = document.getElementById('clearTopicFilter');
+    if (clearTopicFilterBtn) {
+        clearTopicFilterBtn.addEventListener('click', function() {
+            // Скрываем контейнер активной темы
+            const activeTopicContainer = document.getElementById('activeTopicContainer');
+            if (activeTopicContainer) {
+                activeTopicContainer.style.display = 'none';
+            }
+            
+            // Сбрасываем фильтр по теме (показываем все органы)
+            const listId = 'spheresList';
+            const listContainer = document.getElementById(listId);
+            if (listContainer) {
+                const items = listContainer.querySelectorAll('.foiv-list-item');
+                items.forEach(item => {
+                    item.style.display = 'flex';
+                });
+                
+                // Обновляем счетчик
+                const countElement = document.getElementById('spheresCount');
+                if (countElement) {
+                    countElement.textContent = items.length;
+                }
+            }
+            
+            // Сбрасываем кнопку фильтра по сфере на "Все"
+            const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
+            if (filterGroup) {
+                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.filter === 'all') {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
 });
+
+// Экспортируем функции для использования в других файлах
+window.foivModule = {
+    filterByTopic,
+    filterList,
+    getFoivType,
+    getFoivLeader,
+    getFoivPowers,
+    getSphereColor
+};
