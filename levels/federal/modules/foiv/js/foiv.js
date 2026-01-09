@@ -29,7 +29,7 @@ const foivData = [
         "id": "minpromtorg",
         "name": "Министерство промышленности и торговли Российской Федерации",
         "shortName": "Минпромторг России",
-        "sphere": "economic_social",
+        "sphere": "economic",
         "topics": ["промышленность и торговля", "внешняя торговля"],
         "officialWebsite": "https://minpromtorg.gov.ru"
     }
