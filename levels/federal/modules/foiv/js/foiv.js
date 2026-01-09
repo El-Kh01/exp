@@ -210,7 +210,7 @@ const foivData = [
         "officialWebsite": "https://mintrud.gov.ru"
     },
     {
-        "id": "rostud",
+        "id": "rostrud",
         "name": "Федеральная служба по труду и занятости",
         "shortName": "Роструд",
         "sphere": "social",
@@ -777,7 +777,7 @@ function filterByTopic(topic, listId) {
     listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Фильтрация
+// Фильтрация - ИСПРАВЛЕННАЯ ВЕРСИЯ
 function filterList(listId, filterType, filterValue) {
     const listContainer = document.getElementById(listId);
     if (!listContainer) return;
@@ -789,28 +789,32 @@ function filterList(listId, filterType, filterValue) {
         let showItem = false;
         
         switch(filterType) {
-            case 'type': showItem = filterValue === 'all' || item.dataset.type === filterValue; break;
-            case 'leader': showItem = filterValue === 'all' || item.dataset.leader === filterValue; break;
+            case 'type': 
+                showItem = filterValue === 'all' || item.dataset.type === filterValue; 
+                break;
+                
+            case 'leader': 
+                showItem = filterValue === 'all' || item.dataset.leader === filterValue; 
+                break;
+                
             case 'sphere': 
                 if (filterValue === 'all') {
                     showItem = true;
+                } else if (filterValue === 'political') {
+                    // Политическая сфера: чисто политические и комбинированные с политической
+                    showItem = item.dataset.sphere === 'political' || 
+                               item.dataset.sphere === 'economic_political' || 
+                               item.dataset.sphere === 'political_social';
                 } else if (filterValue === 'economic') {
-                    // Экономическая сфера включает pure economic и составные с экономикой
+                    // Экономическая сфера: чисто экономические и комбинированные с экономической
                     showItem = item.dataset.sphere === 'economic' || 
                                item.dataset.sphere === 'economic_political' || 
                                item.dataset.sphere === 'economic_social';
                 } else if (filterValue === 'social') {
-                    // Социальная сфера включает pure social и составные с социальной
+                    // Социальная сфера: чисто социальные и комбинированные с социальной
                     showItem = item.dataset.sphere === 'social' || 
                                item.dataset.sphere === 'political_social' || 
                                item.dataset.sphere === 'economic_social';
-                } else if (filterValue === 'political') {
-                    // Политическая сфера включает pure political и составные с политической
-                    showItem = item.dataset.sphere === 'political' || 
-                               item.dataset.sphere === 'economic_political' || 
-                               item.dataset.sphere === 'political_social';
-                } else {
-                    showItem = item.dataset.sphere === filterValue;
                 }
                 break;
         }
