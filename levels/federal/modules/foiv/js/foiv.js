@@ -101,8 +101,8 @@ const foivData = [
         "id": "gusp",
         "name": "Главное управление специальных программ Президента Российской Федерации",
         "shortName": "ГУСП",
-        "sphere": "political",
-        "topics": ["государственная безопасность"],
+        "sphere": "economic_political",
+        "topics": ["оборона", "промышленность и торговля"],
         "officialWebsite": "https://gusp.gov.ru"
     },
     {
@@ -222,7 +222,7 @@ const foivData = [
         "name": "Министерство природных ресурсов и экологии Российской Федерации",
         "shortName": "Минприроды России",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://www.mnr.gov.ru"
     },
     {
@@ -230,7 +230,7 @@ const foivData = [
         "name": "Федеральная служба по гидрометеорологии и мониторингу окружающей среды",
         "shortName": "Росгидромет",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://www.meteorf.gov.ru"
     },
     {
@@ -238,7 +238,7 @@ const foivData = [
         "name": "Федеральная служба по надзору в сфере природопользования",
         "shortName": "Росприроднадзор",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://rpn.gov.ru"
     },
     {
@@ -246,7 +246,7 @@ const foivData = [
         "name": "Федеральное агентство водных ресурсов",
         "shortName": "Росводресурсы",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://www.voda.gov.ru"
     },
     {
@@ -254,7 +254,7 @@ const foivData = [
         "name": "Федеральное агентство лесного хозяйства",
         "shortName": "Рослесхоз",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://www.rosleshoz.gov.ru"
     },
     {
@@ -262,7 +262,7 @@ const foivData = [
         "name": "Федеральное агентство по недропользованию",
         "shortName": "Роснедра",
         "sphere": "economic_social",
-        "topics": ["экология, окружающая среда"],
+        "topics": ["здравоохранение", "экология, окружающая среда"],
         "officialWebsite": "https://rosnedra.gov.ru"
     },
     {
@@ -430,7 +430,7 @@ const foivData = [
         "name": "Федеральная служба государственной статистики",
         "shortName": "Росстат",
         "sphere": "economic",
-        "topics": ["управление экономическим развитием"],
+        "topics": ["управление экономическим развитием", "промышленность и торговля"],
         "officialWebsite": "https://rosstat.gov.ru"
     },
     {
@@ -510,7 +510,7 @@ const foivData = [
         "name": "Федеральная служба по экологическому, технологическому и атомному надзору",
         "shortName": "Ростехнадзор",
         "sphere": "economic",
-        "topics": ["энергетика"],
+        "topics": ["строительство и жилищно-коммунальное хозяйство"],
         "officialWebsite": "https://www.gosnadzor.ru"
     },
     {
@@ -600,7 +600,7 @@ function getSphereColor(sphere) {
         case 'security': return 'var(--political)';
         case 'economic_political': return '#800080'; // Фиолетовый для экономической+политической
         case 'political_social': return '#FFA500'; // Оранжевый для политической+социальной
-        case 'economic_social': return '#FFA500'; // Оранжевый для экономической+социальной
+        case 'economic_social': return '#90EE90'; // Светло-зеленый для экономической+социальной
         default: return 'var(--detroit-dark-gray)';
     }
 }
