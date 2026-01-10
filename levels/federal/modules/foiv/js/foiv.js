@@ -777,7 +777,7 @@ function filterByTopic(topic, listId) {
     listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Фильтрация - ИСПРАВЛЕННАЯ ВЕРСИЯ
+// Фильтрация
 function filterList(listId, filterType, filterValue) {
     const listContainer = document.getElementById(listId);
     if (!listContainer) return;
@@ -789,14 +789,8 @@ function filterList(listId, filterType, filterValue) {
         let showItem = false;
         
         switch(filterType) {
-            case 'type': 
-                showItem = filterValue === 'all' || item.dataset.type === filterValue; 
-                break;
-                
-            case 'leader': 
-                showItem = filterValue === 'all' || item.dataset.leader === filterValue; 
-                break;
-                
+            case 'type': showItem = filterValue === 'all' || item.dataset.type === filterValue; break;
+            case 'leader': showItem = filterValue === 'all' || item.dataset.leader === filterValue; break;
             case 'sphere': 
                 if (filterValue === 'all') {
                     showItem = true;
@@ -923,7 +917,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstTab = document.querySelector('.tab-btn');
     if (firstTab) firstTab.click();
     
-    // 6. Инициализируем кликабельные темы в разделе "Сферы"
+    // 6. Инициализируем кликабельные темы в разделе "Сферы" - ИСПРАВЛЕННАЯ ВЕРСИЯ
     document.querySelectorAll('.sphere-topic-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -942,14 +936,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
-            // Применяем фильтр по теме
-            filterByTopic(topic, 'spheresList');
+            // Применяем фильтр по сфере
+            filterList('spheresList', 'sphere', filter);
             
-            // Прокручиваем к списку
-            const listContainer = document.getElementById('spheresList');
-            if (listContainer) {
-                listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            // Даем время на обновление DOM, затем применяем фильтр по теме
+            setTimeout(() => {
+                filterByTopic(topic, 'spheresList');
+            }, 50);
         });
     });
     
