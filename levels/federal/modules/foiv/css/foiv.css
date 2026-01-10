@@ -6,11 +6,12 @@
     height: 700px;
     overflow: hidden;
     border-top: 1px solid var(--detroit-light-gray);
+    position: relative;
 }
 
 /* Боковая панель */
 .sidebar {
-    flex: 0 0 350px;
+    flex: 0 0 380px;
     border-right: 1px solid var(--detroit-light-gray);
     display: flex;
     flex-direction: column;
@@ -24,6 +25,7 @@
     border-bottom: 1px solid var(--detroit-light-gray);
     position: relative;
     background: white;
+    flex-shrink: 0;
 }
 
 .search-box i {
@@ -58,6 +60,7 @@
     padding: 1.5rem;
     border-bottom: 1px solid var(--detroit-light-gray);
     background: white;
+    flex-shrink: 0;
 }
 
 .filter-group {
@@ -79,13 +82,11 @@
 
 .filter-buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
 .filter-btn {
-    display: flex;
-    align-items: center;
     padding: 10px 15px;
     border: 1px solid var(--detroit-gray);
     border-radius: var(--border-radius);
@@ -94,8 +95,10 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: var(--transition);
-    text-align: left;
-    width: 100%;
+    text-align: center;
+    flex: 1;
+    min-width: calc(50% - 8px);
+    white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -111,8 +114,15 @@
 
 /* Контейнер для активной темы */
 .active-topic-container {
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
     animation: fadeIn 0.3s ease;
+    background: rgba(64, 139, 201, 0.05);
+    border: 1px solid rgba(64, 139, 201, 0.2);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @keyframes fadeIn {
@@ -125,10 +135,12 @@
     color: var(--detroit-dark-gray);
     text-decoration: none;
     transition: var(--transition);
-    padding: 2px 4px;
-    border-radius: 3px;
+    padding: 3px 6px;
+    border-radius: 4px;
     border-bottom: 1px dashed transparent;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 
 .sphere-topic-link:hover {
@@ -141,12 +153,14 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
+    padding: 0.2rem 0;
 }
 
 .sphere-list li i {
     margin-right: 0.5rem;
     color: var(--detroit-blue);
     flex-shrink: 0;
+    font-size: 0.8rem;
 }
 
 /* Список ФОИВ */
@@ -164,6 +178,7 @@
     justify-content: space-between;
     align-items: center;
     background: var(--detroit-light-gray);
+    flex-shrink: 0;
 }
 
 .list-header h4 {
@@ -189,21 +204,24 @@
     flex: 1;
     overflow-y: auto;
     padding: 0;
+    background: white;
 }
 
 .foiv-list-item {
-    padding: 12px 15px;
+    padding: 14px 16px;
     border-bottom: 1px solid var(--detroit-light-gray);
     cursor: pointer;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     background: white;
+    animation: slideIn 0.3s ease forwards;
+    opacity: 0;
 }
 
 .foiv-list-item:hover {
-    background: rgba(64, 139, 201, 0.1);
+    background: rgba(64, 139, 201, 0.08);
     transform: translateX(5px);
 }
 
@@ -218,6 +236,7 @@
     color: var(--detroit-dark-gray);
     font-size: 0.95rem;
     line-height: 1.4;
+    word-break: break-word;
 }
 
 .foiv-badges {
@@ -235,10 +254,35 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     flex-shrink: 0;
     transition: var(--transition);
+    position: relative;
 }
 
 .foiv-sphere-badge:hover {
     transform: scale(1.1);
+}
+
+.foiv-sphere-badge::after {
+    content: attr(data-sphere-name);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--detroit-dark-gray);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    margin-bottom: 5px;
+    z-index: 100;
+}
+
+.foiv-sphere-badge:hover::after {
+    opacity: 1;
+    visibility: visible;
 }
 
 .foiv-powers {
@@ -364,6 +408,7 @@
     overflow-y: auto;
     padding: 2rem;
     background: white;
+    height: 100%;
 }
 
 /* Анимация загрузки */
@@ -917,10 +962,93 @@
     text-decoration: underline;
 }
 
+/* Анимации */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.foiv-list-item:nth-child(odd) {
+    animation-delay: 0.05s;
+}
+
+.foiv-list-item:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+/* Эффект при загрузке */
+.loading-shimmer {
+    background: linear-gradient(90deg, 
+        var(--detroit-light-gray) 25%, 
+        var(--detroit-white) 50%, 
+        var(--detroit-light-gray) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Прокрутка в списке ФОИВов */
+.foiv-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.foiv-list::-webkit-scrollbar-track {
+    background: var(--detroit-light-gray);
+    border-radius: 4px;
+}
+
+.foiv-list::-webkit-scrollbar-thumb {
+    background: var(--detroit-gray);
+    border-radius: 4px;
+    border: 2px solid var(--detroit-light-gray);
+}
+
+.foiv-list::-webkit-scrollbar-thumb:hover {
+    background: var(--detroit-blue);
+}
+
+/* Прокрутка в контенте */
+.foiv-content-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.foiv-content-container::-webkit-scrollbar-track {
+    background: var(--detroit-light-gray);
+    border-radius: 4px;
+}
+
+.foiv-content-container::-webkit-scrollbar-thumb {
+    background: var(--detroit-gray);
+    border-radius: 4px;
+    border: 2px solid var(--detroit-light-gray);
+}
+
+.foiv-content-container::-webkit-scrollbar-thumb:hover {
+    background: var(--detroit-blue);
+}
+
 /* Адаптивность */
 @media (max-width: 1200px) {
     .module-content {
         height: 600px;
+    }
+    
+    .sidebar {
+        flex: 0 0 320px;
     }
 }
 
@@ -1128,82 +1256,66 @@
     }
 }
 
-/* Прокрутка в списке ФОИВов */
-.foiv-list::-webkit-scrollbar {
-    width: 6px;
+/* Стили для фильтрации по темам */
+.filter-btn[data-filter="political"].active {
+    background: var(--political);
+    border-color: var(--political);
+    color: white;
 }
 
-.foiv-list::-webkit-scrollbar-track {
-    background: var(--detroit-light-gray);
+.filter-btn[data-filter="economic"].active {
+    background: var(--economic);
+    border-color: var(--economic);
+    color: white;
 }
 
-.foiv-list::-webkit-scrollbar-thumb {
-    background: var(--detroit-gray);
-    border-radius: 3px;
+.filter-btn[data-filter="social"].active {
+    background: var(--social);
+    border-color: var(--social);
+    color: white;
 }
 
-.foiv-list::-webkit-scrollbar-thumb:hover {
+/* Специальные стили для отображения тем в списке органов */
+.foiv-list-item[data-sphere="political"] .foiv-sphere-badge {
+    background: var(--political);
+}
+
+.foiv-list-item[data-sphere="economic"] .foiv-sphere-badge {
+    background: var(--economic);
+}
+
+.foiv-list-item[data-sphere="social"] .foiv-sphere-badge {
+    background: var(--social);
+}
+
+.foiv-list-item[data-sphere="economic_political"] .foiv-sphere-badge {
+    background: var(--economic_political);
+}
+
+.foiv-list-item[data-sphere="political_social"] .foiv-sphere-badge {
+    background: var(--political_social);
+}
+
+.foiv-list-item[data-sphere="economic_social"] .foiv-sphere-badge {
+    background: var(--economic_social);
+}
+
+/* Стили для кнопки сброса темы */
+#clearTopicFilter {
     background: var(--detroit-blue);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-/* Прокрутка в контенте */
-.foiv-content-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.foiv-content-container::-webkit-scrollbar-track {
-    background: var(--detroit-light-gray);
-}
-
-.foiv-content-container::-webkit-scrollbar-thumb {
-    background: var(--detroit-gray);
-    border-radius: 4px;
-}
-
-.foiv-content-container::-webkit-scrollbar-thumb:hover {
-    background: var(--detroit-blue);
-}
-
-/* Анимации */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.foiv-list-item {
-    animation: slideIn 0.3s ease forwards;
-    opacity: 0;
-}
-
-.foiv-list-item:nth-child(odd) {
-    animation-delay: 0.05s;
-}
-
-.foiv-list-item:nth-child(even) {
-    animation-delay: 0.1s;
-}
-
-/* Эффект при загрузке */
-.loading-shimmer {
-    background: linear-gradient(90deg, 
-        var(--detroit-light-gray) 25%, 
-        var(--detroit-white) 50%, 
-        var(--detroit-light-gray) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
+#clearTopicFilter:hover {
+    background: var(--detroit-light-blue);
+    transform: translateY(-2px);
 }
