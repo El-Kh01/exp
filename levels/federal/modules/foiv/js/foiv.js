@@ -620,7 +620,7 @@ function createFoivListItem(foiv) {
     item.dataset.type = type;
     item.dataset.sphere = foiv.sphere;
     item.dataset.leader = leader;
-    item.dataset.topics = foiv.topics ? foiv.topics.join(',') : '';
+    item.dataset.topics = foiv.topics ? foiv.topics.join('||') : ''; // Изменили разделитель на ||
 
     // Создаем значки полномочий
     let powersHTML = '';
@@ -758,7 +758,9 @@ function filterByTopic(topic, listId) {
     let visibleCount = 0;
     
     items.forEach(item => {
-        const topics = item.dataset.topics ? item.dataset.topics.split(',') : [];
+        const topicsStr = item.dataset.topics || '';
+        const topics = topicsStr.split('||').filter(t => t.trim() !== ''); // Используем || как разделитель
+        
         const showItem = topics.includes(topic);
         
         item.style.display = showItem ? 'flex' : 'none';
@@ -847,6 +849,12 @@ function initializeSearch(inputId, listId) {
         const listContainer = document.getElementById(listId);
         if (!listContainer) return;
         
+        // Скрываем активную тему при поиске
+        const activeTopicContainer = document.getElementById('activeTopicContainer');
+        if (activeTopicContainer) {
+            activeTopicContainer.style.display = 'none';
+        }
+        
         const items = listContainer.querySelectorAll('.foiv-list-item');
         let visibleCount = 0;
         
@@ -925,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstTab = document.querySelector('.tab-btn');
     if (firstTab) firstTab.click();
     
-    // 6. Инициализируем кликабельные темы в разделе "Сферы" - ИСПРАВЛЕННАЯ ВЕРСИЯ
+    // 6. Инициализируем кликабельные темы в разделе "Сферы"
     document.querySelectorAll('.sphere-topic-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
