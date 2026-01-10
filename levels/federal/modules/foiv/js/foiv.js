@@ -222,7 +222,7 @@ const foivData = [
         "name": "Министерство природных ресурсов и экологии Российской Федерации",
         "shortName": "Минприроды России",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://www.mnr.gov.ru"
     },
     {
@@ -230,7 +230,7 @@ const foivData = [
         "name": "Федеральная служба по гидрометеорологии и мониторингу окружающей среды",
         "shortName": "Росгидромет",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://www.meteorf.gov.ru"
     },
     {
@@ -238,7 +238,7 @@ const foivData = [
         "name": "Федеральная служба по надзору в сфере природопользования",
         "shortName": "Росприроднадзор",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://rpn.gov.ru"
     },
     {
@@ -246,7 +246,7 @@ const foivData = [
         "name": "Федеральное агентство водных ресурсов",
         "shortName": "Росводресурсы",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://www.voda.gov.ru"
     },
     {
@@ -254,7 +254,7 @@ const foivData = [
         "name": "Федеральное агентство лесного хозяйства",
         "shortName": "Рослесхоз",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://www.rosleshoz.gov.ru"
     },
     {
@@ -262,7 +262,7 @@ const foivData = [
         "name": "Федеральное агентство по недропользованию",
         "shortName": "Роснедра",
         "sphere": "economic_social",
-        "topics": ["здравоохранение", "экология, окружающая среда"],
+        "topics": ["экология, окружающая среда"],
         "officialWebsite": "https://rosnedra.gov.ru"
     },
     {
@@ -382,7 +382,7 @@ const foivData = [
         "name": "Федеральная таможенная служба",
         "shortName": "ФТС России",
         "sphere": "economic_political",
-        "topics": ["таможенное дело", "внутренние дела"],
+        "topics": ["таможенное дело"],
         "officialWebsite": "https://www.customs.gov.ru"
     },
     {
@@ -499,7 +499,7 @@ const foivData = [
     },
     {
         "id": "rosobrnadzor",
-        "name": "Федеральная служба по надзору в сфере образования и науки",
+        "name": "Федеральная служба по надзору в сфере образования и науке",
         "shortName": "Рособрнадзор",
         "sphere": "social",
         "topics": ["образование и наука"],
@@ -748,7 +748,7 @@ function updateHeroCounters() {
     }
 }
 
-// Фильтрация по теме (подтеме)
+// Фильтрация по теме (подтеме) - УЛУЧШЕННАЯ ВЕРСИЯ
 function filterByTopic(topic, listId) {
     const listContainer = document.getElementById(listId);
     if (!listContainer) return;
@@ -756,11 +756,47 @@ function filterByTopic(topic, listId) {
     const items = listContainer.querySelectorAll('.foiv-list-item');
     let visibleCount = 0;
     
+    // Приводим тему к нижнему регистру для поиска
+    const searchTopic = topic.toLowerCase().trim();
+    
     items.forEach(item => {
         const topicsStr = item.dataset.topics || '';
         const topics = topicsStr.split(',').filter(t => t.trim() !== '');
         
-        const showItem = topics.includes(topic);
+        // Ищем совпадение: проверяем, содержит ли хотя бы одна тема искомую строку
+        let showItem = false;
+        for (const t of topics) {
+            if (t.toLowerCase().includes(searchTopic)) {
+                showItem = true;
+                break;
+            }
+        }
+        
+        // Дополнительная логика для синонимов
+        if (!showItem) {
+            // Создаем карту синонимов для более гибкого поиска
+            const synonymMap = {
+                'экология': ['экология, окружающая среда', 'окружающая среда', 'природопользование'],
+                'окружающая среда': ['экология, окружающая среда', 'экология'],
+                'природопользование': ['экология, окружающая среда'],
+                'гражданская оборона': ['чрезвычайные ситуации'],
+                'чрезвычайные ситуации': ['гражданская оборона'],
+                'наука': ['образование и наука', 'образование'],
+                'образование': ['образование и наука', 'наука'],
+                'культура': ['международное гуманитарное сотрудничество'],
+                'гуманитарное сотрудничество': ['международное гуманитарное сотрудничество']
+            };
+            
+            // Проверяем синонимы
+            if (synonymMap[searchTopic]) {
+                for (const synonym of synonymMap[searchTopic]) {
+                    if (topics.includes(synonym)) {
+                        showItem = true;
+                        break;
+                    }
+                }
+            }
+        }
         
         item.style.display = showItem ? 'flex' : 'none';
         if (showItem) visibleCount++;
@@ -812,12 +848,6 @@ function filterList(listId, filterType, filterValue) {
                 } else if (filterValue === 'social') {
                     // Социальная: только чисто социальные
                     showItem = item.dataset.sphere === 'social';
-                } else if (filterValue === 'economic_political') {
-                    showItem = item.dataset.sphere === 'economic_political';
-                } else if (filterValue === 'political_social') {
-                    showItem = item.dataset.sphere === 'political_social';
-                } else if (filterValue === 'economic_social') {
-                    showItem = item.dataset.sphere === 'economic_social';
                 }
                 break;
         }
@@ -893,7 +923,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let filterType = 'type';
             if (filterValue === 'president' || filterValue === 'government') {
                 filterType = 'leader';
-            } else if (['political', 'economic', 'social', 'economic_political', 'political_social', 'economic_social'].includes(filterValue)) {
+            } else if (['political', 'economic', 'social'].includes(filterValue)) {
                 filterType = 'sphere';
             }
             
@@ -971,6 +1001,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     countElement.textContent = items.length;
                 }
             }
+            
+            // Сбрасываем кнопку фильтра по сфере на "Все"
+            const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
+            if (filterGroup) {
+                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.filter === 'all') {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Сбрасываем фильтр по сфере
+            filterList('spheresList', 'sphere', 'all');
         });
     }
 });
