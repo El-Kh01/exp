@@ -6,10 +6,15 @@
 }
 
 :root {
-    /* Цвета условных обозначений - НЕ МЕНЯЕМ */
+    /* Цвета условных обозначений */
     --political: #e80909;
     --economic: #1013e3;
     --social: #f5d442;
+    
+    /* Цвета смешанных сфер - ДОБАВЛЕНО */
+    --economic_political: #8a2be2;    /* Фиолетовый */
+    --political_social: #ff8c00;      /* Темно-оранжевый */
+    --economic_social: #32cd32;       /* Лаймово-зеленый */
     
     /* Detroit: Become Human палитра */
     --detroit-white: #F5F7FA;
@@ -672,7 +677,7 @@ body {
 
 .legend-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 2.5rem;
 }
@@ -842,6 +847,10 @@ body {
         width: 280px;
         height: 280px;
         font-size: 5rem;
+    }
+    
+    .legend-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
