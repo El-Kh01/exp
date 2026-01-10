@@ -597,10 +597,9 @@ function getSphereColor(sphere) {
         case 'political': return 'var(--political)';
         case 'economic': return 'var(--economic)';
         case 'social': return 'var(--social)';
-        case 'security': return 'var(--political)';
-        case 'economic_political': return '#800080'; // Фиолетовый для экономической+политической
-        case 'political_social': return '#FFA500'; // Оранжевый для политической+социальной
-        case 'economic_social': return '#90EE90'; // Светло-зеленый для экономической+социальной
+        case 'economic_political': return 'var(--economic_political)';
+        case 'political_social': return 'var(--political_social)';
+        case 'economic_social': return 'var(--economic_social)';
         default: return 'var(--detroit-dark-gray)';
     }
 }
@@ -620,7 +619,7 @@ function createFoivListItem(foiv) {
     item.dataset.type = type;
     item.dataset.sphere = foiv.sphere;
     item.dataset.leader = leader;
-    item.dataset.topics = foiv.topics ? foiv.topics.join('||') : ''; // Изменили разделитель на ||
+    item.dataset.topics = foiv.topics ? foiv.topics.join(',') : '';
 
     // Создаем значки полномочий
     let powersHTML = '';
@@ -759,7 +758,7 @@ function filterByTopic(topic, listId) {
     
     items.forEach(item => {
         const topicsStr = item.dataset.topics || '';
-        const topics = topicsStr.split('||').filter(t => t.trim() !== ''); // Используем || как разделитель
+        const topics = topicsStr.split(',').filter(t => t.trim() !== '');
         
         const showItem = topics.includes(topic);
         
@@ -805,20 +804,20 @@ function filterList(listId, filterType, filterValue) {
                 if (filterValue === 'all') {
                     showItem = true;
                 } else if (filterValue === 'political') {
-                    // Политическая сфера: чисто политические и комбинированные с политической
-                    showItem = item.dataset.sphere === 'political' || 
-                               item.dataset.sphere === 'economic_political' || 
-                               item.dataset.sphere === 'political_social';
+                    // Политическая: только чисто политические
+                    showItem = item.dataset.sphere === 'political';
                 } else if (filterValue === 'economic') {
-                    // Экономическая сфера: чисто экономические и комбинированные с экономической
-                    showItem = item.dataset.sphere === 'economic' || 
-                               item.dataset.sphere === 'economic_political' || 
-                               item.dataset.sphere === 'economic_social';
+                    // Экономическая: только чисто экономические
+                    showItem = item.dataset.sphere === 'economic';
                 } else if (filterValue === 'social') {
-                    // Социальная сфера: чисто социальные и комбинированные с социальной
-                    showItem = item.dataset.sphere === 'social' || 
-                               item.dataset.sphere === 'political_social' || 
-                               item.dataset.sphere === 'economic_social';
+                    // Социальная: только чисто социальные
+                    showItem = item.dataset.sphere === 'social';
+                } else if (filterValue === 'economic_political') {
+                    showItem = item.dataset.sphere === 'economic_political';
+                } else if (filterValue === 'political_social') {
+                    showItem = item.dataset.sphere === 'political_social';
+                } else if (filterValue === 'economic_social') {
+                    showItem = item.dataset.sphere === 'economic_social';
                 }
                 break;
         }
@@ -894,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let filterType = 'type';
             if (filterValue === 'president' || filterValue === 'government') {
                 filterType = 'leader';
-            } else if (['political', 'economic', 'social'].includes(filterValue)) {
+            } else if (['political', 'economic', 'social', 'economic_political', 'political_social', 'economic_social'].includes(filterValue)) {
                 filterType = 'sphere';
             }
             
@@ -939,21 +938,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const topic = this.dataset.topic;
-            const filter = this.dataset.filter;
-            
-            // Активируем соответствующую кнопку фильтра по сфере
-            const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
-            if (filterGroup) {
-                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.filter === filter) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-            
-            // Применяем фильтр по сфере
-            filterList('spheresList', 'sphere', filter);
             
             // Даем время на обновление DOM, затем применяем фильтр по теме
             setTimeout(() => {
@@ -986,17 +970,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (countElement) {
                     countElement.textContent = items.length;
                 }
-            }
-            
-            // Сбрасываем кнопку фильтра по сфере на "Все"
-            const filterGroup = document.querySelector('#spheres-tab .filter-buttons');
-            if (filterGroup) {
-                filterGroup.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.filter === 'all') {
-                        btn.classList.add('active');
-                    }
-                });
             }
         });
     }
